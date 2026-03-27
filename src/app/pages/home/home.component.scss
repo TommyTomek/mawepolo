@@ -1,0 +1,84 @@
+.home-page {
+  position: relative;
+  width: 100%;
+  height: 90vh; /* full screen */
+  background-image: url('/images/Home_background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-bottom: 80px; /* bottom nav space */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-content {
+  margin-top: 20%; /* adjust as needed */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-logo {
+  max-width: 70%;
+  height: auto;
+}
+
+
+/* DISCOVER CARDS */
+.discover-section {
+  margin-top: 35%; /* adjust as needed */  
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  height: 80%;
+  
+
+  .discover-card {
+    background: var(--color-bg);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft-bottom);
+    background: rgba(255, 255, 255, 0.4);
+    height: 50%;
+
+
+
+    img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    h2 {
+      margin: var(--spacing-sm) var(--spacing-md) 0;
+      font-size: var(--font-size-lg);
+    }
+
+    p {
+      margin: 0 var(--spacing-md) var(--spacing-md);
+      color: var(--color-grey-600);
+    }
+
+    button {
+      margin: 0 var(--spacing-md) var(--spacing-md);
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--border-radius-md);
+      border: none;
+      font-size: var(--font-size-sm);
+      cursor: pointer;
+    }
+
+    &.veneto button {
+      background: var(--color-blue-light);
+      color: white;
+    }
+
+    &.malopolska button {
+      background: var(--color-blue-light);
+      color: white;
+    }
+  }
+}
