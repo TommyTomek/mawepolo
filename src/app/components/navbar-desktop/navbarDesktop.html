@@ -1,0 +1,178 @@
+<div class="nav-wrapper" [class.shrink]="shouldShrink">
+  <nav class="navbar">
+    <div class="logo">
+      <a href="/">
+        <img src="assets/branding/logo_wb.png" alt="Company Logo" />
+      </a>
+    </div>
+
+    <div class="nav-right">
+      <div class="nav-top">
+
+        <ul class="nav-primary">
+          <li><a routerLink="/">{{ 'NAV.HOME' | translate }}</a></li>
+          <li><a routerLink="/PremiumArea">{{ 'NAV.PREMIUM' | translate }}</a></li>
+          <li><a routerLink="/Partners">{{ 'NAV.PARTNERS' | translate }}</a></li>
+          <li><a routerLink="/Blog">{{ 'NAV.BLOG' | translate }}</a></li>
+          <li><a routerLink="/BandiErisorse">{{ 'NAV.RESOURCES' | translate }}</a></li>
+          <li><a routerLink="/Contatti">{{ 'NAV.CONTACT' | translate }}</a></li>
+        </ul>
+      </div>
+      <div class="nav-button" [class.visible]="showSecondary" (mouseenter)="isNavButtonHovered = true"
+        (mouseleave)="isNavButtonHovered = false">
+
+        <ul class="nav-secondary">
+          <li class="has-mega" (click)="toggleMega('veneto')">
+            <a >{{ 'MENU.DISCOVER_VENETO.TITLE' | translate }}</a>
+          </li>
+
+          <li class="has-mega" (click)="toggleMega('malopolska')">
+            <a routerLink="/DiscoverMalopolska">{{ 'MENU.DISCOVER_MALOPOLSKA.TITLE' | translate }}</a>
+          </li>
+
+          <li class="has-mega" (click)="toggleMega('maps')">
+            <a routerLink="/Mappe">{{ 'MENU.MAPS.TITLE' | translate }}</a>
+          </li>
+
+          <li class="has-mega" (click)="toggleMega('network')">
+            <a routerLink="/NetworkEvents">{{ 'MENU.NETWORK_EVENTS.TITLE' | translate }}</a>
+          </li>
+
+          <li class="has-mega" (click)="toggleMega('recommend')">
+            <a routerLink="/WeRecommend">{{ 'MENU.WE_RECOMMEND.TITLE' | translate }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="actions">
+      <ul class="nav-actions">
+        <li>
+          <a routerLink="/Cerca"><mat-icon>search</mat-icon></a>
+        </li>
+        <li>
+          <button mat-icon-button class="lang-switch" [matMenuTriggerFor]="langMenu">
+            <span class="lang-code">{{ currentLang | uppercase }}</span>
+            <mat-icon>language</mat-icon>
+          </button>
+
+          <mat-menu #langMenu="matMenu">
+            <button mat-menu-item (click)="switchLanguage('en')">EN</button>
+            <button mat-menu-item (click)="switchLanguage('pl')">PL</button>
+            <button mat-menu-item (click)="switchLanguage('it')">IT</button>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="mega-panel" id="mega-veneto" [class.open]="openMega === 'veneto'">
+  <div class="mega-inner">
+    <div class="mega-left">
+      <h3>{{ 'MENU.DISCOVER_VENETO.TITLE' | translate }}</h3>
+        <ul>
+            <li><a routerLink="/discoverVeneto/history" (click)="closeMegaMenu()">{{ 'MENU.DISCOVER_VENETO.HISTORY' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/MainCities">{{ 'MENU.DISCOVER_VENETO.MAIN_CITIES' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/MainVillages">{{ 'MENU.DISCOVER_VENETO.MAIN_VILLAGES' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/Landscapes">{{ 'MENU.DISCOVER_VENETO.LANDSCAPES' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/Cuisine">{{ 'MENU.DISCOVER_VENETO.CUISINE' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/Drinks">{{ 'MENU.DISCOVER_VENETO.DRINKS' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/TypicalProducts">{{ 'MENU.DISCOVER_VENETO.TYPICAL_PRODUCTS' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/Crafts">{{ 'MENU.DISCOVER_VENETO.CRAFTS' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/FestivalsTraditions">{{ 'MENU.DISCOVER_VENETO.FESTIVALS_TRADITIONS' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/BigCompanies">{{ 'MENU.DISCOVER_VENETO.BIG_COMPANIES' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/SportsFacilities">{{ 'MENU.DISCOVER_VENETO.SPORTS_FACILITIES' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/NatureWellness">{{ 'MENU.DISCOVER_VENETO.NATURE_WELLNESS' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/UnescoSites">{{ 'MENU.DISCOVER_VENETO.UNESCO_SITES' | translate }}</a></li>
+            <li><a routerLink="/discoverVeneto/LanguageCulture">{{ 'MENU.DISCOVER_VENETO.LANGUAGE_CULTURE' | translate }}</a></li>
+          </ul>
+    </div>
+    <div class="mega-right">
+          <img src="" alt="">
+          <img src="" alt="">
+        </div>
+      </div>
+  </div>
+  <div class="mega-panel" id="mega-malopolska" [class.open]="openMega === 'malopolska'">
+      <div class="mega-inner">
+        <div class="mega-left">
+          <h3>{{ 'MENU.DISCOVER_MALOPOLSKA.TITLE' | translate }}</h3>
+          <ul>
+            <li><a routerLink="/DiscoverMalopolska/History">{{ 'MENU.DISCOVER_MALOPOLSKA.HISTORY' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/MainCities">{{ 'MENU.DISCOVER_MALOPOLSKA.MAIN_CITIES' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/MainVillages">{{ 'MENU.DISCOVER_MALOPOLSKA.MAIN_VILLAGES' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/Landscapes">{{ 'MENU.DISCOVER_MALOPOLSKA.LANDSCAPES' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/Cuisine">{{ 'MENU.DISCOVER_MALOPOLSKA.CUISINE' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/Drinks">{{ 'MENU.DISCOVER_MALOPOLSKA.DRINKS' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/TypicalProducts">{{ 'MENU.DISCOVER_MALOPOLSKA.TYPICAL_PRODUCTS' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/Crafts">{{ 'MENU.DISCOVER_MALOPOLSKA.CRAFTS' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/FestivalsTraditions">{{ 'MENU.DISCOVER_MALOPOLSKA.FESTIVALS_TRADITIONS' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/BigCompanies">{{ 'MENU.DISCOVER_MALOPOLSKA.BIG_COMPANIES' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/SportsFacilities">{{ 'MENU.DISCOVER_MALOPOLSKA.SPORTS_FACILITIES' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/NatureWellness">{{ 'MENU.DISCOVER_MALOPOLSKA.NATURE_WELLNESS' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/UnescoSites">{{ 'MENU.DISCOVER_MALOPOLSKA.UNESCO_SITES' | translate }}</a></li>
+            <li><a routerLink="/DiscoverMalopolska/LanguageCulture">{{ 'MENU.DISCOVER_MALOPOLSKA.LANGUAGE_CULTURE' | translate }}</a></li>
+          </ul>
+    </div>
+    <div class="mega-right">
+          <img src="assets/images/malopolska1.jpg" alt="">
+          <img src="assets/images/malopolska2.jpg" alt="">
+        </div>
+      </div>
+  </div>
+  <div class="mega-panel" id="mega-maps" [class.open]="openMega === 'maps'">
+        <div class="mega-inner">
+          <div class="mega-left">
+            <h3>{{ 'MENU.MAPS.TITLE' | translate }}</h3>
+            <ul>
+            <li><a routerLink="/Mappe/Weather">{{ 'MENU.MAPS.WEATHER' | translate }}</a></li>
+            <li><a routerLink="/Mappe/CitiesVillages">{{ 'MENU.MAPS.CITIES_VILLAGES' | translate }}</a></li>
+            <li><a routerLink="/Mappe/UnescoSites">{{ 'MENU.MAPS.UNESCO_SITES' | translate }}</a></li>
+            <li><a routerLink="/Mappe/LandscapesSports">{{ 'MENU.MAPS.LANDSCAPES_SPORTS' | translate }}</a></li>
+            <li><a routerLink="/Mappe/NatureWellness">{{ 'MENU.MAPS.NATURE_WELLNESS' | translate }}</a></li>
+            <li><a routerLink="/Mappe/FoodCrafts">{{ 'MENU.MAPS.FOOD_CRAFTS' | translate }}</a></li>
+            <li><a routerLink="/Mappe/EconomicMap">{{ 'MENU.MAPS.ECONOMIC_MAP' | translate }}</a></li>
+          </ul>
+      </div>
+      <div class="mega-right">
+          <img src="assets/images/maps1.jpg" alt="">
+          <img src="assets/images/maps2.jpg" alt="">
+        </div>
+      </div>
+  </div>
+  <div class="mega-panel" id="mega-network" [class.open]="openMega === 'network'">
+        <div class="mega-inner">
+          <div class="mega-left">
+            <h3>{{ 'MENU.NETWORK_EVENTS.TITLE' | translate }}</h3>
+            <ul>
+              <li><a routerLink="/NetworkEvents/EventsVeneto">{{ 'MENU.NETWORK_EVENTS.EVENTS_VENETO' | translate }}</a></li>
+              <li><a routerLink="/NetworkEvents/EventsMalopolska">{{ 'MENU.NETWORK_EVENTS.EVENTS_MALOPOLSKA' | translate }}</a></li>
+              <li><a routerLink="/NetworkEvents/Associations">{{ 'MENU.NETWORK_EVENTS.ASSOCIATIONS' | translate }}</a></li>
+              <li><a routerLink="/NetworkEvents/FindJob">{{ 'MENU.NETWORK_EVENTS.FIND_JOB' | translate }}</a></li>
+          </ul>
+      </div>
+      <div class="mega-right">
+          <img src="assets/images/network1.jpg" alt="">
+          <img src="assets/images/network2.jpg" alt="">
+        </div>
+      </div>
+  </div>
+  <div class="mega-panel" id="mega-recommend" [class.open]="openMega === 'recommend'">
+        <div class="mega-inner">
+          <div class="mega-left">
+            <h3>{{ 'MENU.WE_RECOMMEND.TITLE' | translate }}</h3>
+            <ul>
+              <li><a routerLink="/WeRecommend/Tourism">{{ 'MENU.WE_RECOMMEND.TOURISM' | translate }}</a></li>
+              <li><a routerLink="/WeRecommend/Commerce">{{ 'MENU.WE_RECOMMEND.COMMERCE' | translate }}</a></li>
+              <li><a routerLink="/WeRecommend/Sport">{{ 'MENU.WE_RECOMMEND.SPORT' | translate }}</a></li>
+              <li><a routerLink="/WeRecommend/Institutions">{{ 'MENU.WE_RECOMMEND.INSTITUTIONS' | translate }}</a></li>
+              <li><a routerLink="/WeRecommend/OurPartners">{{ 'MENU.WE_RECOMMEND.OUR_PARTNERS' | translate }}</a></li>
+              <li><a routerLink="/WeRecommend/SpecialSeasonalProducts">{{ 'MENU.WE_RECOMMEND.SPECIAL_SEASONAL_PRODUCTS' | translate }}</a></li>
+          </ul>
+      </div>
+      <div class="mega-right">
+          <img src="assets/images/recommend1.jpg" alt="">
+          <img src="assets/images/recommend2.jpg" alt="">
+        </div>
+      </div>
+  </div>
+</div>
+<div class="nav-overlay" [class.open]="openMega !== null" (click)="openMega = null"> </div>

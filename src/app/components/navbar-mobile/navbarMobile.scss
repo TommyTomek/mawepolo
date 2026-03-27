@@ -1,0 +1,120 @@
+/* NAVBAR MOBILE TOP */
+.mobile-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 var(--spacing-sm);
+  z-index: 1001;
+  border-bottom: 1px solid var(--color-grey-200);
+  box-shadow:  var(--shadow-soft-bottom); /* shadow added */
+
+  /* LEFT COLUMN — 30% */
+  .left {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .logo {
+      height: 90%;
+      width: auto;
+      object-fit: contain;
+    }
+  }
+
+  .search-wrapper {
+    width: 40%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    }
+
+  .lens-icon {
+    position: absolute;
+    left: 10px;
+    top: 55%;                     /* move to vertical center */
+    transform: translateY(-50%);  /* pull back by half its height */
+    font-size: 18px;
+    color: var(--color-grey-600);
+    pointer-events: none;         /* so clicks go to the input */
+}
+
+
+    .search-input {
+    width: 100%;
+    padding: var(--spacing-xxs) var(--spacing-sm) var(--spacing-xxs) 36px; /* space for icon */
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--color-grey-300);
+    font-size: var(--font-size-sm);
+    background: var(--color-grey-100);
+    color: var(--color-grey-900);
+    }
+
+    /* RIGHT COLUMN — 40% */
+    .right {
+        width: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .burger-btn {
+        background: none;
+        border: none;
+        padding: var(--spacing-xxs);
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        mat-icon {
+            font-size: 26px;
+            color: var(--color-grey-600);
+            font-weight: 200;
+        }
+        }
+    }
+    }
+
+
+/* BOTTOM NAVIGATION */
+.mobile-bottom-nav {
+    
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: var(--color-grey-900);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  box-shadow:  var(--shadow-soft-top); /* shadow added */
+
+  a {
+    text-decoration: none;
+    color: var(--color-white); /* global grey */
+    font-size: var(--font-size-xs);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: color var(--transition-fast);
+
+    &.active {
+      color: var(--color-blue-light); /* global blue */
+    }
+
+    mat-icon {
+      font-size: 22px;
+      margin-bottom: 2px;
+      color: inherit; /* icon follows text color */
+    }
+  }
+}

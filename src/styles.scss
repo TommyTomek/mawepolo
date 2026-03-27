@@ -1,1 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  /* COLORS */
+  --color-white: #ffffff;
+  --color-bg-alt: #f7f7f7;
+  --color-blue-night: #0a1a2f;
+  --color-blue-light: #1f3b5c;
+  --color-yellow-leone: #f5c518;
+  --color-grey-100: #f2f2f2;
+  --color-grey-200: #e0e0e0;
+  --color-grey-300: #c2c2c2;
+  --color-grey-600: #6b6b6b;
+  --color-grey-900: #1a1a1a;
+
+  /* TYPOGRAPHY */
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-md: 1rem;      /* 16px */
+  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-xl: 1.5rem;    /* 24px */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* SPACING SYSTEM */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+
+  /* RADIUS */
+  --border-radius: 8px;
+  --border-radius-lg: 16px;
+
+  /* SHADOWS */
+  --shadow-soft-bottom: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-medium-bottom: 0 6px 20px rgba(0, 0, 0, 0.12);
+  --shadow-strong-bottom: 0 10px 30px rgba(0, 0, 0, 0.16);
+  --shadow-soft-top: 0 -4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-medium-top: 0 -6px 20px rgba(0, 0, 0, 0.12);
+  --shadow-strong-top: 0 -10px 30px rgba(0, 0, 0, 0.16);
+
+
+  /* TRANSITIONS */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.35s ease;
+  --transition-slow: 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* NAVBAR HEIGHTS */
+  --navbar-height: 10vh;
+  --navbar-height-shrink: 5vh;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-grey-900);
+}
