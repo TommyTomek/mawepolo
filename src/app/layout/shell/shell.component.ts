@@ -11,6 +11,12 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './shell.component.html',
 })
 export class AppLayoutComponent {
-  isMobile = computed(() => this.layout.isMobile());
-  constructor(private layout: LayoutService) {}
+  isMobile;
+  ready;
+
+  constructor(private layout: LayoutService) {
+    // Now layout is initialized, so computed() is safe
+    this.isMobile = computed(() => this.layout.isMobile());
+    this.ready = this.layout.ready;
+  }
 }

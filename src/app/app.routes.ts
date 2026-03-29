@@ -11,6 +11,16 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/home/home.component').then(m => m.HomeComponent)
       },
+      {
+        path: 'veneto',
+        loadComponent: () =>
+          import('./pages/veneto/veneto.component').then(m => m.VenetoComponent)
+      },
+      {
+        path: 'malopolska',
+        loadComponent: () =>
+          import('./pages/malopolska/malopolska.component').then(m => m.MalopolskaComponent)
+      }
       
     ]
   }
