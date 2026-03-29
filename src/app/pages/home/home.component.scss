@@ -64,28 +64,28 @@
     }
 
     h2 {
-        margin: -7% var(--spacing-md) 0;
-        font-size: var(--font-size-lg);
+        margin: -10% var(--spacing-md) 0;
+        font-size: var(--font-size-md);
         color: var(--color-white);
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         z-index: 2;
     }
 
     p {
-        margin: var(--spacing-md);
-        font-size: var(--font-size-md);
+        margin: 1% var(--spacing-md) 0;
+        font-size: var(--font-size-sm);
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
 
     button {
-  margin: 0 var(--spacing-md) var(--spacing-md);
-  padding: 12px 20px;
-  border-radius: 999px; /* pill shape */
-  border: none;
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  cursor: pointer;
-  color: white;
+        margin: 2% var(--spacing-md) var(--spacing-md);
+        padding: 12px 20px;
+        border-radius: 999px; /* pill shape */
+        border: none;
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        cursor: pointer;
+        color: white;
 
   background: linear-gradient(
     135deg,
