@@ -1,7 +1,7 @@
 .home-page {
   position: relative;
   width: 100%;
-  height: calc(var(--vh) * 90);
+  height: calc(var(--vh) * 84);
   background-image: url('/images/Home_background.png');
   background-size: cover;
   background-position: center;
@@ -35,11 +35,10 @@
 
 /* DISCOVER CARDS */
 .discover-section {
-  padding: var(--spacing-md);
+  padding: 0 var(--spacing-md) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
-  height: 70%;
+  height: 80%;
   
 
   .discover-card {
