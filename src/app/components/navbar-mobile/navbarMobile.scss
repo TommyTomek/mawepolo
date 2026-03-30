@@ -1,10 +1,10 @@
 /* NAVBAR MOBILE TOP */
 .mobile-top {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
-  height: calc(var(--vh) * 8);
+  height: 7%;
   background: var(--color-white);
   display: flex;
   flex-direction: row;
@@ -16,7 +16,6 @@
 
   /* LEFT COLUMN — 30% */
   .left {
-    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,12 +85,12 @@
 
 /* BOTTOM NAVIGATION */
 .mobile-bottom-nav {
-  height: calc(var(--vh) * 8); 
+    
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 70px;
+  height: 7%;
   background: var(--color-grey-900);
   display: flex;
   justify-content: space-around;

@@ -1,13 +1,8 @@
-@if (!ready()) {
-  <div style="height: 0;">NOT READY</div>
-} @else {
-  <div>READY!</div>
-
+   
   @if (isMobile()) {
-    <app-navbar-mobile></app-navbar-mobile>
-  } @else {
-    <app-navbar></app-navbar>
-  }
+      <app-navbar-mobile></app-navbar-mobile>
+    } @else {
+      <app-navbar></app-navbar>
+    }
+    <router-outlet></router-outlet>
 
-  <router-outlet></router-outlet>
-}
