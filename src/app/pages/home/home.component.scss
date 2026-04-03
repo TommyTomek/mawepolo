@@ -1,105 +1,140 @@
+/* ===========================
+   HOME PAGE WRAPPER
+   =========================== */
 .home-page {
   position: relative;
   width: 100%;
+  height: 86%;
   background-image: url('/images/Home_background.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-  height: 86%;
+  background-attachment: fixed;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+
 }
 
-.hero-content {
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+
+/* ===========================
+   SNAP SECTIONS  (SWIPE)
+   =========================== */
+.snap-section {
+  height: 100%;
+  scroll-snap-align: start;
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.snap-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===========================
+   SECTION 1 — HERO + DISCOVER
+   =========================== */
+.section-hero-discover {
   display: flex;
-flex-direction: column;
-height: 25%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* HERO */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .hero-logo {
   max-width: 70%;
   height: auto;
-  align-self: center;
+  margin-bottom: 2vh;
+  margin-top: 2vh;
 }
 
 .home-title {
-  margin-top: var(--spacing-md);
   font-size: var(--font-size);
   color: var(--color-white);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  align-self: center;
 }
 
-/* DISCOVER CARDS */
+/* ===========================
+   DISCOVER SECTION
+   =========================== */
 .discover-section {
-  position: relative;
-  padding: 0 var(--spacing-md) 0;
+  flex: 1;
+  width: 90%;
   display: flex;
   flex-direction: column;
-  height: 75%;
-  
+  justify-content: space-evenly;
+  align-items: center;
+  height: 80%;
+}
 
-  .discover-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* pushes text to bottom half */
-    margin: var(--spacing-lg);
-    background: var(--color-bg);
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-soft-bottom);
-    background: rgba(255, 255, 255, 0.4);
-    height: 40%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    position: relative;
+.discover-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  height: 45%;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
 
-    img {
-        flex:1;
-      width: 100%;
-      height: 50%;
-      object-fit: cover;
-      box-shadow: var(--shadow-soft-bottom);
-      z-index: 1;
-    }
+.discover-card img {
+  flex: 1;
+  width: 90%;
+  height: 50%;
+  object-fit: cover;
+  align-self: center;
+  padding-top: 5%;
+}
 
-    h2 {
-        position: relative;
-        margin: 0 var(--spacing-md) 0;
-        font-size: var(--font-size-md);
-        color: var(--color-white);
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        z-index: 10;
-    }
+.discover-card h2 {
+  margin: 0 var(--spacing-md);
+  font-size: var(--font-size-md);
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+}
 
-    p {
-        position: relative;
-        margin: 0 var(--spacing-md) 0;
-        font-size: var(--font-size-sm);
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        z-index: 10;
-    }
+.discover-veneto {
+  background: linear-gradient(90deg, #4A4DE7 0%, #4A4DE7 10%, #991159 40%, #991159 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-    button {
-        margin: 2%;
-        padding: 5px 20px;
-        border-radius: 999px; /* pill shape */
-        border: none;
-        font-size: var(--font-size-sm);
-        font-weight: 600;
-        cursor: pointer;
-        color: white;
-        position: relative ;
-        z-index: 10;
+.discover-malopolska {
+  background: linear-gradient(90deg, #ffbc0d 0%, #ffbc0d 30%, #991159 40%, #991159 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.25),
-    rgba(255, 255, 255, 0.05)
-  );
+.discover-card p {
+  margin: 0 var(--spacing-md);
+  font-size: var(--font-size-sm);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
 
+.discover-card button {
+  border-radius: 999px;
+  border: none;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--color-white);
+  width: 40%;
+  margin: 10px 0 10px 5%;
+
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 
@@ -110,19 +145,60 @@ height: 25%;
   transition: all 0.2s ease;
 }
 
-button:active {
+.discover-card button:active {
   transform: scale(0.96);
   box-shadow:
     0 2px 6px rgba(0, 0, 0, 0.3),
     inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-&.veneto button {
+
+.discover-card.veneto button {
   background: linear-gradient(135deg, #4aa8ff, #1e6fd8);
 }
-&.malopolska button {
+
+.discover-card.malopolska button {
   background: linear-gradient(135deg, #ffd85a, #ffb800);
-  color: #333;
 }
 
-  }
+/* ===========================
+   SECTION 2 — WHY MAWEPOLO
+   =========================== */
+
+
+#whyTitle {
+  display: inline-block;
+  background: linear-gradient(90deg, #c90757 0%, #1e3852 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.why-section {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: var(--spacing-lg);
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.why-content {
+  max-width: 700px;
+  isolation: isolate;
+}
+
+.why-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.why-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
 }

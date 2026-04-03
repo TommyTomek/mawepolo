@@ -1,5 +1,6 @@
 .app-wrapper {
   height: calc(var(--vh) * 100);
-  overflow: hidden;
+  overflow: auto;
   position: relative;
+  scrollbar-width: none;
 }

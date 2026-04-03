@@ -1,8 +1,11 @@
    
-  @if (isMobile()) {
+ @if (ready()) {
+   @if (isMobile()) {
       <app-navbar-mobile></app-navbar-mobile>
+      <router-outlet></router-outlet>
     } @else {
       <app-navbar></app-navbar>
+      <router-outlet></router-outlet>
     }
-    <router-outlet></router-outlet>
+  }
 

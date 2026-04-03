@@ -1,26 +1,46 @@
-
 <div class="home-page">
 
-  <div class="hero-content">
-    <img src="/images/logoText.png" alt="Image MaWePolo" class="hero-logo" />
-    <h3 class="home-title">Where Culture, Business and People Meet.</h3>
-  </div>
+  <!-- SECTION 1 — HERO + DISCOVER -->
+  <section class="snap-section section-hero-discover">
 
-  <section class="discover-section">
-
-    <div class="discover-card veneto" routerLink="/veneto">
-      <img src="/images/home_discover_veneto.jpg" alt="Image Veneto" />
-      <h2>Discover Veneto</h2>
-      <p>Opportunities between Małopolska & Veneto.</p>
-      <button class="btn-blue" routerLink="/veneto" >Explore</button>
+    <!-- HERO -->
+    <div class="hero-content">
+      <img src="/images/logoText.png" alt="Image MaWePolo" class="hero-logo" />
+      <h3 class="home-title">Where Culture, Business and People Meet.</h3>
     </div>
 
-    <div class="discover-card malopolska">
-      <img src="/images/home_discover_malopolska.jpg" alt="Image Małopolska" />
-      <h2>Discover Małopolska</h2>
-      <p>Opportunities between Veneto & Małopolska.</p>
-      <button class="btn-yellow" routerLink="/malopolska">Explore</button>
+    <!-- DISCOVER -->
+    <div class="discover-section">
+
+      <div class="discover-card veneto" routerLink="/veneto">
+        <img src="/images/home_discover_veneto.jpg" alt="Image Veneto" />
+        <h2 class="discover-veneto">Discover Veneto</h2>
+        <p>Opportunities between Małopolska & Veneto.</p>
+        <button class="btn-blue" routerLink="/veneto">Explore</button>
+      </div>
+
+      <div class="discover-card malopolska" routerLink="/malopolska">
+        <img src="/images/home_discover_malopolska.jpg" alt="Image Małopolska" />
+        <h2 class="discover-malopolska">Discover Małopolska</h2>
+        <p>Opportunities between Veneto & Małopolska.</p>
+        <button class="btn-yellow" routerLink="/malopolska">Explore</button>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- SECTION 2 — WHY MAWEPOLO -->
+  <section class="snap-section why-section">
+    <div class="why-content">
+      <h2>Why <span id="whyTitle">MaWePolo</span>?</h2>
+      <p>
+        MaWePolo connects the Veneto region in Italy and the Małopolska region in Poland,
+        two regions distant yet remarkably similar. Through this portal, we bring together
+        exceptional opportunities for development and cooperation, bridging cultural,
+        business, and tourism potential.
+      </p>
     </div>
   </section>
-  
+
 </div>
