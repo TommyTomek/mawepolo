@@ -1,5 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
@@ -14,7 +14,10 @@ export function httpLoaderFactory() {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModules)
+    ),
     provideClientHydration(withEventReplay()),
     provideHttpClient(),
     provideTranslateHttpLoader(),
