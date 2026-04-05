@@ -7,7 +7,7 @@ export const routes: Routes = [
     component: AppLayoutComponent,
     children: [
       {
-        path: '',
+        path: 'home',
         loadComponent: () =>
           import('./pages/home/home.component').then(m => m.HomeComponent)
       },
@@ -20,7 +20,23 @@ export const routes: Routes = [
         path: 'malopolska',
         loadComponent: () =>
           import('./pages/malopolska/malopolska.component').then(m => m.MalopolskaComponent)
+      },
+      {
+        path: 'login',
+        loadComponent: () => 
+          import('./pages/login/login.component').then(m => m.LoginComponent)
+      },
+      {
+        path: 'register',
+        loadComponent: () => 
+          import('./pages/register/register').then(m => m.Register)
+      },
+      {
+        path: 'forgot-password',
+        loadComponent: () => 
+          import('./pages/forgot-password/forgot-password').then(m => m.ForgotPassword)
       }
+
       
     ]
   }

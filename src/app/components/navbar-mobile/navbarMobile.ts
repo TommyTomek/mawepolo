@@ -9,4 +9,23 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './navbarMobile.html',
   styleUrls: ['./navbarMobile.scss']
 })
-export class NavbarMobileComponent {}
+export class NavbarMobileComponent {
+  isMobileMenuOpen = false;
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+  share() {
+  if (navigator.share) {
+    navigator.share({
+      title: 'mawepolo.vercel.app',
+      text: 'Check this out!',
+      url: window.location.href
+    })
+    .catch(err => console.error('Share failed:', err));
+  } else {
+    alert('Sharing is not supported on this device');
+  }
+}
+
+}

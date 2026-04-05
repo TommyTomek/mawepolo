@@ -11,12 +11,28 @@
 
 
   <div class="right">
-    <button class="burger-btn">
+    <button class="burger-btn" type="button" (click)="toggleMobileMenu()">
       <mat-icon>menu</mat-icon>
     </button>
   </div>
 
 </header>
+<nav class="mobile-menu" [class.open]="isMobileMenuOpen">
+
+  <button class="close-btn" type="button" (click)="toggleMobileMenu()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div class="menu-title brand">Menu</div>
+  <a routerLink="/login" class="hero-login-btn" (click)="toggleMobileMenu()">Log in to your account</a>
+
+  <ul>
+    <li><a routerLink="/home" (click)="toggleMobileMenu()">Home</a></li>
+    <li><a routerLink="/products">Prodotti</a></li>
+    <li><a routerLink="/about">Chi siamo</a></li>
+    <li><a routerLink="/contact">Contatti</a></li>
+  </ul>
+</nav>
 
 
 <!-- BOTTOM NAVIGATION -->
@@ -31,7 +47,7 @@
     <span>Eventi</span>
   </a>
 
-  <a routerLink="/share" routerLinkActive="active">
+  <a routerLink="/share" routerLinkActive="active" (click)="share()">
     <mat-icon>share</mat-icon>
     <span>Share</span>
   </a>
