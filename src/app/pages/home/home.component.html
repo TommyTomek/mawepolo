@@ -6,7 +6,19 @@
     <!-- HERO -->
     <div class="hero-content">
       <img src="/images/logoText.png" alt="Image MaWePolo" class="hero-logo" />
-       <a routerLink="/login" class="hero-login-btn">Log in to your account</a>
+
+       @if (!profile()) {
+          <a routerLink="/login" class="hero-login-btn">
+            Log in to your account
+          </a>
+        } @else {
+          <div class="hero-login-btn">
+            Welcome, {{ profile().full_name }}!
+          </div>
+      } 
+
+
+
       <h3 class="home-title">Where Culture, Business and People Meet.</h3>
      
 

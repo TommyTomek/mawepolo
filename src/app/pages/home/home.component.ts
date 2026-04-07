@@ -1,7 +1,8 @@
-import { Component, AfterViewInit, Inject, PLATFORM_ID, effect, signal } from '@angular/core';
+import { Component, AfterViewInit, Inject, PLATFORM_ID, effect, signal} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { LayoutService } from '../../services/services';
+import { authProfile } from '../../store/auth.store';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { LayoutService } from '../../services/services';
 export class HomeComponent implements AfterViewInit {
 
   private animationsStarted = signal(false);
+  profile = authProfile;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -38,9 +40,10 @@ export class HomeComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
-    // nothing here
-  }
+  async ngAfterViewInit() {
+
+}
+
 
   private initAnimations() {
     window.scrollTo(0, 0);

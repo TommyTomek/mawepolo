@@ -1,7 +1,13 @@
 import { Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/shell/shell.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
   {
     path: '',
     component: AppLayoutComponent,
@@ -14,7 +20,8 @@ export const routes: Routes = [
       {
         path: 'veneto',
         loadComponent: () =>
-          import('./pages/veneto/veneto.component').then(m => m.VenetoComponent)
+          import('./pages/veneto/veneto.component').then(m => m.VenetoComponent),
+          canActivate: [authGuard],
       },
       {
         path: 'malopolska',
@@ -23,21 +30,19 @@ export const routes: Routes = [
       },
       {
         path: 'login',
-        loadComponent: () => 
+        loadComponent: () =>
           import('./pages/login/login.component').then(m => m.LoginComponent)
       },
       {
         path: 'register',
-        loadComponent: () => 
+        loadComponent: () =>
           import('./pages/register/register').then(m => m.Register)
       },
       {
         path: 'forgot-password',
-        loadComponent: () => 
+        loadComponent: () =>
           import('./pages/forgot-password/forgot-password').then(m => m.ForgotPassword)
       }
-
-      
     ]
   }
 ];
