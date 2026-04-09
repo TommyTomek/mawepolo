@@ -60,3 +60,8 @@ body {
   background-color: var(--color-bg);
   color: var(--color-grey-900);
 }
+
+.app-logo {
+  height: 32px;   // or 24px, 28px — whatever fits your tile
+  width: auto;
+}
