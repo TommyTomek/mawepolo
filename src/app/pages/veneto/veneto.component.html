@@ -1,1 +1,104 @@
-<p>veneto works!</p>
+<div class="discover-veneto-wrapper snap-section">
+  <img src="/images/Home_background.webp" alt="Home Background Image" class="hero-image" />
+  <!-- TITLE -->
+    <h1 class="h-title">Città Principali</h1>
+
+
+<div class="dv-cities">
+
+  <!-- TOP ROW — 2 STATIC CARDS -->
+  <div class="dv-top-row">
+    <div class="dv-card">
+      <div class="card-image" style="background-image: url('images/venezia.webp')" alt="Venice"></div>
+      <h2>Venice</h2>
+      <p>The city of canals, art, and romance. St. Mark’s Square, Doge’s Palace, Rialto Bridge, Murano.</p>
+    </div>
+
+    <div class="dv-card">
+      <div class="card-image" style="background-image: url('images/verona.webp')" alt="Verona"></div>
+      <h2>Verona</h2>
+      <p>The city of love and Roman‑Scaliger heritage. The Arena, Juliet’s House, historic center.</p>
+    </div>
+  </div>
+
+
+  <div class="dv-scroll-wrapper">
+  <div class="carousel-arrow left">‹</div>
+  <div class="carousel-arrow right">›</div>
+
+ <div class="dv-scroll-row">
+
+  <!-- COPY 1 -->
+@for (c of cities; track c) {
+  <div class="dv-card">
+    <div class="card-image" [style.background-image]="'url(' + c.img + ')'"></div>
+    <h2>{{ c.title }}</h2>
+    <p>{{ c.text }}</p>
+  </div>
+}
+
+<!-- COPY 2 -->
+@for (c of cities; track c) {
+  <div class="dv-card">
+    <div class="card-image" [style.background-image]="'url(' + c.img + ')'"></div>
+    <h2>{{ c.title }}</h2>
+    <p>{{ c.text }}</p>
+  </div>
+}
+
+<!-- COPY 3 -->
+@for (c of cities; track c) {
+  <div class="dv-card">
+    <div class="card-image" [style.background-image]="'url(' + c.img + ')'"></div>
+    <h2>{{ c.title }}</h2>
+    <p>{{ c.text }}</p>
+  </div>
+}
+
+    </div>
+    </div>  
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- TERRITORY -->
+  <h1 class="h-title">Il Territorio</h1>
+  <div class="dv-section">
+    <h3>Borghi</h3>
+    <p>Asolo, Marostica, Bassano del Grappa: borghi storici, castelli medievali e paesaggi unici.</p>
+
+    <h3>Paesaggi</h3>
+    <p>Dolomiti, Lago di Garda, costa Adriatica: montagne, laghi, colline e pianure incantevoli.</p>
+  </div>
+
+  <!-- GASTRONOMIA -->
+  <h1 class="h-title">Gastronomia</h1>
+  <div class="dv-section">
+    <h3>Arte</h3>
+    <p>Opera Festival Arena di Verona, Carnevale di Venezia, rievocazioni storiche.</p>
+
+    <h3>Siti UNESCO</h3>
+    <p>Venezia, Padova, Dolomiti: patrimonio mondiale dell’umanità.</p>
+  </div>
+
+  <!-- ECONOMIA -->
+  <h1 class="h-title">Economia</h1>
+  <div class="dv-section">
+    <h3>Aziende</h3>
+    <p>Benetton, Luxottica: impresa, design e innovazione globale.</p>
+
+    <h3>Artigianato</h3>
+    <p>Il vetro di Murano.</p>
+  </div>
+
+</div>

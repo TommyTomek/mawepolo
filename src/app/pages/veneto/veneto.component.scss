@@ -1,7 +1,226 @@
-p {
+/* ===========================
+   MAIN WRAPPER
+   =========================== */
+.discover-veneto-wrapper {
+  width: 100%;
+  height: 86%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-white);
+}
+
+/* ===========================
+   HERO IMAGE
+   =========================== */
+.hero-image {
+  width: 100%;
+  height: 13vh;
+  object-fit: cover;
+}
+
+/* ===========================
+   TITLE
+   =========================== */
+.h-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 4%;
+  flex-shrink: 1;
+
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: black;
+
+  gap: 0.8rem;
+  width: 100%; /* let the lines stretch naturally */
+}
+
+.h-title::before,
+.h-title::after {
+  content: "";
+  flex: 1;                 /* lines stretch evenly */
+  height: 1px;
+  background-color: #bfbfbf;
+  opacity: 0.7;
+}
+
+
+
+
+/* ===========================
+   CITIES WRAPPER
+   =========================== */
+.dv-cities {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: auto;
+}
+
+/* ===========================
+   TOP ROW — 2 CARDS
+   =========================== */
+.dv-top-row {
+  flex: 0 0 60%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2%;
+  padding: 0 2%;
+}
+
+/* ===========================
+   SCROLL ROW — 3 CARDS
+   =========================== */
+
+ .dv-scroll-wrapper {
+  position: relative;
+  width: 96%;
+  align-self: center;
+
+}  
+
+.dv-scroll-row {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: row;
+
+  /* FIX: allow touch scrolling */
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  gap: 2%;
+  padding: 2% 0;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  width: 100%;
+  align-self: center;
+  height: 100%;
+}
+
+.dv-scroll-row::-webkit-scrollbar {
+  display: none;
+}
+
+.dv-scroll-row .dv-card {
+ 
+  flex: 0 0 70%;
+
+}
+
+/* ===========================
+   CARD BASE STYLE
+   =========================== */
+.dv-card {
+  position: relative;
+  height: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
+
+}
+
+/* Background image layer */
+.card-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+  height: 100%;
+  
+}
+
+.dv-scroll-row .dv-card {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    margin-top: 200px;
+    
+
+}
+
+.dv-card::after {
+  pointer-events: none;
+}
+
+
+
+
+/* ===========================
+   CARD TEXT
+   =========================== */
+h2,
+p {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: var(--spacing-sm);
+  color: var(--color-white);
+ 
+
+}
+
+h2 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.6),
+    rgba(0,0,0,0)
+  );
+}
+
+p {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,1),
+    rgba(0,0,0,0)
+  );
+}
+
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 222;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.carousel-arrow.left {
+  left: 1%;
+}
+
+.carousel-arrow.right {
+  right: 1%;
 }
