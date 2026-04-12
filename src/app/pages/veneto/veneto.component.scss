@@ -2,21 +2,53 @@
    MAIN WRAPPER
    =========================== */
 .discover-veneto-wrapper {
+  position: relative;
   width: 100%;
   height: 86%;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: var(--color-white);
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scrollbar-color: #ffc602 transparent; /* for Firefox */
+
 }
 
 /* ===========================
    HERO IMAGE
    =========================== */
 .hero-image {
+  flex: none;
   width: 100%;
-  height: 13vh;
-  object-fit: cover;
+  height: 15%;
+  position: relative;
+  /* Combine gradient + image properly */
+  background:
+    url('/images/discover-veneto.webp') center/cover no-repeat;
+
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-direction: column;
+  display: flex;
+  z-index: 1;
+  text-shadow: black 0px 0px 8px;
+  color: black;
+  justify-content: flex-end; /* push content to bottom */
+    
+}
+.h-hero {
+  flex:none; /* fills both width and height of parent */
+  display: flex;
+
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+
 }
 
 /* ===========================
@@ -144,7 +176,6 @@
   background-repeat: no-repeat;
   z-index: 1;
   height: 100%;
-  
 }
 
 .dv-scroll-row .dv-card {
@@ -223,4 +254,44 @@ p {
 
 .carousel-arrow.right {
   right: 1%;
+}
+
+.dv-territory-wrapper {
+  position: relative;
+  flex: 0 0 40%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2%;
+  padding: 0 2%;
+}
+
+.dv-culture-wrapper {
+  position: relative;
+  flex: 0 0 40%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2%;
+  padding: 0 2%;
+}
+
+.dv-gastronomy-wrapper {
+  flex: none;
+  position: relative;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+  gap: 2%;
+  padding: 0 2%;
+  height: 90%;
+
+}
+
+.dv-economy-wrapper {
+  flex: none;
+  position: relative;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+  gap: 2%;
+  padding: 0 2% 2% 2%;
+  height: 90%;
+
 }
