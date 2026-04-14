@@ -1,0 +1,96 @@
+{
+  "hero": {
+    "title": "Discover Veneto",
+    "image": "images/discover-region-hero.webp"
+  },
+
+  "cities": [
+    {
+      "title": "Venice",
+      "text": "The city of canals, art, and romance. St. Mark’s Square, Doge’s Palace, Rialto Bridge, Murano.",
+      "img": "images/venezia.webp"
+    },
+    {
+      "title": "Verona",
+      "text": "The city of love and Roman‑Scaliger heritage. The Arena, Juliet’s House, historic center.",
+      "img": "images/verona.webp"
+    },
+    {
+      "title": "Treviso",
+      "text": "A small gem crossed by canals and medieval arcades.",
+      "img": "images/treviso.webp"
+    },
+    {
+      "title": "Padua",
+      "text": "A historic university city with ancient traditions.",
+      "img": "images/padova.webp"
+    },
+    {
+      "title": "Vicenza",
+      "text": "The city of Palladio, Renaissance elegance, UNESCO heritage.",
+      "img": "images/vicenza.webp"
+    },
+    {
+      "title": "Belluno",
+      "text": "Gateway to the Dolomites, pristine nature and spectacular mountain landscapes.",
+      "img": "images/belluno.webp"
+    },
+    {
+      "title": "Rovigo",
+      "text": "Between the Po and Adige rivers, medieval history and the calm atmosphere of Polesine.",
+      "img": "images/rovigo.webp"
+    }
+  ],
+
+  "territory": [
+    {
+      "title": "Villages",
+      "text": "Asolo, Marostica, Bassano del Grappa: historic villages, medieval castles, and unique landscapes.",
+      "img": "images/villages.webp"
+    },
+    {
+      "title": "Landscapes",
+      "text": "Dolomites, Lake Garda, Adriatic coast: enchanting mountains, lakes, hills, and plains.",
+      "img": "images/landscape.webp"
+    }
+  ],
+
+  "gastronomy": [
+    {
+      "title": "Food & Beverages",
+      "text": "Discover the soul of Italian cuisine — from traditional dishes to modern interpretations, all crafted with passion and the finest ingredients.",
+      "img": "images/food&beverage.webp"
+    },
+    {
+      "title": "Products",
+      "text": "Discover the unique products of Veneto — from traditional crafts to modern innovations.",
+      "img": "images/products.webp"
+    }
+  ],
+
+  "culture": [
+    {
+      "title": "Art",
+      "text": "Discover the soul of Italian art — from Renaissance frescoes and sacred church interiors to timeless landscapes shaped by history, light, and beauty.",
+      "img": "images/art.webp"
+    },
+    {
+      "title": "UNESCO Sites",
+      "text": "Venezia, Padova, Dolomiti: world heritage sites.",
+      "img": "images/unesco.webp"
+    }
+  ],
+
+  "economy": [
+    {
+      "title": "Craft",
+      "text": "Traditional Italian craftsmanship: ceramics, glassmaking, wood carving, textiles, and timeless artisan techniques passed down through generations.",
+      "img": "images/craft.webp"
+    },
+    {
+      "title": "Businesses",
+      "text": "Local businesses: from industry and design to agriculture and craftsmanship, a diverse economy rooted in tradition and innovation.",
+      "img": "images/companies.webp"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "hero": {
+    "title": "Odkryj Małopolskę",
+    "image": "images/discover-region-hero.webp"
+  },
+
+  "cities": [
+    {
+      "title": "Kraków",
+      "text": "Historyczne serce Polski. Wawel, Rynek Główny, Kazimierz i królewska tradycja sięgająca wieków.",
+      "img": "images/krakow.webp"
+    },
+    {
+      "title": "Tarnów",
+      "text": "Urokliwe miasto z renesansową architekturą, ciepłym klimatem i pięknie zachowaną starówką.",
+      "img": "images/tarnow.webp"
+    },
+    {
+      "title": "Nowy Sącz",
+      "text": "Brama do gór, drewniana architektura i bogate regionalne tradycje.",
+      "img": "images/nowy_sacz.webp"
+    },
+    {
+      "title": "Zakopane",
+      "text": "Zimowa stolica Polski. Tatry, drewniane wille i żywa kultura góralska.",
+      "img": "images/zakopane.webp"
+    },
+    {
+      "title": "Oświęcim",
+      "text": "Miasto pamięci i refleksji, miejsce Muzeum Auschwitz‑Birkenau.",
+      "img": "images/oswiecim.webp"
+    },
+    {
+      "title": "Wieliczka",
+      "text": "Słynna z kopalni soli wpisanej na listę UNESCO — podziemny świat komór i solnych rzeźb.",
+      "img": "images/wieliczka.webp"
+    },
+    {
+      "title": "Bochnia",
+      "text": "Jedno z najstarszych miast w Polsce, znane z historycznej kopalni soli i średniowiecznego dziedzictwa.",
+      "img": "images/bochnia.webp"
+    }
+  ],
+
+  "territory": [
+    {
+      "title": "Miejscowości",
+      "text": "Lanckorona, Chochołów, Lipnica Murowana — drewniane domy, folklor i spokojne krajobrazy.",
+      "img": "images/villages.webp"
+    },
+    {
+      "title": "Krajobrazy",
+      "text": "Tatry, Pieniny, Beskidy, Przełom Dunajca — góry, rzeki, lasy i malownicze doliny.",
+      "img": "images/landscape.webp"
+    }
+  ],
+
+  "gastronomy": [
+    {
+      "title": "Kuchnia i napoje",
+      "text": "Oscypek, kwaśnica, pierogi, regionalne sery, piwa rzemieślnicze i tradycyjna kuchnia góralska.",
+      "img": "images/food&beverage.webp"
+    },
+    {
+      "title": "Produkty",
+      "text": "Rzemiosło, wyroby z drewna, koronki, ceramika i lokalne specjały z górskich wiosek.",
+      "img": "images/products.webp"
+    }
+  ],
+
+  "culture": [
+    {
+      "title": "Sztuka",
+      "text": "Sztuka sakralna, drewniane kościoły, stroje ludowe i żywe tradycje kulturowe kształtowane przez wieki.",
+      "img": "images/art.webp"
+    },
+    {
+      "title": "Obiekty UNESCO",
+      "text": "Stare Miasto w Krakowie, Kopalnia Soli w Wieliczce, Kalwaria Zebrzydowska, Drewniane Kościoły Południowej Małopolski.",
+      "img": "images/unesco.webp"
+    }
+  ],
+
+  "economy": [
+    {
+      "title": "Rzemiosło",
+      "text": "Góralskie rękodzieło, wyroby z drewna, tekstylia i tradycyjne techniki przekazywane z pokolenia na pokolenie.",
+      "img": "images/craft.webp"
+    },
+    {
+      "title": "Biznes",
+      "text": "Dynamiczny region oparty na turystyce, technologii, edukacji i lokalnych przedsiębiorstwach.",
+      "img": "images/companies.webp"
+    }
+  ]
+}

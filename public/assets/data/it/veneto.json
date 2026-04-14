@@ -1,0 +1,96 @@
+{
+  "hero": {
+    "title": "Scopri il Veneto",
+    "image": "images/veneto-hero.webp"
+  },
+
+  "cities": [
+    {
+      "title": "Venezia",
+      "text": "La città dei canali, dell’arte e del romanticismo. Piazza San Marco, Palazzo Ducale, Ponte di Rialto, Murano.",
+      "img": "images/venezia.webp"
+    },
+    {
+      "title": "Verona",
+      "text": "La città dell’amore e dell’eredità romano‑scaligera. L’Arena, la Casa di Giulietta, il centro storico.",
+      "img": "images/verona.webp"
+    },
+    {
+      "title": "Treviso",
+      "text": "Un piccolo gioiello attraversato da canali e portici medievali.",
+      "img": "images/treviso.webp"
+    },
+    {
+      "title": "Padova",
+      "text": "Una storica città universitaria con antiche tradizioni.",
+      "img": "images/padova.webp"
+    },
+    {
+      "title": "Vicenza",
+      "text": "La città di Palladio, eleganza rinascimentale e patrimonio UNESCO.",
+      "img": "images/vicenza.webp"
+    },
+    {
+      "title": "Belluno",
+      "text": "Porta delle Dolomiti, natura incontaminata e paesaggi montani spettacolari.",
+      "img": "images/belluno.webp"
+    },
+    {
+      "title": "Rovigo",
+      "text": "Tra il Po e l’Adige, storia medievale e l’atmosfera tranquilla del Polesine.",
+      "img": "images/rovigo.webp"
+    }
+  ],
+
+  "territory": [
+    {
+      "title": "Borghi",
+      "text": "Asolo, Marostica, Bassano del Grappa: borghi storici, castelli medievali e paesaggi unici.",
+      "img": "images/villages.webp"
+    },
+    {
+      "title": "Paesaggi",
+      "text": "Dolomiti, Lago di Garda, costa adriatica: montagne incantevoli, laghi, colline e pianure.",
+      "img": "images/landscape.webp"
+    }
+  ],
+
+  "gastronomy": [
+    {
+      "title": "Cibo e Bevande",
+      "text": "Scopri l’anima della cucina italiana — dai piatti tradizionali alle interpretazioni moderne, creati con passione e ingredienti di alta qualità.",
+      "img": "images/food&beverage.webp"
+    },
+    {
+      "title": "Prodotti",
+      "text": "Scopri i prodotti unici del Veneto — dall’artigianato tradizionale alle innovazioni moderne.",
+      "img": "images/products.webp"
+    }
+  ],
+
+  "culture": [
+    {
+      "title": "Arte",
+      "text": "Scopri l’anima dell’arte italiana — dagli affreschi rinascimentali e interni sacri ai paesaggi senza tempo modellati da storia, luce e bellezza.",
+      "img": "images/art.webp"
+    },
+    {
+      "title": "Siti UNESCO",
+      "text": "Venezia, Padova, Dolomiti: siti patrimonio dell’umanità.",
+      "img": "images/unesco.webp"
+    }
+  ],
+
+  "economy": [
+    {
+      "title": "Artigianato",
+      "text": "L’artigianato tradizionale italiano: ceramica, vetro, intaglio del legno, tessuti e tecniche senza tempo tramandate di generazione in generazione.",
+      "img": "images/craft.webp"
+    },
+    {
+      "title": "Imprese",
+      "text": "Imprese locali: dall’industria e design all’agricoltura e all’artigianato — un’economia diversificata radicata nella tradizione e nell’innovazione.",
+      "img": "images/companies.webp"
+    }
+  ]
+}

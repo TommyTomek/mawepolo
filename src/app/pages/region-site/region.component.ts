@@ -1,48 +1,44 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { Region } from '../../types/region';
 
 @Component({
-  selector: 'app-veneto',
+  selector: 'app-region',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './veneto.component.html',
-  styleUrls: ['./veneto.component.scss'],
+  templateUrl: './region.component.html',
+  styleUrls: ['./region.component.scss'],
 })
-export class VenetoComponent implements AfterViewInit {
+export class RegionComponent implements AfterViewInit {
 
-  cities = [
-    { title: 'Treviso', img: 'images/treviso.webp', text: 'A small gem crossed by canals and medieval arcades.' },
-    { title: 'Padua', img: 'images/padova.webp', text: 'A historic university city with ancient traditions.' },
-    { title: 'Vicenza', img: 'images/vicenza.webp', text: 'The city of Palladio, Renaissance elegance, UNESCO heritage.' },
-    { title: 'Belluno', img: 'images/belluno.webp', text: 'Gateway to the Dolomites, pristine nature and spectacular mountain landscapes.' },
-    { title: 'Rovigo', img: 'images/rovigo.webp', text: 'Between the Po and Adige rivers, medieval history and the calm atmosphere of Polesine.' }
-  ];
+  region!: Region;
+
+  constructor(private route: ActivatedRoute) {
+    this.region = this.route.snapshot.data['region'];
+    console.log('Loaded region:', this.region);
+  }
 
   ngAfterViewInit(): void {
-    console.log('[Veneto] ngAfterViewInit');
 
     const row = document.querySelector('.dv-scroll-row') as HTMLElement | null;
     const cards = Array.from(document.querySelectorAll('.dv-scroll-row .dv-card')) as HTMLElement[];
 
-    console.log('[Veneto] row:', row);
-    console.log('[Veneto] cards:', cards.length);
-
     if (!row || cards.length === 0) {
-      console.warn('[Veneto] Carousel DOM not found');
+      console.warn('[region] Carousel DOM not found');
       return;
     }
 
     /* -----------------------------------------
        INFINITE LOOP INITIALIZATION
     ------------------------------------------*/
-    const original = this.cities.length;   // 5
-    const total = cards.length;            // 15
+    const original = this.region.cities.length;   // dynamic length
+    const total = cards.length;                   // 3 copies → original * 3
 
     // Start in the middle copy
-    let current = original + 1;            // index 6
+    let current = original + 1;
 
     const scrollToCard = (index: number, behavior: ScrollBehavior = 'smooth') => {
-      console.log('[Veneto] scrollToCard', index);
       cards[index].scrollIntoView({
         behavior,
         inline: 'center',
@@ -60,11 +56,8 @@ export class VenetoComponent implements AfterViewInit {
     const leftArrow = document.querySelector('.carousel-arrow.left') as HTMLElement | null;
     const rightArrow = document.querySelector('.carousel-arrow.right') as HTMLElement | null;
 
-    console.log('[Veneto] leftArrow:', !!leftArrow, 'rightArrow:', !!rightArrow);
-
     if (leftArrow) {
       leftArrow.addEventListener('click', () => {
-        console.log('[Veneto] left click');
         current = Math.max(0, current - 1);
         scrollToCard(current);
       });
@@ -72,7 +65,6 @@ export class VenetoComponent implements AfterViewInit {
 
     if (rightArrow) {
       rightArrow.addEventListener('click', () => {
-        console.log('[Veneto] right click');
         current = Math.min(total - 1, current + 1);
         scrollToCard(current);
       });

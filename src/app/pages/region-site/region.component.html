@@ -1,0 +1,103 @@
+@if (region; as r) {
+
+<div class="discover-region-wrapper snap-section">
+
+  <!-- HERO -->
+  <div class="hero-image" [style.background-image]="'url(' + r.hero.image + ')'">
+    <p class="h-hero">{{ r.hero.title }}</p>
+  </div>
+
+  <!-- MAIN CITIES -->
+  <h1 class="h-title">Main Cities</h1>
+
+  <div class="dv-cities">
+
+    <!-- TOP ROW — FIRST 2 CITIES -->
+    <div class="dv-top-row">
+      @for (c of r.cities.slice(0,2); track c) {
+        <div class="dv-card">
+          <div class="card-image" [style.background-image]="'url(' + c.img + ')'"></div>
+          <h2>{{ c.title }}</h2>
+          <p>{{ c.text }}</p>
+        </div>
+      }
+    </div>
+
+    <!-- SCROLLING CAROUSEL -->
+    <div class="dv-scroll-wrapper">
+      <div class="carousel-arrow left">‹</div>
+      <div class="carousel-arrow right">›</div>
+
+      <div class="dv-scroll-row">
+
+        <!-- COPY 1–3 FOR INFINITE LOOP -->
+        @for (copy of [1,2,3]; track copy) {
+          @for (c of r.cities; track c) {
+            <div class="dv-card">
+              <div class="card-image" [style.background-image]="'url(' + c.img + ')'"></div>
+              <h2>{{ c.title }}</h2>
+              <p>{{ c.text }}</p>
+            </div>
+          }
+        }
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TERRITORY -->
+  <h1 class="h-title">The Territory</h1>
+
+  <div class="dv-territory-wrapper">
+    @for (t of r.territory; track t) {
+      <div class="dv-card">
+        <div class="card-image" [style.background-image]="'url(' + t.img + ')'"></div>
+        <h2>{{ t.title }}</h2>
+        <p>{{ t.text }}</p>
+      </div>
+    }
+  </div>
+
+  <!-- GASTRONOMY -->
+  <h1 class="h-title">Gastronomy</h1>
+
+  <div class="dv-gastronomy-wrapper">
+    @for (g of r.gastronomy; track g) {
+      <div class="dv-card">
+        <div class="card-image" [style.background-image]="'url(' + g.img + ')'"></div>
+        <h2>{{ g.title }}</h2>
+        <p>{{ g.text }}</p>
+      </div>
+    }
+  </div>
+
+  <!-- CULTURE -->
+  <h1 class="h-title">Culture</h1>
+
+  <div class="dv-culture-wrapper">
+    @for (c of r.culture; track c) {
+      <div class="dv-card">
+        <div class="card-image" [style.background-image]="'url(' + c.img + ')'"></div>
+        <h2>{{ c.title }}</h2>
+        <p>{{ c.text }}</p>
+      </div>
+    }
+  </div>
+
+  <!-- ECONOMY -->
+  <h1 class="h-title">Economy</h1>
+
+  <div class="dv-economy-wrapper">
+    @for (e of r.economy; track e) {
+      <div class="dv-card">
+        <div class="card-image" [style.background-image]="'url(' + e.img + ')'"></div>
+        <h2>{{ e.title }}</h2>
+        <p>{{ e.text }}</p>
+      </div>
+    }
+  </div>
+
+</div>
+
+}

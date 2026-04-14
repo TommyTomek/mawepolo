@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VenetoComponent } from './veneto.component';
+import { RegionComponent } from './region.component';
 
-describe('Veneto', () => {
-  let component: VenetoComponent;
-  let fixture: ComponentFixture<VenetoComponent>;
-
+describe('Region', () => {
+  let component: RegionComponent;
+  let fixture: ComponentFixture<RegionComponent>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VenetoComponent]
+      imports: [RegionComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(VenetoComponent);
+    fixture = TestBed.createComponent(RegionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

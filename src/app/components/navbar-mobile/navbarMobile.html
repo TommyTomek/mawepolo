@@ -11,6 +11,15 @@
 
 
   <div class="right">
+    <!-- LANGUAGE BUTTON -->
+    <button class="lang-btn" type="button" (click)="toggleLanguageMenu()">
+      <mat-icon>language</mat-icon>
+      <div class="lang-menu" [class.open]="isLanguageMenuOpen">
+        <button (click)="switchLanguage('en')">English</button>
+        <button (click)="switchLanguage('it')">Italiano</button>
+        <button (click)="switchLanguage('pl')">Polski</button>
+      </div>
+    </button>
     <button class="burger-btn" type="button" (click)="toggleMobileMenu()">
       <mat-icon>menu</mat-icon>
     </button>

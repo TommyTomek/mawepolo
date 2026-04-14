@@ -263,3 +263,47 @@
   color: white !important;
   text-decoration: none;
 }
+.lang-btn {
+  background: none;
+  border: none;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  mat-icon {
+    font-size: 26px;
+    color: #fff;
+  }
+}
+
+.language-menu {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 10px;
+  display: none;
+  flex-direction: column;
+  z-index: 9999;
+
+  &.open {
+    display: flex;
+  }
+
+  button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 15px;
+
+    &:hover {
+      background: rgba(255,255,255,0.1);
+    }
+  }
+}

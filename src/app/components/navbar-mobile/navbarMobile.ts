@@ -11,6 +11,20 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class NavbarMobileComponent {
   isMobileMenuOpen = false;
+  isLanguageMenuOpen = false;
+  currentLanguage = 'en'; // Default language
+
+  switchLanguage(lang: string) {
+    // Implement language switching logic here
+    console.log('Switching language to:', lang);
+    this.currentLanguage = lang; // Update current language state
+    localStorage.setItem('language', lang); // Persist language choice
+    this.isLanguageMenuOpen = false; // Close menu after selection
+  }
+
+  toggleLanguageMenu() {
+    this.isLanguageMenuOpen = !this.isLanguageMenuOpen;
+  }
 
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
@@ -26,6 +40,24 @@ export class NavbarMobileComponent {
   } else {
     alert('Sharing is not supported on this device');
   }
-}
+  }
+  ngOnInit() {
+  const saved = localStorage.getItem('lang');
+
+  if (saved) {
+    this.currentLanguage = saved;
+    return;
+  }
+
+  const browserLang = navigator.language.split('-')[0];
+
+  if (['en', 'it', 'pl'].includes(browserLang)) {
+    this.currentLanguage = browserLang;
+  } else {
+    this.currentLanguage = 'en';
+  }
+
+  localStorage.setItem('lang', this.currentLanguage);
+  }
 
 }

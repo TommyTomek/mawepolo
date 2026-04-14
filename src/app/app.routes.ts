@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/shell/shell.component';
 import { authGuard } from './guards/auth.guard';
+import { RegionResolver } from './resolvers/region.resolver';
 
 export const routes: Routes = [
   {
@@ -18,15 +19,13 @@ export const routes: Routes = [
           import('./pages/home/home.component').then(m => m.HomeComponent)
       },
       {
-        path: 'veneto',
+        path: 'region/:region',
         loadComponent: () =>
-          import('./pages/veneto/veneto.component').then(m => m.VenetoComponent),
-          canActivate: [authGuard],
-      },
-      {
-        path: 'malopolska',
-        loadComponent: () =>
-          import('./pages/malopolska/malopolska.component').then(m => m.MalopolskaComponent)
+          import('./pages/region-site/region.component').then(m => m.RegionComponent),
+        resolve: {
+          region: RegionResolver
+        },
+        canActivate: [authGuard],
       },
       {
         path: 'login',
