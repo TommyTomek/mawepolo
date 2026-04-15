@@ -7,7 +7,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
-
 export function httpLoaderFactory() {
   return new TranslateHttpLoader(); // ✔️ zero-argument version
 }
