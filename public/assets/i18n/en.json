@@ -1,0 +1,195 @@
+{
+  "malopolska": {
+    "hero": {
+      "title": "Discover Małopolska",
+      "image": "images/discover-region-hero.webp"
+    },
+
+    "cities": {
+      "1": {
+        "title": "Kraków",
+        "text": "The historic heart of Poland. Wawel Castle, the Main Square, Kazimierz, and centuries of royal heritage.",
+        "img": "images/krakow.webp"
+      },
+      "2": {
+        "title": "Tarnów",
+        "text": "A charming city with Renaissance architecture, warm climate, and a beautifully preserved old town.",
+        "img": "images/tarnow.webp"
+      },
+      "3": {
+        "title": "Nowy Sącz",
+        "text": "A gateway to the mountains, wooden architecture, and rich regional traditions.",
+        "img": "images/nowy_sacz.webp"
+      },
+      "4": {
+        "title": "Zakopane",
+        "text": "The winter capital of Poland. Tatra Mountains, wooden villas, and vibrant highlander culture.",
+        "img": "images/zakopane.webp"
+      },
+      "5": {
+        "title": "Oświęcim",
+        "text": "A city of memory and reflection, home to the Auschwitz‑Birkenau Memorial and Museum.",
+        "img": "images/oswiecim.webp"
+      },
+      "6": {
+        "title": "Wieliczka",
+        "text": "Famous for its UNESCO‑listed Salt Mine — a world of underground chambers and salt sculptures.",
+        "img": "images/wieliczka.webp"
+      },
+      "7": {
+        "title": "Bochnia",
+        "text": "One of the oldest cities in Poland, known for its historic salt mine and medieval heritage.",
+        "img": "images/bochnia.webp"
+      }
+    },
+
+    "territory": {
+      "1": {
+        "title": "Villages",
+        "text": "Lanckorona, Chochołów, Lipnica Murowana — wooden houses, folk traditions, and peaceful landscapes.",
+        "img": "images/villages.webp"
+      },
+      "2": {
+        "title": "Landscapes",
+        "text": "Tatra Mountains, Pieniny, Beskids, Dunajec Gorge — dramatic peaks, rivers, forests, and valleys.",
+        "img": "images/landscape.webp"
+      }
+    },
+
+    "gastronomy": {
+      "1": {
+        "title": "Food & Beverages",
+        "text": "Oscypek, kwaśnica, pierogi, regional cheeses, craft beers, and traditional highlander cuisine.",
+        "img": "images/food&beverage.webp"
+      },
+      "2": {
+        "title": "Products",
+        "text": "Local crafts, wooden carvings, lacework, pottery, and regional specialties from mountain villages.",
+        "img": "images/products.webp"
+      }
+    },
+
+    "culture": {
+      "1": {
+        "title": "Art",
+        "text": "Sacred art, wooden churches, folk costumes, and vibrant cultural traditions shaped by centuries.",
+        "img": "images/art.webp"
+      },
+      "2": {
+        "title": "UNESCO Sites",
+        "text": "Kraków Old Town, Wieliczka Salt Mine, Kalwaria Zebrzydowska, Wooden Churches of Southern Małopolska.",
+        "img": "images/unesco.webp"
+      }
+    },
+
+    "economy": {
+      "1": {
+        "title": "Craft",
+        "text": "Highlander craftsmanship, woodwork, textiles, and traditional artisan techniques passed down through generations.",
+        "img": "images/craft.webp"
+      },
+      "2": {
+        "title": "Businesses",
+        "text": "A dynamic region with tourism, technology, education, and local enterprises driving economic growth.",
+        "img": "images/companies.webp"
+      }
+    }
+  },
+
+  "veneto": {
+    "hero": {
+      "title": "Discover Veneto",
+      "image": "images/discover-region-hero.webp"
+    },
+
+    "cities": {
+      "1": {
+        "title": "Venice",
+        "text": "The city of canals, art, and romance. St. Mark’s Square, Doge’s Palace, Rialto Bridge, Murano.",
+        "img": "images/venezia.webp"
+      },
+      "2": {
+        "title": "Verona",
+        "text": "The city of love and Roman‑Scaliger heritage. The Arena, Juliet’s House, historic center.",
+        "img": "images/verona.webp"
+      },
+      "3": {
+        "title": "Treviso",
+        "text": "A small gem crossed by canals and medieval arcades.",
+        "img": "images/treviso.webp"
+      },
+      "4": {
+        "title": "Padua",
+        "text": "A historic university city with ancient traditions.",
+        "img": "images/padova.webp"
+      },
+      "5": {
+        "title": "Vicenza",
+        "text": "The city of Palladio, Renaissance elegance, UNESCO heritage.",
+        "img": "images/vicenza.webp"
+      },
+      "6": {
+        "title": "Belluno",
+        "text": "Gateway to the Dolomites, pristine nature and spectacular mountain landscapes.",
+        "img": "images/belluno.webp"
+      },
+      "7": {
+        "title": "Rovigo",
+        "text": "Between the Po and Adige rivers, medieval history and the calm atmosphere of Polesine.",
+        "img": "images/rovigo.webp"
+      }
+    },
+
+    "territory": {
+      "1": {
+        "title": "Villages",
+        "text": "Asolo, Marostica, Bassano del Grappa: historic villages, medieval castles, and unique landscapes.",
+        "img": "images/villages.webp"
+      },
+      "2": {
+        "title": "Landscapes",
+        "text": "Dolomites, Lake Garda, Adriatic coast: enchanting mountains, lakes, hills, and plains.",
+        "img": "images/landscape.webp"
+      }
+    },
+
+    "gastronomy": {
+      "1": {
+        "title": "Food & Beverages",
+        "text": "Discover the soul of Italian cuisine — from traditional dishes to modern interpretations, all crafted with passion and the finest ingredients.",
+        "img": "images/food&beverage.webp"
+      },
+      "2": {
+        "title": "Products",
+        "text": "Discover the unique products of Veneto — from traditional crafts to modern innovations.",
+        "img": "images/products.webp"
+      }
+    },
+
+    "culture": {
+      "1": {
+        "title": "Art",
+        "text": "Discover the soul of Italian art — from Renaissance frescoes and sacred church interiors to timeless landscapes shaped by history, light, and beauty.",
+        "img": "images/art.webp"
+      },
+      "2": {
+        "title": "UNESCO Sites",
+        "text": "Venezia, Padova, Dolomiti: world heritage sites.",
+        "img": "images/unesco.webp"
+      }
+    },
+
+    "economy": {
+      "1": {
+        "title": "Craft",
+        "text": "Traditional Italian craftsmanship: ceramics, glassmaking, wood carving, textiles, and timeless artisan techniques passed down through generations.",
+        "img": "images/craft.webp"
+      },
+      "2": {
+        "title": "Businesses",
+        "text": "Local businesses: from industry and design to agriculture and craftsmanship, a diverse economy rooted in tradition and innovation.",
+        "img": "images/companies.webp"
+      }
+    }
+  }
+}

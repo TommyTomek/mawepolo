@@ -1,33 +1,27 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideHttpClient, HttpClient } from '@angular/common/http';
 
-export function httpLoaderFactory() {
-  return new TranslateHttpLoader(); // ✔️ zero-argument version
-}
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from './core/i18n/translation-loader';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(
-      routes,
-      withPreloading(PreloadAllModules)
-    ),
+    provideRouter(routes, withPreloading(PreloadAllModules)),
     provideClientHydration(withEventReplay()),
     provideHttpClient(),
-    provideTranslateHttpLoader(),
 
-
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpLoaderFactory
-      },
-      fallbackLang: 'en'
-    }).providers!,
-  ],
+    importProvidersFrom(
+      TranslateModule.forRoot({
+        fallbackLang: 'en',
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      })
+    )
+  ]
 };

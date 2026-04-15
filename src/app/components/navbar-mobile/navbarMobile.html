@@ -12,14 +12,28 @@
 
   <div class="right">
     <!-- LANGUAGE BUTTON -->
-    <button class="lang-btn" type="button" (click)="toggleLanguageMenu()">
-      <mat-icon>language</mat-icon>
-      <div class="lang-menu" [class.open]="isLanguageMenuOpen">
-        <button (click)="switchLanguage('en')">English</button>
-        <button (click)="switchLanguage('it')">Italiano</button>
-        <button (click)="switchLanguage('pl')">Polski</button>
-      </div>
-    </button>
+    <div class="lang-wrapper"
+     (mouseenter)="onLangEnter()"
+     (mouseleave)="onLangLeave()"
+     (click)="toggleLanguageMenu()">
+
+      <mat-icon class="lang-icon"
+                [class.open]="isLanguageMenuOpen"
+                [class.hover]="isLanguageHovered">
+        language
+      </mat-icon>
+    </div>
+
+@if (isLanguageMenuOpen) {
+  <div class="lang-menu">
+    <button (click)="switchLanguage('it')" [class.active]="currentLanguage === 'it'">🇮🇹 Italiano</button>
+    <button (click)="switchLanguage('pl')" [class.active]="currentLanguage === 'pl'">🇵🇱 Polski</button>
+    <button (click)="switchLanguage('en')" [class.active]="currentLanguage === 'en'">🇬🇧 English</button>
+  </div>
+}
+
+
+
     <button class="burger-btn" type="button" (click)="toggleMobileMenu()">
       <mat-icon>menu</mat-icon>
     </button>
