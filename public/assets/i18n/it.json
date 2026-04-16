@@ -1,4 +1,25 @@
 {
+  "home": {
+    "hero": {
+      "login": "Accedi al tuo account",
+      "welcome": "Benvenuto, {{name}}!",
+      "title": "Dove cultura, business e persone si incontrano."
+    },
+    "discover": {
+      "veneto": {
+        "title": "Scopri il Veneto",
+        "text": "Opportunità tra Małopolska e Veneto."
+      },
+      "malopolska": {
+        "title": "Scopri la Małopolska",
+        "text": "Opportunità tra Veneto e Małopolska."
+      }
+    },
+    "why": {
+      "title": "Perché MaWePolo?",
+      "text": "MaWePolo collega la regione Veneto in Italia e la regione Małopolska in Polonia, due territori lontani ma sorprendentemente simili. Questo portale unisce opportunità di sviluppo e cooperazione, valorizzando cultura, business e turismo."
+    }
+  },
   "malopolska": {
     "hero": {
       "title": "Scopri la Małopolska",

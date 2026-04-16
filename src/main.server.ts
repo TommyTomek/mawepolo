@@ -8,8 +8,7 @@ const bootstrap = (context: BootstrapContext) =>
   bootstrapApplication(App, {
     ...config,
     providers: [
-      ...(config.providers ?? []),
-      provideServerRendering()
+      ...(config.providers ?? [])
     ]
   }, context);
 

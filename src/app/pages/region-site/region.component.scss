@@ -1,297 +1,275 @@
-/* ===========================
-   MAIN WRAPPER
-   =========================== */
-.discover-region-wrapper {
-  position: relative;
-  width: 100%;
-  height: 86%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: var(--color-white);
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  scrollbar-color: #ffc602 transparent; /* for Firefox */
+    /* ============================================================
+      MAIN WRAPPER
+      ============================================================ */
+    .discover-region-wrapper {
+      position: relative;
+      width: 100%;
+      height: 86%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--color-white);
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      scrollbar-color: #ffc602 transparent;
+    }
 
-}
+    /* ============================================================
+      HERO IMAGE
+      ============================================================ */
+    .hero-image {
+      flex: none;
+      width: 100%;
+      height: 15%;
+      position: relative;
+      background: url('/images/discover-veneto.webp') center/cover no-repeat;
+      background-blend-mode: overlay;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      text-shadow: 0 0 8px black;
+      color: black;
+    }
 
-/* ===========================
-   HERO IMAGE
-   =========================== */
-.hero-image {
-  flex: none;
-  width: 100%;
-  height: 15%;
-  position: relative;
-  /* Combine gradient + image properly */
-  background:
-    url('/images/discover-veneto.webp') center/cover no-repeat;
+    .h-hero {
+      display: flex;
+      justify-content: center;
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
 
-  background-blend-mode: overlay;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  flex-direction: column;
-  display: flex;
-  z-index: 1;
-  text-shadow: black 0px 0px 8px;
-  color: black;
-  justify-content: flex-end; /* push content to bottom */
-    
-}
-.h-hero {
-  flex:none; /* fills both width and height of parent */
-  display: flex;
+    /* ============================================================
+      SECTION TITLES
+      ============================================================ */
+    .h-title {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 4%;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: black;
+      gap: 0.8rem;
+      width: 100%;
+    }
 
-  justify-content: center;
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    .h-title::before,
+    .h-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: #bfbfbf;
+      opacity: 0.7;
+    }
 
-}
+    /* ============================================================
+      CITIES WRAPPER
+      ============================================================ */
+    .dv-cities {
+      width: 100%;
+      height: 60%;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      margin: auto;
+    }
 
-/* ===========================
-   TITLE
-   =========================== */
-.h-title {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    /* ============================================================
+      TOP ROW — 2 CARDS
+      ============================================================ */
+    .dv-top-row {
+      flex: 0 0 60%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2%;
+      padding: 0 2%;
+    }
 
-  height: 4%;
-  flex-shrink: 1;
+    /* ============================================================
+      SCROLLING CAROUSEL
+      ============================================================ */
+    .dv-scroll-wrapper {
+      position: relative;
+      width: 96%;
+      align-self: center;
+      height: auto;
+      flex-shrink: 0;
+      padding: 2% 0;
+    }
 
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: black;
+    /* Edge fade effect */
+    .dv-scroll-wrapper::before,
+    .dv-scroll-wrapper::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 15%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+    }
 
-  gap: 0.8rem;
-  width: 100%; /* let the lines stretch naturally */
-}
+    .dv-scroll-wrapper::before {
+      left: 0;
+      background: linear-gradient(to right, rgba(255,255,255,0.4), transparent);
+    }
 
-.h-title::before,
-.h-title::after {
-  content: "";
-  flex: 1;                 /* lines stretch evenly */
-  height: 1px;
-  background-color: #bfbfbf;
-  opacity: 0.7;
-}
+    .dv-scroll-wrapper::after {
+      right: 0;
+      background: linear-gradient(to left, rgba(255,255,255,0.4), transparent);
+    }
 
+    .dv-scroll-row {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 2%;
+      padding: 0;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      width: 100%;
+      height: 100%;
+    }
 
+    .dv-scroll-row::-webkit-scrollbar {
+      display: none;
+    }
 
+    /* ============================================================
+      CARD BASE STYLE
+      ============================================================ */
+    .dv-card {
+      position: relative;
+      height: 100%;
+      border-radius: 5px;
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
 
-/* ===========================
-   CITIES WRAPPER
-   =========================== */
-.dv-cities {
-  width: 100%;
-  height: 60%;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  margin: auto;
-}
+    /* Base state for all cards */
+    .dv-scroll-row .dv-card {
+      flex: 0 0 70%;
+      transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+      will-change: transform, opacity;
+    }
 
-/* ===========================
-   TOP ROW — 2 CARDS
-   =========================== */
-.dv-top-row {
-  flex: 0 0 60%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2%;
-  padding: 0 2%;
-}
+    /* Animate ONLY non-active cards */
+    .dv-scroll-row .dv-card:not(.active) {
+      animation: scaleBlur 1s linear both;
+      animation-timeline: cards;
+      animation-range: entry 0% exit 100%;
+    }
 
-/* ===========================
-   SCROLL ROW — 3 CARDS
-   =========================== */
-
- .dv-scroll-wrapper {
-  position: relative;
-  width: 96%;
-  align-self: center;
-
-}  
-
-.dv-scroll-row {
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-shrink: 0;
-  flex-direction: row;
-
-  /* FIX: allow touch scrolling */
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  gap: 2%;
-  padding: 2% 0;
-
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  width: 100%;
-  align-self: center;
-  height: 100%;
-}
-
-.dv-scroll-row::-webkit-scrollbar {
-  display: none;
-}
-
-.dv-scroll-row .dv-card {
- 
-  flex: 0 0 70%;
-
-}
-
-/* ===========================
-   CARD BASE STYLE
-   =========================== */
-.dv-card {
-  position: relative;
-  height: 100%;
-  border-radius: 5px;
-  overflow: hidden;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-shrink: 0;
-
-}
-
-/* Background image layer */
-.card-image {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 1;
-  height: 100%;
-}
-
-.dv-scroll-row .dv-card {
-    width: 100%;
-    
-
-}
-
-.dv-card::after {
-  pointer-events: none;
-}
+    /* Active card must NOT animate or blur */
+    .dv-scroll-row .dv-card.active {
+      animation: none !important;
+      transform: scale(1) !important;
+      opacity: 1 !important;
+      z-index: 5;
+    }
 
 
 
+    /* Blur only the image, not the whole card */
+    .dv-scroll-row .dv-card:not(.active) .card-image {
+      filter: blur(4px);
+    }
 
-/* ===========================
-   CARD TEXT
-   =========================== */
-h2,
-p {
-  position: relative;
-  z-index: 2;
-  margin: 0;
-  padding: var(--spacing-sm);
-  color: var(--color-white);
- 
+    .dv-scroll-row .dv-card.active .card-image {
+      filter: blur(0);
+    }
 
-}
+    /* Background image */
+    .card-image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
 
-h2 {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.6),
-    rgba(0,0,0,0)
-  );
-}
+    /* ============================================================
+      CARD TEXT
+      ============================================================ */
+    h2,
+    p {
+      position: relative;
+      z-index: 2;
+      margin: 0;
+      padding: var(--spacing-sm);
+      color: var(--color-white);
+    }
 
-p {
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,1),
-    rgba(0,0,0,0)
-  );
-}
+    h2 {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0));
+    }
+
+    p {
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+    }
+
+    /* ============================================================
+      ARROWS
+      ============================================================ */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 222;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0,0,0,1);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .carousel-arrow.left { left: 1%; }
+    .carousel-arrow.right { right: 1%; }
+
+    /* ============================================================
+      GRID SECTIONS (TERRITORY, CULTURE, ETC.)
+      ============================================================ */
+    .dv-territory-wrapper,
+    .dv-culture-wrapper {
+      position: relative;
+      flex: 0 0 40%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2%;
+      padding: 0 2%;
+    }
+
+    .dv-gastronomy-wrapper,
+    .dv-economy-wrapper {
+      flex: none;
+      position: relative;
+      display: grid;
+      grid-template-rows: 2fr 1fr;
+      gap: 2%;
+      padding: 0 2%;
+      height: 90%;
+    }
 
 
-.carousel-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 222;
 
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(4px);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: white;
-  font-size: 1.6rem;
-  cursor: pointer;
-}
-
-.carousel-arrow.left {
-  left: 1%;
-}
-
-.carousel-arrow.right {
-  right: 1%;
-}
-
-.dv-territory-wrapper {
-  position: relative;
-  flex: 0 0 40%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2%;
-  padding: 0 2%;
-}
-
-.dv-culture-wrapper {
-  position: relative;
-  flex: 0 0 40%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2%;
-  padding: 0 2%;
-}
-
-.dv-gastronomy-wrapper {
-  flex: none;
-  position: relative;
-  display: grid;
-  grid-template-rows: 2fr 1fr;
-  gap: 2%;
-  padding: 0 2%;
-  height: 90%;
-
-}
-
-.dv-economy-wrapper {
-  flex: none;
-  position: relative;
-  display: grid;
-  grid-template-rows: 2fr 1fr;
-  gap: 2%;
-  padding: 0 2% 2% 2%;
-  height: 90%;
-
-}

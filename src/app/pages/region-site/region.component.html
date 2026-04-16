@@ -14,7 +14,7 @@
 
     <!-- TOP ROW — FIRST 2 CITIES -->
     <div class="dv-top-row">
-      @for (c of r.cities.slice(0,2); track c) {
+      @for (c of r.cities.slice(0,2); track c.title) {
         <div class="dv-card">
           <div class="card-image" [style.background-image]="'url(' + c.img + ')'"></div>
           <h2>{{ c.title }}</h2>
@@ -32,7 +32,7 @@
 
         <!-- COPY 1–3 FOR INFINITE LOOP -->
         @for (copy of [1,2,3]; track copy) {
-          @for (c of r.cities; track c) {
+          @for (c of r.cities; track c.title) {
             <div class="dv-card">
               <div class="card-image" [style.background-image]="'url(' + c.img + ')'"></div>
               <h2>{{ c.title }}</h2>
@@ -50,7 +50,7 @@
   <h1 class="h-title">The Territory</h1>
 
   <div class="dv-territory-wrapper">
-    @for (t of r.territory; track t) {
+    @for (t of r.territory; track t.title) {
       <div class="dv-card">
         <div class="card-image" [style.background-image]="'url(' + t.img + ')'"></div>
         <h2>{{ t.title }}</h2>
@@ -63,7 +63,7 @@
   <h1 class="h-title">Gastronomy</h1>
 
   <div class="dv-gastronomy-wrapper">
-    @for (g of r.gastronomy; track g) {
+    @for (g of r.gastronomy; track g.title) {
       <div class="dv-card">
         <div class="card-image" [style.background-image]="'url(' + g.img + ')'"></div>
         <h2>{{ g.title }}</h2>
@@ -76,7 +76,7 @@
   <h1 class="h-title">Culture</h1>
 
   <div class="dv-culture-wrapper">
-    @for (c of r.culture; track c) {
+    @for (c of r.culture; track c.title) {
       <div class="dv-card">
         <div class="card-image" [style.background-image]="'url(' + c.img + ')'"></div>
         <h2>{{ c.title }}</h2>
@@ -89,7 +89,7 @@
   <h1 class="h-title">Economy</h1>
 
   <div class="dv-economy-wrapper">
-    @for (e of r.economy; track e) {
+    @for (e of r.economy; track e.title) {
       <div class="dv-card">
         <div class="card-image" [style.background-image]="'url(' + e.img + ')'"></div>
         <h2>{{ e.title }}</h2>

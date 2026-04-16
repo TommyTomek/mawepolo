@@ -1,4 +1,25 @@
 {
+  "home": {
+    "hero": {
+      "login": "Log in to your account",
+      "welcome": "Welcome, {{name}}!",
+      "title": "Where Culture, Business and People Meet."
+    },
+    "discover": {
+      "veneto": {
+        "title": "Discover Veneto",
+        "text": "Opportunities between Małopolska & Veneto."
+      },
+      "malopolska": {
+        "title": "Discover Małopolska",
+        "text": "Opportunities between Veneto & Małopolska."
+      }
+    },
+    "why": {
+      "title": "Why MaWePolo?",
+      "text": "MaWePolo connects the Veneto region in Italy and the Małopolska region in Poland, two regions distant yet remarkably similar. Through this portal, we bring together exceptional opportunities for development and cooperation, bridging cultural, business, and tourism potential."
+    }
+  },
   "malopolska": {
     "hero": {
       "title": "Discover Małopolska",

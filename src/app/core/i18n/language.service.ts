@@ -15,6 +15,7 @@ export class LanguageService {
   switch(lang: 'en' | 'pl' | 'it') {
     this.currentLang.set(lang);
     this.translate.use(lang);
+    this.translate.reloadLang(lang);
   }
 
   get() {

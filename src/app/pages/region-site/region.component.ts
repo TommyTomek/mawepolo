@@ -22,13 +22,9 @@ export class RegionComponent implements AfterViewInit {
   regionName!: string;
 
   constructor() {
-    // Read region from route
     this.regionName = this.route.snapshot.paramMap.get('region')!;
-    
-    // Load initial region (from resolver)
     this.region = this.route.snapshot.data['region'];
 
-    // React to language changes
     effect(() => {
       const currentLang = this.lang.currentLang();
       this.reloadRegion(currentLang);
@@ -47,16 +43,13 @@ export class RegionComponent implements AfterViewInit {
   }
 
   /* ---------------------------------------------------
-     CAROUSEL LOGIC (unchanged, just moved to a function)
+     CAROUSEL LOGIC — JS BLUR + SCALE
   ----------------------------------------------------*/
   initCarousel() {
     const row = document.querySelector('.dv-scroll-row') as HTMLElement | null;
     const cards = Array.from(document.querySelectorAll('.dv-scroll-row .dv-card')) as HTMLElement[];
 
-    if (!row || cards.length === 0) {
-      console.warn('[region] Carousel DOM not found');
-      return;
-    }
+    if (!row || cards.length === 0) return;
 
     const original = this.region.cities.length;
     const total = cards.length;
@@ -71,8 +64,44 @@ export class RegionComponent implements AfterViewInit {
       });
     };
 
-    scrollToCard(current, 'auto');
+    const updateActiveCard = () => {
+      cards.forEach((card, index) => {
+        card.classList.toggle('active', index === current);
+      });
+    };
 
+    const updateCardTransforms = () => {
+      const viewportCenter = window.innerWidth / 2;
+
+      cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const distance = Math.abs(viewportCenter - cardCenter);
+        const maxDistance = window.innerWidth * 0.45;
+
+        const t = Math.min(distance / maxDistance, 1); // 0 center, 1 far
+        const scale = 1 - t * 0.25;                    // 1 → 0.75
+        const opacity = 1 - t * 0.4;                   // 1 → 0.6
+        const blur = t * 4;                            // 0 → 4px
+
+        card.style.transform = `scale(${scale})`;
+        card.style.opacity = `${opacity}`;
+
+        const img = card.querySelector('.card-image') as HTMLElement | null;
+        if (img) img.style.filter = `blur(${blur}px)`;
+      });
+    };
+
+    // Initial center
+    scrollToCard(current, 'auto');
+    setTimeout(() => {
+      updateActiveCard();
+      updateCardTransforms();
+    }, 50);
+
+    /* ---------------------------------------------------
+       ARROWS
+    ----------------------------------------------------*/
     const leftArrow = document.querySelector('.carousel-arrow.left') as HTMLElement | null;
     const rightArrow = document.querySelector('.carousel-arrow.right') as HTMLElement | null;
 
@@ -80,6 +109,10 @@ export class RegionComponent implements AfterViewInit {
       leftArrow.onclick = () => {
         current = Math.max(0, current - 1);
         scrollToCard(current);
+        setTimeout(() => {
+          updateActiveCard();
+          updateCardTransforms();
+        }, 80);
       };
     }
 
@@ -87,9 +120,16 @@ export class RegionComponent implements AfterViewInit {
       rightArrow.onclick = () => {
         current = Math.min(total - 1, current + 1);
         scrollToCard(current);
+        setTimeout(() => {
+          updateActiveCard();
+          updateCardTransforms();
+        }, 80);
       };
     }
 
+    /* ---------------------------------------------------
+       TOUCH SWIPE
+    ----------------------------------------------------*/
     let startX = 0;
 
     row.ontouchstart = (e: TouchEvent) => {
@@ -101,29 +141,37 @@ export class RegionComponent implements AfterViewInit {
       const diff = startX - endX;
 
       if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          current = Math.min(total - 1, current + 1);
-        } else {
-          current = Math.max(0, current - 1);
-        }
+        current = diff > 0
+          ? Math.min(total - 1, current + 1)
+          : Math.max(0, current - 1);
+
         scrollToCard(current);
+        setTimeout(() => {
+          updateActiveCard();
+          updateCardTransforms();
+        }, 80);
       }
     };
 
+    /* ---------------------------------------------------
+       INFINITE LOOP + CENTER DETECTION
+  ----------------------------------------------------*/
     let scrollTimeout: any;
 
-    row.onscroll = () => {
-      clearTimeout(scrollTimeout);
+    row.addEventListener('scroll', () => {
+      // live transform while scrolling
+      updateCardTransforms();
 
+      clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         let closestIndex = 0;
         let closestDistance = Infinity;
-        const center = window.innerWidth / 2;
+        const viewportCenter = window.innerWidth / 2;
 
         cards.forEach((card, index) => {
           const rect = card.getBoundingClientRect();
           const cardCenter = rect.left + rect.width / 2;
-          const distance = Math.abs(cardCenter - center);
+          const distance = Math.abs(cardCenter - viewportCenter);
 
           if (distance < closestDistance) {
             closestDistance = distance;
@@ -133,21 +181,34 @@ export class RegionComponent implements AfterViewInit {
 
         current = closestIndex;
 
+        // Infinite loop boundaries
         if (current >= total - original - 1) {
           current = original + (current % original);
           scrollToCard(current, 'auto');
+          setTimeout(() => {
+            updateActiveCard();
+            updateCardTransforms();
+          }, 50);
           return;
         }
 
         if (current <= original) {
           current = original + (current % original);
           scrollToCard(current, 'auto');
+          setTimeout(() => {
+            updateActiveCard();
+            updateCardTransforms();
+          }, 50);
           return;
         }
 
         scrollToCard(current);
+        setTimeout(() => {
+          updateActiveCard();
+          updateCardTransforms();
+        }, 50);
 
       }, 120);
-    };
+    });
   }
 }

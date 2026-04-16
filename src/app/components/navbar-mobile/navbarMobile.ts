@@ -1,13 +1,15 @@
-import { Component,HostListener } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { LanguageService } from '../../core/i18n/language.service';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-navbar-mobile',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, MatIconModule],
+  imports: [RouterLink, CommonModule, MatIconModule],
   templateUrl: './navbarMobile.html',
   styleUrls: ['./navbarMobile.scss']
 })
@@ -16,10 +18,15 @@ export class NavbarMobileComponent {
   isMobileMenuOpen = false;
   isLanguageMenuOpen = false;
   currentLanguage = 'en';
+  isLanguageHovered = false;
 
-  constructor(private lang: LanguageService) {}
+  constructor(private lang: LanguageService, 
+              private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
+  // Delay until after hydration finishes
+  Promise.resolve().then(() => {
     const saved = localStorage.getItem('lang');
 
     if (saved) {
@@ -30,26 +37,35 @@ export class NavbarMobileComponent {
 
     const browserLang = navigator.language.split('-')[0];
 
-    if (['en', 'it', 'pl'].includes(browserLang)) {
-      this.currentLanguage = browserLang;
-    } else {
-      this.currentLanguage = 'en';
-    }
+    this.currentLanguage = ['en', 'it', 'pl'].includes(browserLang)
+      ? browserLang
+      : 'en';
 
     this.lang.switch(this.currentLanguage as 'en' | 'pl' | 'it');
     localStorage.setItem('lang', this.currentLanguage);
-  }
+  });
+}
 
-  switchLanguage(lang: 'en' | 'pl' | 'it') {
-    this.currentLanguage = lang;
-    this.lang.switch(lang);
-    localStorage.setItem('lang', lang);
+
+
+ toggleLanguageMenu(event: Event) {
+  event.stopPropagation();
+  this.isLanguageMenuOpen = !this.isLanguageMenuOpen;
+}
+
+switchLanguage(lang: 'en' | 'pl' | 'it', event: Event) {
+  event.stopPropagation();
+
+  this.currentLanguage = lang;
+  this.lang.switch(lang);
+  localStorage.setItem('lang', lang);
+  this.cdr.detectChanges();
+
+  setTimeout(() => {
     this.isLanguageMenuOpen = false;
-  }
+  }, 50);
+}
 
-  toggleLanguageMenu() {
-    this.isLanguageMenuOpen = !this.isLanguageMenuOpen;
-  }
 
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
@@ -61,13 +77,11 @@ export class NavbarMobileComponent {
         title: 'mawepolo.vercel.app',
         text: 'Check this out!',
         url: window.location.href
-      })
-      .catch(err => console.error('Share failed:', err));
+      }).catch(err => console.error('Share failed:', err));
     } else {
       alert('Sharing is not supported on this device');
     }
   }
-  isLanguageHovered = false;
 
   onLangEnter() {
     this.isLanguageHovered = true;
@@ -76,5 +90,4 @@ export class NavbarMobileComponent {
   onLangLeave() {
     this.isLanguageHovered = false;
   }
-
 }

@@ -1,56 +1,51 @@
-import { Component, AfterViewInit, Inject, PLATFORM_ID, effect, signal} from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  Inject,
+  PLATFORM_ID,
+  effect,
+  signal
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { LayoutService } from '../../services/services';
 import { authProfile } from '../../store/auth.store';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [RouterLink]
+  imports: [RouterLink, TranslateModule] 
 })
 export class HomeComponent implements AfterViewInit {
 
-  private animationsStarted = signal(false);
   profile = authProfile;
+
+  private animationsStarted = signal(false);
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private layout: LayoutService
   ) {
-
-    // ⭐ effect must be created in constructor
     effect(() => {
-
-      // Only run in browser
       if (!isPlatformBrowser(this.platformId)) return;
-
-      // Wait until layout is ready
       if (!this.layout.ready()) return;
-
-      // Prevent multiple triggers
       if (this.animationsStarted()) return;
 
       this.animationsStarted.set(true);
-
-      // Now run animations
       this.initAnimations();
     });
   }
 
-  async ngAfterViewInit() {
-
-}
-
+  ngAfterViewInit() {}
 
   private initAnimations() {
     window.scrollTo(0, 0);
 
     setTimeout(() => {
       requestAnimationFrame(() => {
-
         const sections = document.querySelectorAll('.snap-section');
 
         if (sections.length > 0) {
@@ -68,7 +63,6 @@ export class HomeComponent implements AfterViewInit {
         }, { threshold: 0.4 });
 
         sections.forEach(sec => observer.observe(sec));
-
       });
     }, 0);
   }

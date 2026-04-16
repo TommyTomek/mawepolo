@@ -1,4 +1,25 @@
 {
+  "home": {
+    "hero": {
+      "login": "Zaloguj się na swoje konto",
+      "welcome": "Witaj, {{name}}!",
+      "title": "Gdzie kultura, biznes i ludzie spotykają się."
+    },
+    "discover": {
+      "veneto": {
+        "title": "Odkryj Veneto",
+        "text": "Możliwości między Małopolską a Veneto."
+      },
+      "malopolska": {
+        "title": "Odkryj Małopolskę",
+        "text": "Możliwości między Veneto a Małopolską."
+      }
+    },
+    "why": {
+      "title": "Dlaczego MaWePolo?",
+      "text": "MaWePolo łączy region Veneto we Włoszech i region Małopolski w Polsce — dwa odległe, a jednak zaskakująco podobne regiony. Portal prezentuje wyjątkowe możliwości rozwoju i współpracy, łącząc potencjał kulturowy, biznesowy i turystyczny."
+    }
+  },
   "malopolska": {
     "hero": {
       "title": "Odkryj Małopolskę",

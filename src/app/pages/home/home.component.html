@@ -7,21 +7,19 @@
     <div class="hero-content">
       <img src="/images/logoText.png" alt="Image MaWePolo" class="hero-logo" />
 
-       @if (!profile()) {
-          <a routerLink="/login" class="hero-login-btn">
-            Log in to your account
-          </a>
-        } @else {
-          <div class="hero-login-btn">
-            Welcome, {{ profile().full_name }}!
-          </div>
-      } 
+      @if (!profile()) {
+        <a routerLink="/login" class="hero-login-btn">
+          {{ 'home.hero.login' | translate }}
+        </a>
+      } @else {
+        <div class="hero-login-btn">
+          {{ 'home.hero.welcome' | translate:{ name: profile().full_name } }}
+        </div>
+      }
 
-
-
-      <h3 class="home-title">Where Culture, Business and People Meet.</h3>
-     
-
+      <h3 class="home-title">
+        {{ 'home.hero.title' | translate }}
+      </h3>
     </div>
 
     <!-- DISCOVER -->
@@ -30,17 +28,23 @@
       <div class="discover-card veneto" routerLink="/region/veneto">
         <img src="/images/home_discover_veneto.webp" alt="Image Veneto" />
         <div class="image-glass">
-        <h2 class="discover-veneto">Discover Veneto</h2>
-        <p>Opportunities between Małopolska & Veneto.</p>
+          <h2 class="discover-veneto">
+            {{ 'home.discover.veneto.title' | translate }}
+          </h2>
+          <p>
+            {{ 'home.discover.veneto.text' | translate }}
+          </p>
         </div>
-        <!-- <button class="btn-blue" routerLink="/region">Explore</button> -->
       </div>
 
       <div class="discover-card malopolska" routerLink="/region/malopolska">
         <img src="/images/home_discover_malopolska.webp" alt="Image Małopolska" />
-        <h2 class="discover-malopolska">Discover Małopolska</h2>
-        <p>Opportunities between Veneto & Małopolska.</p>
-        <!-- <button class="btn-yellow" routerLink="/region">Explore</button> -->
+        <h2 class="discover-malopolska">
+          {{ 'home.discover.malopolska.title' | translate }}
+        </h2>
+        <p>
+          {{ 'home.discover.malopolska.text' | translate }}
+        </p>
       </div>
 
     </div>
@@ -50,12 +54,11 @@
   <!-- SECTION 2 — WHY MAWEPOLO -->
   <section class="snap-section why-section">
     <div class="why-content">
-      <h2>Why <span id="whyTitle">MaWePolo</span>?</h2>
+      <h2>
+        {{ 'home.why.title' | translate }}
+      </h2>
       <p>
-        MaWePolo connects the Veneto region in Italy and the Małopolska region in Poland,
-        two regions distant yet remarkably similar. Through this portal, we bring together
-        exceptional opportunities for development and cooperation, bridging cultural,
-        business, and tourism potential.
+        {{ 'home.why.text' | translate }}
       </p>
     </div>
   </section>
