@@ -201,6 +201,13 @@
   font-size: var(--font-size-sm);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
+.why-content h2 {
+  display: inline-block;
+  background: linear-gradient(90deg, #c90757 0%, #1e3852 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .discover-card button {
   border-radius: 999px;

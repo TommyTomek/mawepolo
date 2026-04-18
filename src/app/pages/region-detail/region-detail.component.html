@@ -1,0 +1,65 @@
+@if (region && detail) {
+
+<div class="detail-wrapper">
+
+  <!-- HERO -->
+  @let heroItem = getHeroItem();
+
+  <div class="hero" [style.background-image]="'url(' + heroItem?.img + ')'">
+    <div class="hero-gradient"></div>
+
+    <div class="hero-content">
+      <button class="back-btn" [routerLink]="['/region', regionSlug]">‹</button>
+      <h1>{{ heroItem?.title }}</h1>
+      <p class="region-label">{{ region.hero.title }}</p>
+    </div>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <section class="description">
+    <p>{{ detail.description }}</p>
+  </section>
+
+  <!-- ALTERNATING BLOCKS -->
+  <section class="blocks">
+    @for (block of detail.blocks; track block.title; let i = $index) {
+      <div class="block" [class.reverse]="i % 2 === 1">
+
+        <div class="block-image"
+             [style.background-image]="'url(' + block.img + ')'">
+        </div>
+
+        <div class="block-content">
+          <h2>{{ block.title }}</h2>
+          <p>{{ block.text }}</p>
+        </div>
+
+      </div>
+    }
+  </section>
+
+  <!-- RELATED -->
+  <h2 class="related-title">
+    {{ 'regionDetail.moreFrom' | translate:{ region: region.hero.title } }}
+  </h2>
+
+  <div class="related-scroll">
+    @for (slug of detail.related; track slug) {
+      @let item = getItemBySlug(slug);
+
+      @if (item) {
+        <app-discover-card
+          [title]="item.title"
+          [description]="item.text"
+          [image]="item.img"
+          [region]="regionSlug"
+          [category]="category"
+          [slug]="item.slug"
+        />
+      }
+    }
+  </div>
+
+</div>
+
+}

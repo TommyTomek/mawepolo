@@ -11,28 +11,71 @@ export class RegionService {
     private lang: LanguageService
   ) {}
 
+  /* -------------------------------------------------------
+     LOAD REGION (cities, territory, gastronomy, etc.)
+     from translations: { "veneto": { ... }, "malopolska": { ... } }
+  ------------------------------------------------------- */
   getRegion(region: string): Observable<any> {
     const lang = this.lang.get();
 
-    console.log(`[RegionService] Loading region "${region}" in language "${lang}"`);
-
     return this.translate.get(region).pipe(
       map(data => {
-        if (!data) {
-          console.error(`[RegionService] Region "${region}" not found in translations`);
-          return null;
-        }
+        if (!data) return null;
 
-        // Normalize all dictionary-like sections into arrays
         return {
           ...data,
-          cities: Object.values(data.cities || {}),
-          territory: Object.values(data.territory || {}),
-          gastronomy: Object.values(data.gastronomy || {}),
-          culture: Object.values(data.culture || {}),
-          economy: Object.values(data.economy || {})
+          slug: region,
+          cities: this.normalizeList(data.cities),
+          territory: this.normalizeList(data.territory),
+          gastronomy: this.normalizeList(data.gastronomy),
+          culture: this.normalizeList(data.culture),
+          economy: this.normalizeList(data.economy)
         };
       })
     );
+  }
+
+  /* -------------------------------------------------------
+     LOAD REGION DETAIL (blocks, description, related)
+     from translations: { "veneto-detail": { ... } }
+  ------------------------------------------------------- */
+  getRegionDetail(region: string, itemSlug: string): Observable<any> {
+    const detailKey = `${region}-detail`;
+
+    return this.translate.get(detailKey).pipe(
+      map(detailData => {
+        if (!detailData) return null;
+
+        const item = detailData[itemSlug];
+        if (!item) return null;
+
+        return {
+          ...item,
+          slug: itemSlug,
+          blocks: this.normalizeList(item.blocks || []),
+          related: item.related || []
+        };
+      })
+    );
+  }
+
+  /* -------------------------------------------------------
+     HELPERS
+  ------------------------------------------------------- */
+  private normalizeList(list: any[]): any[] {
+    if (!Array.isArray(list)) return [];
+
+    return list.map(item => ({
+      ...item,
+      slug: item.slug || this.slugify(item.title)
+    }));
+  }
+
+  private slugify(str: string): string {
+    return str
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
   }
 }

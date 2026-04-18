@@ -1,31 +1,21 @@
 export interface Region {
+  slug: string;
+
   hero: {
     title: string;
     image: string;
   };
-  cities: {
-    title: string;
-    text: string;
-    img: string;
-  }[];
-  territory: {
-    title: string;
-    text: string;
-    img: string;
-  }[];
-  gastronomy: {
-    title: string;
-    text: string;
-    img: string;
-  }[];
-  culture: {
-    title: string;
-    text: string;
-    img: string;
-  }[];
-  economy: {
-    title: string;
-    text: string;
-    img: string;
-  }[];
+
+  cities: RegionItem[];
+  territory: RegionItem[];
+  gastronomy: RegionItem[];
+  culture: RegionItem[];
+  economy: RegionItem[];
+}
+
+export interface RegionItem {
+  slug: string;
+  title: string;
+  text: string;
+  img: string;
 }

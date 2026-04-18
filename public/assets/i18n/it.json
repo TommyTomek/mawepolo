@@ -3,7 +3,7 @@
     "hero": {
       "login": "Accedi al tuo account",
       "welcome": "Benvenuto, {{name}}!",
-      "title": "Dove cultura, business e persone si incontrano."
+      "title": "Dove Cultura, Business e Persone si Incontrano."
     },
     "discover": {
       "veneto": {
@@ -17,200 +17,677 @@
     },
     "why": {
       "title": "Perché MaWePolo?",
-      "text": "MaWePolo collega la regione Veneto in Italia e la regione Małopolska in Polonia, due territori lontani ma sorprendentemente simili. Questo portale unisce opportunità di sviluppo e cooperazione, valorizzando cultura, business e turismo."
+      "text": "MaWePolo collega la regione Veneto in Italia con la regione Małopolska in Polonia — due territori lontani ma sorprendentemente simili. Attraverso questo portale uniamo eccezionali opportunità di sviluppo e cooperazione, valorizzando il potenziale culturale, economico e turistico."
     }
   },
-  "malopolska": {
-    "hero": {
-      "title": "Scopri la Małopolska",
-      "image": "images/discover-region-hero.webp"
-    },
-
-    "cities": {
-      "1": {
-        "title": "Cracovia",
-        "text": "Il cuore storico della Polonia. Il Castello del Wawel, la Piazza del Mercato, Kazimierz e secoli di eredità reale.",
-        "img": "images/krakow.webp"
+"regionDetail": {
+  "moreFrom": "Więcej z {{region}}",
+  "readMore": "Czytaj więcej",
+  "discoverMore": "Odkryj więcej"
+},
+"malopolska": {
+  "slug": "malopolska",
+  "hero": {
+    "title": "Scopri la Małopolska",
+    "image": "images/discover-region-hero.webp"
+  },
+  "cities": [
+    { "slug": "krakow", "title": "Kraków", "text": "Il cuore storico della Polonia. Castello di Wawel, Piazza del Mercato, Kazimierz e secoli di eredità reale.", "img": "images/krakow.webp" },
+    { "slug": "tarnow", "title": "Tarnów", "text": "Una città affascinante con architettura rinascimentale, clima mite e un centro storico splendidamente conservato.", "img": "images/tarnow.webp" },
+    { "slug": "nowy-sacz", "title": "Nowy Sącz", "text": "Una porta verso le montagne, l’architettura in legno e le ricche tradizioni regionali.", "img": "images/nowy_sacz.webp" },
+    { "slug": "zakopane", "title": "Zakopane", "text": "La capitale invernale della Polonia. Monti Tatra, ville in legno e vivace cultura degli altipiani.", "img": "images/zakopane.webp" },
+    { "slug": "oswiecim", "title": "Oświęcim", "text": "Una città della memoria e della riflessione, sede del Memoriale e Museo di Auschwitz‑Birkenau.", "img": "images/oswiecim.webp" },
+    { "slug": "wieliczka", "title": "Wieliczka", "text": "Famosa per la Miniera di Sale, patrimonio UNESCO — un mondo di camere sotterranee e sculture di sale.", "img": "images/wieliczka.webp" },
+    { "slug": "bochnia", "title": "Bochnia", "text": "Una delle città più antiche della Polonia, nota per la sua storica miniera di sale e il patrimonio medievale.", "img": "images/bochnia.webp" }
+  ],
+  "territory": [
+    { "slug": "villages", "title": "Borghi", "text": "Lanckorona, Chochołów, Lipnica Murowana — case in legno, tradizioni popolari e paesaggi tranquilli.", "img": "images/villages.webp" },
+    { "slug": "landscapes", "title": "Paesaggi", "text": "Monti Tatra, Pieniny, Beschidi, Gola del Dunajec — cime drammatiche, fiumi, foreste e valli.", "img": "images/landscape.webp" }
+  ],
+  "gastronomy": [
+    { "slug": "food-and-beverages", "title": "Cibo e Bevande", "text": "Oscypek, kwaśnica, pierogi, formaggi regionali, birre artigianali e cucina tradizionale degli altipiani.", "img": "images/food&beverage.webp" },
+    { "slug": "products", "title": "Prodotti", "text": "Artigianato locale, sculture in legno, merletti, ceramiche e specialità regionali dei villaggi montani.", "img": "images/products.webp" }
+  ],
+  "culture": [
+    { "slug": "art", "title": "Arte", "text": "Arte sacra, chiese in legno, costumi popolari e vivaci tradizioni culturali plasmate nei secoli.", "img": "images/art.webp" },
+    { "slug": "unesco-sites", "title": "Siti UNESCO", "text": "Centro Storico di Cracovia, Miniera di Sale di Wieliczka, Kalwaria Zebrzydowska, Chiese in Legno della Małopolska Meridionale.", "img": "images/unesco.webp" }
+  ],
+  "economy": [
+    { "slug": "craft", "title": "Artigianato", "text": "Artigianato degli altipiani, lavorazione del legno, tessuti e tecniche tradizionali tramandate da generazioni.", "img": "images/craft.webp" },
+    { "slug": "businesses", "title": "Imprese", "text": "Una regione dinamica con turismo, tecnologia, istruzione e imprese locali che guidano la crescita economica.", "img": "images/companies.webp" }
+  ]
+},
+"veneto": {
+  "slug": "veneto",
+  "hero": {
+    "title": "Scopri il Veneto",
+    "image": "images/discover-region-hero.webp"
+  },
+  "cities": [
+    { "slug": "treviso", "title": "Treviso", "text": "Un piccolo gioiello attraversato da canali e portici medievali.", "img": "images/treviso.webp" },
+    { "slug": "padua", "title": "Padova", "text": "Una storica città universitaria con antiche tradizioni.", "img": "images/padova.webp" },
+    { "slug": "vicenza", "title": "Vicenza", "text": "La città di Palladio, eleganza rinascimentale e patrimonio UNESCO.", "img": "images/vicenza.webp" },
+    { "slug": "belluno", "title": "Belluno", "text": "Porta delle Dolomiti, natura incontaminata e spettacolari paesaggi montani.", "img": "images/belluno.webp" },
+    { "slug": "rovigo", "title": "Rovigo", "text": "Tra i fiumi Po e Adige — storia medievale e l’atmosfera tranquilla del Polesine.", "img": "images/rovigo.webp" }
+  ],
+  "territory": [
+    { "slug": "villages", "title": "Borghi", "text": "Asolo, Marostica, Bassano del Grappa: borghi storici, castelli medievali e paesaggi unici.", "img": "images/villages.webp" },
+    { "slug": "landscapes", "title": "Paesaggi", "text": "Dolomiti, Lago di Garda, costa Adriatica: montagne incantevoli, laghi, colline e pianure.", "img": "images/landscape.webp" }
+  ],
+  "gastronomy": [
+    { "slug": "food-and-beverages", "title": "Cibo e Bevande", "text": "Scopri l’anima della cucina italiana — dai piatti tradizionali alle interpretazioni moderne, create con passione e ingredienti eccellenti.", "img": "images/food&beverage.webp" },
+    { "slug": "products", "title": "Prodotti", "text": "Scopri i prodotti unici del Veneto — dall’artigianato tradizionale alle innovazioni moderne.", "img": "images/products.webp" }
+  ],
+  "culture": [
+    { "slug": "art", "title": "Arte", "text": "Scopri l’anima dell’arte italiana — dagli affreschi rinascimentali e interni sacri ai paesaggi senza tempo modellati da storia, luce e bellezza.", "img": "images/art.webp" },
+    { "slug": "unesco-sites", "title": "Siti UNESCO", "text": "Venezia, Padova, Dolomiti: siti patrimonio mondiale.", "img": "images/unesco.webp" }
+  ],
+  "economy": [
+    { "slug": "craft", "title": "Artigianato", "text": "Artigianato italiano tradizionale: ceramica, vetro, intaglio del legno, tessuti e tecniche senza tempo tramandate da generazioni.", "img": "images/craft.webp" },
+    { "slug": "businesses", "title": "Imprese", "text": "Imprese locali: dall’industria e design all’agricoltura e artigianato — un’economia diversificata radicata nella tradizione e nell’innovazione.", "img": "images/companies.webp" }
+  ]
+},
+"malopolska-detail": {  
+  "krakow": {
+    "description": "Cracovia è il cuore culturale della Polonia — una città di re, studiosi, artisti e secoli di storia. Il suo centro storico, i castelli e i vivaci quartieri creano un mix unico di tradizione e vita moderna.",
+    "blocks": [
+      {
+        "title": "Castello di Wawel",
+        "text": "Simbolo del patrimonio polacco, il Castello di Wawel domina il fiume Vistola e conserva camere reali, cattedrali e leggende.",
+        "img": "images/krakow_wawel.webp"
       },
-      "2": {
-        "title": "Tarnów",
-        "text": "Una città affascinante con architettura rinascimentale, clima mite e un centro storico splendidamente conservato.",
-        "img": "images/tarnow.webp"
+      {
+        "title": "Piazza del Mercato",
+        "text": "Una delle più grandi piazze medievali d’Europa, circondata da caffè, chiese e dalla celebre Sukiennice.",
+        "img": "images/krakow_square.webp"
       },
-      "3": {
-        "title": "Nowy Sącz",
-        "text": "Porta d’accesso ai monti, architettura in legno e ricche tradizioni regionali.",
-        "img": "images/nowy_sacz.webp"
-      },
-      "4": {
-        "title": "Zakopane",
-        "text": "La capitale invernale della Polonia. Monti Tatra, ville in legno e vivace cultura degli highlander.",
-        "img": "images/zakopane.webp"
-      },
-      "5": {
-        "title": "Oświęcim",
-        "text": "Città della memoria e della riflessione, sede del Memoriale e Museo di Auschwitz‑Birkenau.",
-        "img": "images/oswiecim.webp"
-      },
-      "6": {
-        "title": "Wieliczka",
-        "text": "Famosa per la Miniera di Sale, patrimonio UNESCO — un mondo di camere sotterranee e sculture di sale.",
-        "img": "images/wieliczka.webp"
-      },
-      "7": {
-        "title": "Bochnia",
-        "text": "Una delle città più antiche della Polonia, nota per la sua storica miniera di sale e il patrimonio medievale.",
-        "img": "images/bochnia.webp"
+      {
+        "title": "Quartiere Kazimierz",
+        "text": "Un antico quartiere ebraico trasformato in una zona vivace di caffè, gallerie ed eventi culturali.",
+        "img": "images/krakow_kazimierz.webp"
       }
-    },
-
-    "territory": {
-      "1": {
-        "title": "Borghi",
-        "text": "Lanckorona, Chochołów, Lipnica Murowana — case in legno, tradizioni popolari e paesaggi tranquilli.",
-        "img": "images/villages.webp"
-      },
-      "2": {
-        "title": "Paesaggi",
-        "text": "Monti Tatra, Pieniny, Beskidi, Gola del Dunajec — vette maestose, fiumi, foreste e valli.",
-        "img": "images/landscape.webp"
-      }
-    },
-
-    "gastronomy": {
-      "1": {
-        "title": "Cibo e Bevande",
-        "text": "Oscypek, kwaśnica, pierogi, formaggi regionali, birre artigianali e cucina tradizionale degli highlander.",
-        "img": "images/food&beverage.webp"
-      },
-      "2": {
-        "title": "Prodotti",
-        "text": "Artigianato locale, sculture in legno, merletti, ceramiche e specialità regionali dei villaggi montani.",
-        "img": "images/products.webp"
-      }
-    },
-
-    "culture": {
-      "1": {
-        "title": "Arte",
-        "text": "Arte sacra, chiese in legno, costumi popolari e vivaci tradizioni culturali modellate nei secoli.",
-        "img": "images/art.webp"
-      },
-      "2": {
-        "title": "Siti UNESCO",
-        "text": "Centro storico di Cracovia, Miniera di Sale di Wieliczka, Kalwaria Zebrzydowska, Chiese in Legno della Małopolska Meridionale.",
-        "img": "images/unesco.webp"
-      }
-    },
-
-    "economy": {
-      "1": {
-        "title": "Artigianato",
-        "text": "Artigianato highlander, lavorazione del legno, tessuti e tecniche tradizionali tramandate da generazioni.",
-        "img": "images/craft.webp"
-      },
-      "2": {
-        "title": "Imprese",
-        "text": "Una regione dinamica in cui turismo, tecnologia, istruzione e imprese locali guidano la crescita economica.",
-        "img": "images/companies.webp"
-      }
-    }
+    ],
+    "related": ["tarnow", "wieliczka", "unesco-sites"]
   },
 
-  "veneto": {
-    "hero": {
-      "title": "Scopri il Veneto",
-      "image": "images/discover-region-hero.webp"
-    },
-
-    "cities": {
-      "1": {
-        "title": "Venezia",
-        "text": "La città dei canali, dell’arte e del romanticismo. Piazza San Marco, Palazzo Ducale, Ponte di Rialto, Murano.",
-        "img": "images/venezia.webp"
+  "tarnow": {
+    "description": "Tarnów è una città calda ed elegante, con architettura rinascimentale, strade affascinanti e un centro storico splendidamente conservato.",
+    "blocks": [
+      {
+        "title": "Centro Storico Rinascimentale",
+        "text": "Facciate colorate, portici e un municipio storico creano un’atmosfera unica, quasi mediterranea.",
+        "img": "images/tarnow_oldtown.webp"
       },
-      "2": {
-        "title": "Verona",
-        "text": "La città dell’amore e dell’eredità romano‑scaligera. L’Arena, la Casa di Giulietta, il centro storico.",
-        "img": "images/verona.webp"
+      {
+        "title": "Patrimonio Culturale",
+        "text": "Musei, chiese e monumenti riflettono il passato multiculturale della città.",
+        "img": "images/tarnow_culture.webp"
       },
-      "3": {
-        "title": "Treviso",
-        "text": "Una piccola gemma attraversata da canali e portici medievali.",
-        "img": "images/treviso.webp"
-      },
-      "4": {
-        "title": "Padova",
-        "text": "Storica città universitaria con antiche tradizioni.",
-        "img": "images/padova.webp"
-      },
-      "5": {
-        "title": "Vicenza",
-        "text": "La città di Palladio, eleganza rinascimentale e patrimonio UNESCO.",
-        "img": "images/vicenza.webp"
-      },
-      "6": {
-        "title": "Belluno",
-        "text": "Porta delle Dolomiti, natura incontaminata e paesaggi montani spettacolari.",
-        "img": "images/belluno.webp"
-      },
-      "7": {
-        "title": "Rovigo",
-        "text": "Tra i fiumi Po e Adige — storia medievale e l’atmosfera tranquilla del Polesine.",
-        "img": "images/rovigo.webp"
+      {
+        "title": "Clima Soleggiato",
+        "text": "Tarnów è conosciuta come una delle città più calde della Polonia, ideale per passeggiate e vita all’aperto.",
+        "img": "images/tarnow_sun.webp"
       }
-    },
+    ],
+    "related": ["krakow", "bochnia", "villages"]
+  },
 
-    "territory": {
-      "1": {
-        "title": "Borghi",
-        "text": "Asolo, Marostica, Bassano del Grappa — borghi storici, castelli medievali e paesaggi unici.",
-        "img": "images/villages.webp"
+  "nowy-sacz": {
+    "description": "Nowy Sącz è una porta verso le montagne, l’architettura in legno e le ricche tradizioni regionali.",
+    "blocks": [
+      {
+        "title": "Architettura in Legno",
+        "text": "Musei all’aperto e chiese storiche preservano l’unica arte lignea della regione.",
+        "img": "images/nowysacz_wood.webp"
       },
-      "2": {
-        "title": "Paesaggi",
-        "text": "Dolomiti, Lago di Garda, costa adriatica — montagne incantevoli, laghi, colline e pianure.",
-        "img": "images/landscape.webp"
+      {
+        "title": "Paesaggi Montani",
+        "text": "I vicini Beschidi offrono sentieri, panorami e natura tranquilla.",
+        "img": "images/nowysacz_mountains.webp"
+      },
+      {
+        "title": "Tradizioni Regionali",
+        "text": "Costumi popolari, musica e cucina riflettono secoli di patrimonio culturale.",
+        "img": "images/nowysacz_traditions.webp"
       }
-    },
+    ],
+    "related": ["zakopane", "landscapes", "villages"]
+  },
 
-    "gastronomy": {
-      "1": {
-        "title": "Cibo e Bevande",
-        "text": "Scopri l’anima della cucina italiana — dai piatti tradizionali alle interpretazioni moderne, creati con passione e ingredienti eccellenti.",
-        "img": "images/food&beverage.webp"
+  "zakopane": {
+    "description": "Zakopane è la capitale invernale della Polonia — una cittadina ai piedi dei Tatra, famosa per le ville in legno, la cultura montana e le attività all’aria aperta.",
+    "blocks": [
+      {
+        "title": "Monti Tatra",
+        "text": "Sentieri, cime, laghi e panorami mozzafiato rendono i Tatra un paradiso per gli escursionisti.",
+        "img": "images/zakopane_tatras.webp"
       },
-      "2": {
-        "title": "Prodotti",
-        "text": "Scopri i prodotti unici del Veneto — dall’artigianato tradizionale alle innovazioni contemporanee.",
-        "img": "images/products.webp"
+      {
+        "title": "Cultura degli Altipiani",
+        "text": "Case in legno, musica e cucina creano una forte identità regionale.",
+        "img": "images/zakopane_culture.webp"
+      },
+      {
+        "title": "Via Krupówki",
+        "text": "Negozi, caffè e specialità locali animano il centro della città.",
+        "img": "images/zakopane_krupowki.webp"
       }
-    },
+    ],
+    "related": ["landscapes", "villages", "food-and-beverages"]
+  },
 
-    "culture": {
-      "1": {
-        "title": "Arte",
-        "text": "Scopri l’anima dell’arte italiana — dagli affreschi rinascimentali e interni sacri ai paesaggi senza tempo modellati da storia, luce e bellezza.",
-        "img": "images/art.webp"
+  "oswiecim": {
+    "description": "Oświęcim è una città della memoria e della riflessione, sede del Memoriale e Museo di Auschwitz‑Birkenau.",
+    "blocks": [
+      {
+        "title": "Memoriale di Auschwitz‑Birkenau",
+        "text": "Un sito UNESCO dedicato al ricordo, all’educazione e alla verità storica.",
+        "img": "images/oswiecim_memorial.webp"
       },
-      "2": {
-        "title": "Siti UNESCO",
-        "text": "Venezia, Padova, Dolomiti — luoghi patrimonio dell’umanità.",
-        "img": "images/unesco.webp"
+      {
+        "title": "Città della Riflessione",
+        "text": "Oświęcim promuove dialogo, pace e comprensione interculturale.",
+        "img": "images/oswiecim_city.webp"
       }
-    },
+    ],
+    "related": ["krakow", "unesco-sites"]
+  },
 
-    "economy": {
-      "1": {
-        "title": "Artigianato",
-        "text": "Artigianato italiano tradizionale: ceramica, vetro, intaglio del legno, tessuti e tecniche senza tempo tramandate nei secoli.",
-        "img": "images/craft.webp"
+  "wieliczka": {
+    "description": "Wieliczka è famosa per la sua Miniera di Sale, patrimonio UNESCO — un mondo sotterraneo di camere, sculture e laghi salini.",
+    "blocks": [
+      {
+        "title": "Miniera di Sale",
+        "text": "Un labirinto di tunnel, cappelle e opere d’arte scolpite interamente nel sale.",
+        "img": "images/wieliczka_mine.webp"
       },
-      "2": {
-        "title": "Imprese",
-        "text": "Imprese locali — dall’industria e design all’agricoltura e all’artigianato. Un’economia diversificata che unisce tradizione e innovazione.",
-        "img": "images/companies.webp"
+      {
+        "title": "Laghi Sotterranei",
+        "text": "Laghi salini cristallini creano un’atmosfera magica nel sottosuolo.",
+        "img": "images/wieliczka_lake.webp"
       }
-    }
+    ],
+    "related": ["krakow", "bochnia", "unesco-sites"]
+  },
+
+  "bochnia": {
+    "description": "Bochnia è una delle città più antiche della Polonia, nota per la sua storica miniera di sale e il patrimonio medievale.",
+    "blocks": [
+      {
+        "title": "Miniera di Sale di Bochnia",
+        "text": "Una delle più antiche miniere di sale d’Europa, con percorsi sotterranei ed esposizioni.",
+        "img": "images/bochnia_mine.webp"
+      },
+      {
+        "title": "Centro Storico",
+        "text": "Strade e chiese medievali raccontano la lunga storia della città.",
+        "img": "images/bochnia_city.webp"
+      }
+    ],
+    "related": ["wieliczka", "tarnow"]
+  },
+
+  "villages": {
+    "description": "I villaggi della Małopolska preservano case in legno, tradizioni popolari e paesaggi tranquilli.",
+    "blocks": [
+      {
+        "title": "Lanckorona",
+        "text": "Un affascinante villaggio collinare con case in legno e un’atmosfera artistica.",
+        "img": "images/lanckorona.webp"
+      },
+      {
+        "title": "Chochołów",
+        "text": "Un villaggio di case tradizionali in legno, conservate da generazioni.",
+        "img": "images/chocholow.webp"
+      },
+      {
+        "title": "Lipnica Murowana",
+        "text": "Nota per le sue chiese in legno e il patrimonio culturale.",
+        "img": "images/lipnica.webp"
+      }
+    ],
+    "related": ["landscapes", "nowy-sacz"]
+  },
+
+  "landscapes": {
+    "description": "La Małopolska offre cime drammatiche, fiumi, foreste e valli — dai Tatra ai Pieniny e ai Beschidi.",
+    "blocks": [
+      {
+        "title": "Monti Tatra",
+        "text": "Le vette più alte della Polonia, con paesaggi alpini e sentieri iconici.",
+        "img": "images/tatras.webp"
+      },
+      {
+        "title": "Pieniny e Gola del Dunajec",
+        "text": "Un canyon fluviale spettacolare, famoso per il rafting e i panorami.",
+        "img": "images/pieniny.webp"
+      },
+      {
+        "title": "Beskidi",
+        "text": "Montagne dolci, ideali per escursioni, ciclismo e gite in famiglia.",
+        "img": "images/beskids.webp"
+      }
+    ],
+    "related": ["villages", "zakopane"]
+  },
+
+  "food-and-beverages": {
+    "description": "La cucina della Małopolska unisce sapori montani, ricette tradizionali e specialità regionali.",
+    "blocks": [
+      {
+        "title": "Oscypek",
+        "text": "Un formaggio affumicato di latte di pecora, simbolo della cultura degli altipiani.",
+        "img": "images/oscypek.webp"
+      },
+      {
+        "title": "Pierogi",
+        "text": "I celebri ravioli polacchi, ripieni di formaggio, patate, carne o ingredienti stagionali.",
+        "img": "images/pierogi.webp"
+      },
+      {
+        "title": "Kwaśnica",
+        "text": "Una sostanziosa zuppa montana a base di crauti e carne.",
+        "img": "images/kwasnica.webp"
+      }
+    ],
+    "related": ["products", "zakopane"]
+  },
+
+  "products": {
+    "description": "Artigianato locale, sculture in legno, merletti, ceramiche e specialità regionali dei villaggi montani.",
+    "blocks": [
+      {
+        "title": "Artigianato in Legno",
+        "text": "Decorazioni, mobili e ornamenti tradizionali intagliati a mano.",
+        "img": "images/woodcraft.webp"
+      },
+      {
+        "title": "Merletti e Tessuti",
+        "text": "Merletti fatti a mano e tessuti intrecciati da artigiani locali.",
+        "img": "images/lace.webp"
+      },
+      {
+        "title": "Ceramiche",
+        "text": "Ceramiche tradizionali modellate e dipinte da artisti regionali.",
+        "img": "images/pottery.webp"
+      }
+    ],
+    "related": ["food-and-beverages", "villages"]
+  },
+
+  "art": {
+    "description": "L’arte della Małopolska spazia dall’architettura sacra alle tradizioni popolari, fino a secoli di artigianato.",
+    "blocks": [
+      {
+        "title": "Chiese in Legno",
+        "text": "Le chiese in legno, patrimonio UNESCO, rappresentano un’architettura unica.",
+        "img": "images/wooden_church.webp"
+      },
+      {
+        "title": "Costumi Popolari",
+        "text": "Colorati abiti regionali che riflettono identità e tradizione.",
+        "img": "images/folk_costume.webp"
+      },
+      {
+        "title": "Arte Sacra",
+        "text": "Pale d’altare, sculture e dipinti conservati in chiese e musei.",
+        "img": "images/sacred_art.webp"
+      }
+    ],
+    "related": ["unesco-sites", "culture"]
+  },
+
+  "unesco-sites": {
+    "description": "La Małopolska ospita diversi siti UNESCO, ciascuno di eccezionale valore culturale.",
+    "blocks": [
+      {
+        "title": "Centro Storico di Cracovia",
+        "text": "Un centro storico ricco di monumenti, chiese e secoli di patrimonio.",
+        "img": "images/krakow_oldtown.webp"
+      },
+      {
+        "title": "Miniera di Sale di Wieliczka",
+        "text": "Un mondo sotterraneo di camere, sculture e laghi salini.",
+        "img": "images/wieliczka_unesco.webp"
+      },
+      {
+        "title": "Chiese in Legno",
+        "text": "Una collezione unica di architettura sacra in legno.",
+        "img": "images/wooden_churches_unesco.webp"
+      }
+    ],
+    "related": ["krakow", "wieliczka", "art"]
+  },
+
+  "craft": {
+    "description": "L’artigianato della Małopolska riflette tradizioni montane, lavorazione del legno, tessuti e tecniche artigiane.",
+    "blocks": [
+      {
+        "title": "Lavorazione del Legno",
+        "text": "Tecniche di intaglio tradizionali tramandate da generazioni.",
+        "img": "images/craft_wood.webp"
+      },
+      {
+        "title": "Tessuti",
+        "text": "Tessuti intrecciati a mano e abiti ricamati.",
+        "img": "images/craft_textiles.webp"
+      },
+      {
+        "title": "Laboratori Artigianali",
+        "text": "Laboratori locali che preservano abilità tradizionali e creano interpretazioni moderne.",
+        "img": "images/craft_workshops.webp"
+      }
+    ],
+    "related": ["products", "art"]
+  },
+
+  "businesses": {
+    "description": "L’economia della Małopolska unisce turismo, tecnologia, istruzione e imprese locali.",
+    "blocks": [
+      {
+        "title": "Turismo",
+        "text": "Città, montagne e siti culturali attirano milioni di visitatori.",
+        "img": "images/business_tourism.webp"
+      },
+      {
+        "title": "Innovazione",
+        "text": "Università e aziende tecnologiche guidano ricerca e sviluppo.",
+        "img": "images/business_innovation.webp"
+      },
+      {
+        "title": "Imprese Locali",
+        "text": "Piccole e medie imprese costituiscono la spina dorsale dell’economia regionale.",
+        "img": "images/business_local.webp"
+      }
+    ],
+    "related": ["craft", "products"]
   }
+},
+"veneto-detail": {  
+  "treviso": {
+    "description": "Treviso è una città intima fatta di canali, portici e piazze tranquille. Il suo centro storico unisce mura medievali, palazzi rinascimentali e il dolce scorrere dei corsi d’acqua che le conferiscono un fascino unico, quasi segreto.",
+    "blocks": [
+      {
+        "title": "Città d’Acqua e Portici",
+        "text": "Il centro storico di Treviso è attraversato da canali e costeggiato da eleganti portici, dove la vita quotidiana si svolge tra caffè, piccole botteghe e facciate storiche.",
+        "img": "images/treviso_canals.webp"
+      },
+      {
+        "title": "Piazze e Vita Quotidiana",
+        "text": "Piazza dei Signori e le vie circostanti sono il cuore pulsante della città, dove i residenti si incontrano per un caffè, un aperitivo o una passeggiata serale.",
+        "img": "images/treviso_piazza.webp"
+      },
+      {
+        "title": "Sapori del Territorio",
+        "text": "Dalle colline del Prosecco alle trattorie locali, Treviso è una porta d’accesso alla cucina e ai vini autentici del Veneto.",
+        "img": "images/treviso_food.webp"
+      }
+    ],
+    "related": ["padua", "vicenza", "villages"]
+  },
+
+  "padua": {
+    "description": "Padova è una delle più antiche città universitarie d’Italia, dove scienza, fede e arte si intrecciano da secoli. Le sue strade e piazze raccontano storie di studenti, pellegrini e mercanti.",
+    "blocks": [
+      {
+        "title": "Antica Tradizione Universitaria",
+        "text": "L’Università di Padova, fondata nel 1222, ha ospitato grandi menti come Galileo Galilei e rimane un vivace centro di ricerca e cultura.",
+        "img": "images/padova_university.webp"
+      },
+      {
+        "title": "Arte Sacra e Pellegrinaggio",
+        "text": "La Basilica di Sant’Antonio e la Cappella degli Scrovegni con gli affreschi di Giotto rendono Padova una meta fondamentale per arte e spiritualità.",
+        "img": "images/padova_basilica.webp"
+      },
+      {
+        "title": "Piazze e Mercati",
+        "text": "Piazza delle Erbe e Piazza della Frutta ospitano mercati storici, dove colori, profumi e voci creano un’atmosfera senza tempo.",
+        "img": "images/padova_market.webp"
+      }
+    ],
+    "related": ["treviso", "vicenza", "unesco-sites"]
+  },
+
+  "vicenza": {
+    "description": "Vicenza è la città di Palladio, dove l’architettura diventa un palcoscenico vivente. Ville, palazzi e l’iconico Teatro Olimpico la rendono un capolavoro di armonia rinascimentale.",
+    "blocks": [
+      {
+        "title": "Eredità Palladiana",
+        "text": "Le ville e i palazzi di Andrea Palladio hanno plasmato l’identità di Vicenza e influenzato l’architettura in Europa e nel mondo.",
+        "img": "images/vicenza_palladio.webp"
+      },
+      {
+        "title": "Teatro Olimpico",
+        "text": "Il Teatro Olimpico, con il suo straordinario palcoscenico prospettico, è uno dei teatri più affascinanti mai costruiti.",
+        "img": "images/vicenza_teatro.webp"
+      },
+      {
+        "title": "Eleganza Urbana",
+        "text": "Passeggiare lungo Corso Palladio e nel centro storico rivela boutique, caffè e un’atmosfera urbana raffinata.",
+        "img": "images/vicenza_city.webp"
+      }
+    ],
+    "related": ["treviso", "padua", "craft"]
+  },
+
+  "belluno": {
+    "description": "Belluno è la porta delle Dolomiti, dove montagne, foreste e valli creano un paesaggio di rara bellezza. È una città sospesa tra natura e storia.",
+    "blocks": [
+      {
+        "title": "Porta delle Dolomiti",
+        "text": "Da Belluno le Dolomiti si innalzano in tutta la loro maestosità, offrendo sentieri, punti panoramici e viste indimenticabili.",
+        "img": "images/belluno_dolomites.webp"
+      },
+      {
+        "title": "Natura e Vita all’Aria Aperta",
+        "text": "Escursioni, sci, ciclismo e rifugi di montagna rendono la zona un paradiso per gli amanti dell’outdoor.",
+        "img": "images/belluno_nature.webp"
+      },
+      {
+        "title": "Centro Storico",
+        "text": "Il centro storico di Belluno conserva eleganti palazzi, chiese e piazze con viste sulle montagne circostanti.",
+        "img": "images/belluno_city.webp"
+      }
+    ],
+    "related": ["landscapes", "villages", "unesco-sites"]
+  },
+
+  "rovigo": {
+    "description": "Rovigo si trova tra i fiumi Po e Adige, nel paesaggio tranquillo del Polesine. È una terra d’acqua, orizzonti e ritmi lenti.",
+    "blocks": [
+      {
+        "title": "Tra Fiumi e Terra",
+        "text": "Il territorio attorno a Rovigo è modellato da fiumi, canali e terre bonificate, creando un paesaggio unico.",
+        "img": "images/rovigo_river.webp"
+      },
+      {
+        "title": "Tracce Medievali",
+        "text": "Torri, chiese ed edifici storici raccontano la storia di una città che per secoli è stata crocevia tra regioni.",
+        "img": "images/rovigo_history.webp"
+      },
+      {
+        "title": "Atmosfera Tranquilla",
+        "text": "Rovigo offre un ritmo di vita calmo e autentico, lontano dalle rotte turistiche più affollate.",
+        "img": "images/rovigo_city.webp"
+      }
+    ],
+    "related": ["landscapes", "villages"]
+  },
+
+  "villages": {
+    "description": "I borghi del Veneto sono piccoli mondi di pietra, mura e piazze. Ognuno conserva storie, tradizioni e scorci che sembrano dipinti.",
+    "blocks": [
+      {
+        "title": "Asolo",
+        "text": "Conosciuta come la 'città dai cento orizzonti', Asolo incanta con i suoi panorami, portici e la sua storia letteraria.",
+        "img": "images/asolo.webp"
+      },
+      {
+        "title": "Marostica",
+        "text": "Famosa per la partita a scacchi vivente, Marostica unisce mura medievali, un castello e una piazza scenografica.",
+        "img": "images/marostica.webp"
+      },
+      {
+        "title": "Bassano del Grappa",
+        "text": "Il ponte di legno sul fiume Brenta, le distillerie di grappa e le viste montane rendono Bassano indimenticabile.",
+        "img": "images/bassano.webp"
+      }
+    ],
+    "related": ["landscapes", "treviso", "vicenza"]
+  },
+
+  "landscapes": {
+    "description": "Dalle Dolomiti al Lago di Garda fino alla costa Adriatica, il Veneto offre un mosaico di paesaggi: montagne, laghi, colline, pianure e mare.",
+    "blocks": [
+      {
+        "title": "Dolomiti",
+        "text": "Patrimonio Mondiale UNESCO, le Dolomiti sono un regno di torri rocciose, valli e luci mutevoli.",
+        "img": "images/dolomites.webp"
+      },
+      {
+        "title": "Lago di Garda",
+        "text": "La sponda orientale del Lago di Garda offre clima mite, ulivi e borghi affacciati sull’acqua.",
+        "img": "images/garda.webp"
+      },
+      {
+        "title": "Costa Adriatica",
+        "text": "Spiagge, lagune e tradizioni di pesca definiscono il lato costiero del Veneto.",
+        "img": "images/adriatic.webp"
+      }
+    ],
+    "related": ["villages", "belluno", "unesco-sites"]
+  },
+
+  "food-and-beverages": {
+    "description": "La gastronomia veneta è un viaggio tra sapori: dai formaggi di montagna al pesce di laguna, dalle ricette tradizionali alla cucina contemporanea.",
+    "blocks": [
+      {
+        "title": "Radicchio Rosso di Treviso",
+        "text": "Un ortaggio unico dal gusto amarognolo‑dolce, coltivato con cura e celebrato in piatti invernali, insalate e risotti.",
+        "img": "images/radicchio.webp"
+      },
+      {
+        "title": "Soppressa Veneta",
+        "text": "Un salame tradizionale della campagna veneta, ricco di sapore e spesso gustato con pane, polenta e vini locali.",
+        "img": "images/soppressa.webp"
+      },
+      {
+        "title": "Asiago DOP",
+        "text": "Un formaggio dell’altopiano di Asiago, dal fresco e delicato allo stagionato e intenso, perfetto da solo o in ricette.",
+        "img": "images/asiago.webp"
+      }
+    ],
+    "related": ["products", "villages", "cities"]
+  },
+
+  "products": {
+    "description": "I prodotti del Veneto riflettono la sua diversità: dall’eccellenza agricola alle creazioni artigianali e al design.",
+    "blocks": [
+      {
+        "title": "Specialità Locali",
+        "text": "Formaggi, salumi, riso, polenta e vini costituiscono la base della cultura gastronomica veneta.",
+        "img": "images/veneto_products_food.webp"
+      },
+      {
+        "title": "Artigianato e Design",
+        "text": "Dal vetro alla ceramica, dai tessuti ai mobili, il Veneto è una terra di artigianato e innovazione.",
+        "img": "images/veneto_products_craft.webp"
+      },
+      {
+        "title": "Territorio e Identità",
+        "text": "Ogni prodotto racconta una storia di territorio, clima e abilità umana, unendo tradizione e modernità.",
+        "img": "images/veneto_products_territory.webp"
+      }
+    ],
+    "related": ["food-and-beverages", "craft", "businesses"]
+  },
+
+  "art": {
+    "description": "L’arte veneta attraversa i secoli: dalle chiese romaniche ai capolavori rinascimentali, dalle ville palladiane alla creatività contemporanea.",
+    "blocks": [
+      {
+        "title": "Arte Rinascimentale e Sacra",
+        "text": "Chiese, cappelle e palazzi conservano affreschi, pale d’altare e sculture che hanno plasmato l’arte europea.",
+        "img": "images/veneto_art_sacred.webp"
+      },
+      {
+        "title": "Ville e Palazzi",
+        "text": "Residenze nobiliari nelle campagne e nelle città raccontano storie di potere, gusto e mecenatismo.",
+        "img": "images/veneto_art_villas.webp"
+      },
+      {
+        "title": "Cultura Viva",
+        "text": "Festival, mostre ed eventi culturali mantengono viva ed evolutiva la tradizione artistica.",
+        "img": "images/veneto_art_events.webp"
+      }
+    ],
+    "related": ["unesco-sites", "cities", "culture"]
+  },
+
+  "unesco-sites": {
+    "description": "Il Veneto ospita diversi siti Patrimonio Mondiale UNESCO, dove natura, architettura e storia raggiungono valori eccezionali.",
+    "blocks": [
+      {
+        "title": "Venezia e la sua Laguna",
+        "text": "Una città unica sull’acqua, con canali, palazzi e un ecosistema fragile ma straordinario.",
+        "img": "images/venice.webp"
+      },
+      {
+        "title": "Cicli di Affreschi di Padova",
+        "text": "Gli affreschi di Padova, tra cui le opere di Giotto, rappresentano una pietra miliare della pittura europea.",
+        "img": "images/padova_frescoes.webp"
+      },
+      {
+        "title": "Dolomiti",
+        "text": "Riconosciute per il loro valore geologico e paesaggistico, le Dolomiti sono un monumento naturale.",
+        "img": "images/dolomites_unesco.webp"
+      }
+    ],
+    "related": ["landscapes", "art", "belluno"]
+  },
+
+  "craft": {
+    "description": "L’artigianato veneto è un mix di tradizione e sperimentazione: vetro, ceramica, legno, tessuti e molto altro.",
+    "blocks": [
+      {
+        "title": "Vetro",
+        "text": "Il vetro veneziano è rinomato in tutto il mondo per colori, forme e tecniche perfezionate nei secoli.",
+        "img": "images/veneto_glass.webp"
+      },
+      {
+        "title": "Legno e Arredo",
+        "text": "Dalle botteghe di montagna alle aziende di design, la lavorazione del legno è parte fondamentale dell’identità regionale.",
+        "img": "images/veneto_wood.webp"
+      },
+      {
+        "title": "Tessuti e Moda",
+        "text": "La produzione tessile e il design della moda collegano il sapere locale ai mercati globali.",
+        "img": "images/veneto_textiles.webp"
+      }
+    ],
+    "related": ["products", "businesses", "vicenza"]
+  },
+
+  "businesses": {
+    "description": "L’economia del Veneto è dinamica e diversificata: industria, agricoltura, turismo, servizi e settori creativi convivono e interagiscono.",
+    "blocks": [
+      {
+        "title": "Distretti Industriali",
+        "text": "Piccole e medie imprese formano distretti produttivi noti per specializzazione e capacità di esportazione.",
+        "img": "images/veneto_industry.webp"
+      },
+      {
+        "title": "Agricoltura e Vino",
+        "text": "Vigneti, frutteti e campi producono vini, frutta e prodotti apprezzati in tutto il mondo.",
+        "img": "images/veneto_agriculture.webp"
+      },
+      {
+        "title": "Turismo e Servizi",
+        "text": "Città d’arte, montagne, laghi e coste sostengono un forte settore turistico e dei servizi.",
+        "img": "images/veneto_tourism.webp"
+      }
+    ],
+    "related": ["craft", "products", "cities"]
+  }
+}
 }

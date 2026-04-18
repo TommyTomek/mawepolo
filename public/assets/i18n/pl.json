@@ -3,7 +3,7 @@
     "hero": {
       "login": "Zaloguj się na swoje konto",
       "welcome": "Witaj, {{name}}!",
-      "title": "Gdzie kultura, biznes i ludzie spotykają się."
+      "title": "Miejsce, gdzie spotyka się kultura, biznes i ludzie."
     },
     "discover": {
       "veneto": {
@@ -17,200 +17,677 @@
     },
     "why": {
       "title": "Dlaczego MaWePolo?",
-      "text": "MaWePolo łączy region Veneto we Włoszech i region Małopolski w Polsce — dwa odległe, a jednak zaskakująco podobne regiony. Portal prezentuje wyjątkowe możliwości rozwoju i współpracy, łącząc potencjał kulturowy, biznesowy i turystyczny."
+      "text": "MaWePolo łączy region Veneto we Włoszech z regionem Małopolski w Polsce — dwa regiony odległe, a jednak zaskakująco podobne. Dzięki temu portalowi łączymy wyjątkowe możliwości rozwoju i współpracy, integrując potencjał kulturowy, biznesowy i turystyczny."
     }
   },
-  "malopolska": {
-    "hero": {
-      "title": "Odkryj Małopolskę",
-      "image": "images/discover-region-hero.webp"
-    },
-
-    "cities": {
-      "1": {
-        "title": "Kraków",
-        "text": "Historyczne serce Polski. Zamek Królewski na Wawelu, Rynek Główny, Kazimierz i wieki królewskiego dziedzictwa.",
-        "img": "images/krakow.webp"
+"regionDetail": {
+  "moreFrom": "Więcej z {{region}}",
+  "readMore": "Czytaj więcej",
+  "discoverMore": "Odkryj więcej"
+},
+"malopolska": {
+  "slug": "malopolska",
+  "hero": {
+    "title": "Odkryj Małopolskę",
+    "image": "images/discover-region-hero.webp"
+  },
+  "cities": [
+    { "slug": "krakow", "title": "Kraków", "text": "Historyczne serce Polski. Zamek Królewski na Wawelu, Rynek Główny, Kazimierz i wieki królewskiego dziedzictwa.", "img": "images/krakow.webp" },
+    { "slug": "tarnow", "title": "Tarnów", "text": "Urokliwe miasto z renesansową architekturą, ciepłym klimatem i pięknie zachowaną starówką.", "img": "images/tarnow.webp" },
+    { "slug": "nowy-sacz", "title": "Nowy Sącz", "text": "Brama do gór, drewnianej architektury i bogatych tradycji regionalnych.", "img": "images/nowy_sacz.webp" },
+    { "slug": "zakopane", "title": "Zakopane", "text": "Zimowa stolica Polski. Tatry, drewniane wille i żywa kultura góralska.", "img": "images/zakopane.webp" },
+    { "slug": "oswiecim", "title": "Oświęcim", "text": "Miasto pamięci i refleksji, siedziba Miejsca Pamięci i Muzeum Auschwitz‑Birkenau.", "img": "images/oswiecim.webp" },
+    { "slug": "wieliczka", "title": "Wieliczka", "text": "Słynna z kopalni soli wpisanej na listę UNESCO — świata podziemnych komór i solnych rzeźb.", "img": "images/wieliczka.webp" },
+    { "slug": "bochnia", "title": "Bochnia", "text": "Jedno z najstarszych miast w Polsce, znane z historycznej kopalni soli i średniowiecznego dziedzictwa.", "img": "images/bochnia.webp" }
+  ],
+  "territory": [
+    { "slug": "villages", "title": "Wioski", "text": "Lanckorona, Chochołów, Lipnica Murowana — drewniane domy, tradycje ludowe i spokojne krajobrazy.", "img": "images/villages.webp" },
+    { "slug": "landscapes", "title": "Krajobrazy", "text": "Tatry, Pieniny, Beskidy, Przełom Dunajca — dramatyczne szczyty, rzeki, lasy i doliny.", "img": "images/landscape.webp" }
+  ],
+  "gastronomy": [
+    { "slug": "food-and-beverages", "title": "Jedzenie i Napoje", "text": "Oscypek, kwaśnica, pierogi, sery regionalne, piwa rzemieślnicze i tradycyjna kuchnia góralska.", "img": "images/food&beverage.webp" },
+    { "slug": "products", "title": "Produkty", "text": "Lokalne rzemiosło, drewniane rzeźby, koronki, ceramika i regionalne specjały z górskich wiosek.", "img": "images/products.webp" }
+  ],
+  "culture": [
+    { "slug": "art", "title": "Sztuka", "text": "Sztuka sakralna, drewniane kościoły, stroje ludowe i żywe tradycje kulturowe kształtowane przez wieki.", "img": "images/art.webp" },
+    { "slug": "unesco-sites", "title": "Obiekty UNESCO", "text": "Stare Miasto w Krakowie, Kopalnia Soli w Wieliczce, Kalwaria Zebrzydowska, Drewniane Kościoły Południowej Małopolski.", "img": "images/unesco.webp" }
+  ],
+  "economy": [
+    { "slug": "craft", "title": "Rzemiosło", "text": "Góralskie rzemiosło, obróbka drewna, tkaniny i tradycyjne techniki przekazywane z pokolenia na pokolenie.", "img": "images/craft.webp" },
+    { "slug": "businesses", "title": "Biznes", "text": "Dynamiczny region z turystyką, technologią, edukacją i lokalnymi przedsiębiorstwami napędzającymi rozwój gospodarczy.", "img": "images/companies.webp" }
+  ]
+},
+"veneto": {
+  "slug": "veneto",
+  "hero": {
+    "title": "Odkryj Veneto",
+    "image": "images/discover-region-hero.webp"
+  },
+  "cities": [
+    { "slug": "treviso", "title": "Treviso", "text": "Mały klejnot przecięty kanałami i średniowiecznymi podcieniami.", "img": "images/treviso.webp" },
+    { "slug": "padua", "title": "Padwa", "text": "Historyczne miasto uniwersyteckie o wielowiekowych tradycjach.", "img": "images/padova.webp" },
+    { "slug": "vicenza", "title": "Vicenza", "text": "Miasto Palladia, renesansowa elegancja i dziedzictwo UNESCO.", "img": "images/vicenza.webp" },
+    { "slug": "belluno", "title": "Belluno", "text": "Brama do Dolomitów, dziewicza natura i spektakularne krajobrazy górskie.", "img": "images/belluno.webp" },
+    { "slug": "rovigo", "title": "Rovigo", "text": "Między rzekami Pad i Adyga — średniowieczna historia i spokojna atmosfera Polesine.", "img": "images/rovigo.webp" }
+  ],
+  "territory": [
+    { "slug": "villages", "title": "Wioski", "text": "Asolo, Marostica, Bassano del Grappa: historyczne miasteczka, średniowieczne zamki i wyjątkowe krajobrazy.", "img": "images/villages.webp" },
+    { "slug": "landscapes", "title": "Krajobrazy", "text": "Dolomity, Jezioro Garda, wybrzeże Adriatyku: urzekające góry, jeziora, wzgórza i równiny.", "img": "images/landscape.webp" }
+  ],
+  "gastronomy": [
+    { "slug": "food-and-beverages", "title": "Jedzenie i Napoje", "text": "Odkryj duszę włoskiej kuchni — od tradycyjnych potraw po nowoczesne interpretacje, tworzone z pasją i najlepszych składników.", "img": "images/food&beverage.webp" },
+    { "slug": "products", "title": "Produkty", "text": "Poznaj unikalne produkty Veneto — od tradycyjnego rzemiosła po nowoczesne innowacje.", "img": "images/products.webp" }
+  ],
+  "culture": [
+    { "slug": "art", "title": "Sztuka", "text": "Odkryj duszę włoskiej sztuki — od renesansowych fresków i wnętrz sakralnych po ponadczasowe krajobrazy kształtowane przez historię, światło i piękno.", "img": "images/art.webp" },
+    { "slug": "unesco-sites", "title": "Obiekty UNESCO", "text": "Wenecja, Padwa, Dolomity: miejsca światowego dziedzictwa.", "img": "images/unesco.webp" }
+  ],
+  "economy": [
+    { "slug": "craft", "title": "Rzemiosło", "text": "Tradycyjne włoskie rzemiosło: ceramika, szkło, rzeźba w drewnie, tkaniny i ponadczasowe techniki przekazywane przez pokolenia.", "img": "images/craft.webp" },
+    { "slug": "businesses", "title": "Biznes", "text": "Lokalne przedsiębiorstwa: od przemysłu i designu po rolnictwo i rzemiosło — zróżnicowana gospodarka oparta na tradycji i innowacji.", "img": "images/companies.webp" }
+  ]
+},
+"malopolska-detail": {  
+  "krakow": {
+    "description": "Kraków to kulturalne serce Polski — miasto królów, uczonych, artystów i wieków historii. Jego stare miasto, zamki i tętniące życiem dzielnice tworzą wyjątkowe połączenie tradycji i nowoczesności.",
+    "blocks": [
+      {
+        "title": "Zamek Królewski na Wawelu",
+        "text": "Symbol polskiego dziedzictwa — góruje nad Wisłą i kryje komnaty królewskie, katedrę oraz liczne legendy.",
+        "img": "images/krakow_wawel.webp"
       },
-      "2": {
-        "title": "Tarnów",
-        "text": "Urokliwe miasto z renesansową architekturą, ciepłym klimatem i pięknie zachowaną starówką.",
-        "img": "images/tarnow.webp"
+      {
+        "title": "Rynek Główny",
+        "text": "Jeden z największych średniowiecznych rynków w Europie, otoczony kawiarniami, kościołami i słynnymi Sukiennicami.",
+        "img": "images/krakow_square.webp"
       },
-      "3": {
-        "title": "Nowy Sącz",
-        "text": "Brama w góry, drewniana architektura i bogate tradycje regionalne.",
-        "img": "images/nowy_sacz.webp"
-      },
-      "4": {
-        "title": "Zakopane",
-        "text": "Zimowa stolica Polski. Tatry, drewniane wille i żywa kultura góralska.",
-        "img": "images/zakopane.webp"
-      },
-      "5": {
-        "title": "Oświęcim",
-        "text": "Miasto pamięci i refleksji, miejsce Miejsca Pamięci i Muzeum Auschwitz‑Birkenau.",
-        "img": "images/oswiecim.webp"
-      },
-      "6": {
-        "title": "Wieliczka",
-        "text": "Słynna z Kopalni Soli wpisanej na listę UNESCO — świata podziemnych komór i solnych rzeźb.",
-        "img": "images/wieliczka.webp"
-      },
-      "7": {
-        "title": "Bochnia",
-        "text": "Jedno z najstarszych miast w Polsce, znane z historycznej kopalni soli i średniowiecznego dziedzictwa.",
-        "img": "images/bochnia.webp"
+      {
+        "title": "Kazimierz",
+        "text": "Historyczna dzielnica żydowska, dziś pełna kawiarni, galerii i wydarzeń kulturalnych.",
+        "img": "images/krakow_kazimierz.webp"
       }
-    },
-
-    "territory": {
-      "1": {
-        "title": "Wsie",
-        "text": "Lanckorona, Chochołów, Lipnica Murowana — drewniane domy, tradycje ludowe i spokojne krajobrazy.",
-        "img": "images/villages.webp"
-      },
-      "2": {
-        "title": "Krajobrazy",
-        "text": "Tatry, Pieniny, Beskidy, Przełom Dunajca — majestatyczne szczyty, rzeki, lasy i doliny.",
-        "img": "images/landscape.webp"
-      }
-    },
-
-    "gastronomy": {
-      "1": {
-        "title": "Jedzenie i Napoje",
-        "text": "Oscypek, kwaśnica, pierogi, sery regionalne, piwa rzemieślnicze i tradycyjna kuchnia góralska.",
-        "img": "images/food&beverage.webp"
-      },
-      "2": {
-        "title": "Produkty",
-        "text": "Lokalne rzemiosło, rzeźby w drewnie, koronki, ceramika i regionalne specjały z górskich wiosek.",
-        "img": "images/products.webp"
-      }
-    },
-
-    "culture": {
-      "1": {
-        "title": "Sztuka",
-        "text": "Sztuka sakralna, drewniane kościoły, stroje ludowe i żywe tradycje kulturowe kształtowane przez wieki.",
-        "img": "images/art.webp"
-      },
-      "2": {
-        "title": "Obiekty UNESCO",
-        "text": "Stare Miasto w Krakowie, Kopalnia Soli w Wieliczce, Kalwaria Zebrzydowska, Drewniane Kościoły Południowej Małopolski.",
-        "img": "images/unesco.webp"
-      }
-    },
-
-    "economy": {
-      "1": {
-        "title": "Rzemiosło",
-        "text": "Góralskie rękodzieło, wyroby z drewna, tekstylia i tradycyjne techniki przekazywane z pokolenia na pokolenie.",
-        "img": "images/craft.webp"
-      },
-      "2": {
-        "title": "Biznes",
-        "text": "Dynamiczny region, w którym turystyka, technologia, edukacja i lokalne przedsiębiorstwa napędzają rozwój gospodarczy.",
-        "img": "images/companies.webp"
-      }
-    }
+    ],
+    "related": ["tarnow", "wieliczka", "unesco-sites"]
   },
 
-  "veneto": {
-    "hero": {
-      "title": "Odkryj Veneto",
-      "image": "images/discover-region-hero.webp"
-    },
-
-    "cities": {
-      "1": {
-        "title": "Wenecja",
-        "text": "Miasto kanałów, sztuki i romantyzmu. Plac św. Marka, Pałac Dożów, Most Rialto, Murano.",
-        "img": "images/venezia.webp"
+  "tarnow": {
+    "description": "Tarnów to ciepłe, eleganckie miasto z renesansową architekturą, uroczymi uliczkami i pięknie zachowaną starówką.",
+    "blocks": [
+      {
+        "title": "Renesansowa Starówka",
+        "text": "Kolorowe fasady, arkady i zabytkowy ratusz tworzą wyjątkową, południowoeuropejską atmosferę.",
+        "img": "images/tarnow_oldtown.webp"
       },
-      "2": {
-        "title": "Werona",
-        "text": "Miasto miłości i dziedzictwa rzymsko‑skaligerskiego. Arena, Dom Julii, historyczne centrum.",
-        "img": "images/verona.webp"
+      {
+        "title": "Dziedzictwo Kulturowe",
+        "text": "Muzea, kościoły i pomniki odzwierciedlają wielokulturową historię miasta.",
+        "img": "images/tarnow_culture.webp"
       },
-      "3": {
-        "title": "Treviso",
-        "text": "Mała perła poprzecinana kanałami i średniowiecznymi podcieniami.",
-        "img": "images/treviso.webp"
-      },
-      "4": {
-        "title": "Padwa",
-        "text": "Historyczne miasto uniwersyteckie o wielowiekowych tradycjach.",
-        "img": "images/padova.webp"
-      },
-      "5": {
-        "title": "Vicenza",
-        "text": "Miasto Palladia, renesansowa elegancja i dziedzictwo UNESCO.",
-        "img": "images/vicenza.webp"
-      },
-      "6": {
-        "title": "Belluno",
-        "text": "Brama do Dolomitów, dziewicza natura i spektakularne górskie krajobrazy.",
-        "img": "images/belluno.webp"
-      },
-      "7": {
-        "title": "Rovigo",
-        "text": "Między rzekami Pad i Adyga — średniowieczna historia i spokojna atmosfera Polesine.",
-        "img": "images/rovigo.webp"
+      {
+        "title": "Słoneczny Klimat",
+        "text": "Tarnów jest jednym z najcieplejszych miast w Polsce — idealnym na spacery i życie na świeżym powietrzu.",
+        "img": "images/tarnow_sun.webp"
       }
-    },
+    ],
+    "related": ["krakow", "bochnia", "villages"]
+  },
 
-    "territory": {
-      "1": {
-        "title": "Wsie",
-        "text": "Asolo, Marostica, Bassano del Grappa — historyczne miasteczka, średniowieczne zamki i wyjątkowe krajobrazy.",
-        "img": "images/villages.webp"
+  "nowy-sacz": {
+    "description": "Nowy Sącz to brama do gór, drewnianej architektury i bogatych tradycji regionalnych.",
+    "blocks": [
+      {
+        "title": "Architektura Drewniana",
+        "text": "Skanseny i zabytkowe kościoły chronią unikatowe rzemiosło drewniane regionu.",
+        "img": "images/nowysacz_wood.webp"
       },
-      "2": {
-        "title": "Krajobrazy",
-        "text": "Dolomity, Jezioro Garda, wybrzeże Adriatyku — urzekające góry, jeziora, wzgórza i równiny.",
-        "img": "images/landscape.webp"
+      {
+        "title": "Krajobrazy Górskie",
+        "text": "Otaczające Beskidy oferują szlaki, punkty widokowe i spokojną naturę.",
+        "img": "images/nowysacz_mountains.webp"
+      },
+      {
+        "title": "Tradycje Regionalne",
+        "text": "Stroje ludowe, muzyka i kuchnia odzwierciedlają wieki dziedzictwa kulturowego.",
+        "img": "images/nowysacz_traditions.webp"
       }
-    },
+    ],
+    "related": ["zakopane", "landscapes", "villages"]
+  },
 
-    "gastronomy": {
-      "1": {
-        "title": "Jedzenie i Napoje",
-        "text": "Odkryj duszę włoskiej kuchni — od tradycyjnych potraw po nowoczesne interpretacje, tworzone z pasją i najlepszych składników.",
-        "img": "images/food&beverage.webp"
+  "zakopane": {
+    "description": "Zakopane to zimowa stolica Polski — tętniące życiem miasto u podnóża Tatr, znane z drewnianych willi, kultury góralskiej i aktywności na świeżym powietrzu.",
+    "blocks": [
+      {
+        "title": "Tatry",
+        "text": "Szlaki, szczyty, jeziora i zapierające dech widoki czynią Tatry rajem dla wędrowców.",
+        "img": "images/zakopane_tatras.webp"
       },
-      "2": {
-        "title": "Produkty",
-        "text": "Poznaj unikalne produkty Veneto — od tradycyjnego rzemiosła po współczesne innowacje.",
-        "img": "images/products.webp"
+      {
+        "title": "Kultura Góralska",
+        "text": "Drewniane domy, muzyka i kuchnia tworzą silną tożsamość regionalną.",
+        "img": "images/zakopane_culture.webp"
+      },
+      {
+        "title": "Krupówki",
+        "text": "Sklepy, kawiarnie i lokalne specjały ożywiają centrum miasta.",
+        "img": "images/zakopane_krupowki.webp"
       }
-    },
+    ],
+    "related": ["landscapes", "villages", "food-and-beverages"]
+  },
 
-    "culture": {
-      "1": {
-        "title": "Sztuka",
-        "text": "Odkryj duszę włoskiej sztuki — od renesansowych fresków i sakralnych wnętrz po ponadczasowe pejzaże kształtowane przez historię, światło i piękno.",
-        "img": "images/art.webp"
+  "oswiecim": {
+    "description": "Oświęcim to miasto pamięci i refleksji, siedziba Miejsca Pamięci i Muzeum Auschwitz‑Birkenau.",
+    "blocks": [
+      {
+        "title": "Auschwitz‑Birkenau",
+        "text": "Miejsce UNESCO poświęcone pamięci, edukacji i prawdzie historycznej.",
+        "img": "images/oswiecim_memorial.webp"
       },
-      "2": {
-        "title": "Obiekty UNESCO",
-        "text": "Wenecja, Padwa, Dolomity — miejsca światowego dziedzictwa.",
-        "img": "images/unesco.webp"
+      {
+        "title": "Miasto Refleksji",
+        "text": "Oświęcim promuje dialog, pokój i zrozumienie międzykulturowe.",
+        "img": "images/oswiecim_city.webp"
       }
-    },
+    ],
+    "related": ["krakow", "unesco-sites"]
+  },
 
-    "economy": {
-      "1": {
-        "title": "Rzemiosło",
-        "text": "Tradycyjne włoskie rzemiosło: ceramika, szkło, rzeźba w drewnie, tekstylia i ponadczasowe techniki przekazywane przez pokolenia.",
-        "img": "images/craft.webp"
+  "wieliczka": {
+    "description": "Wieliczka słynie z kopalni soli wpisanej na listę UNESCO — świata podziemnych komór, rzeźb i słonych jezior.",
+    "blocks": [
+      {
+        "title": "Kopalnia Soli",
+        "text": "Labirynt tuneli, kaplic i dzieł sztuki wyrzeźbionych w soli.",
+        "img": "images/wieliczka_mine.webp"
       },
-      "2": {
-        "title": "Biznes",
-        "text": "Lokalne przedsiębiorstwa — od przemysłu i designu po rolnictwo i rzemiosło. Zróżnicowana gospodarka łącząca tradycję z innowacją.",
-        "img": "images/companies.webp"
+      {
+        "title": "Podziemne Jeziora",
+        "text": "Krystaliczne słone jeziora tworzą magiczną atmosferę głęboko pod ziemią.",
+        "img": "images/wieliczka_lake.webp"
       }
-    }
+    ],
+    "related": ["krakow", "bochnia", "unesco-sites"]
+  },
+
+  "bochnia": {
+    "description": "Bochnia to jedno z najstarszych miast w Polsce, znane z historycznej kopalni soli i średniowiecznego dziedzictwa.",
+    "blocks": [
+      {
+        "title": "Kopalnia Soli w Bochni",
+        "text": "Jedna z najstarszych kopalni soli w Europie, oferująca podziemne trasy i wystawy.",
+        "img": "images/bochnia_mine.webp"
+      },
+      {
+        "title": "Centrum Historyczne",
+        "text": "Średniowieczne ulice i kościoły odzwierciedlają długą historię miasta.",
+        "img": "images/bochnia_city.webp"
+      }
+    ],
+    "related": ["wieliczka", "tarnow"]
+  },
+
+  "villages": {
+    "description": "Wioski Małopolski zachowują drewniane domy, tradycje ludowe i spokojne krajobrazy.",
+    "blocks": [
+      {
+        "title": "Lanckorona",
+        "text": "Urokliwa wieś na wzgórzu z drewnianą zabudową i artystyczną atmosferą.",
+        "img": "images/lanckorona.webp"
+      },
+      {
+        "title": "Chochołów",
+        "text": "Wieś tradycyjnych drewnianych domów, zachowanych przez pokolenia.",
+        "img": "images/chocholow.webp"
+      },
+      {
+        "title": "Lipnica Murowana",
+        "text": "Znana z drewnianych kościołów i bogatego dziedzictwa kulturowego.",
+        "img": "images/lipnica.webp"
+      }
+    ],
+    "related": ["landscapes", "nowy-sacz"]
+  },
+
+  "landscapes": {
+    "description": "Małopolska oferuje dramatyczne szczyty, rzeki, lasy i doliny — od Tatr po Pieniny i Beskidy.",
+    "blocks": [
+      {
+        "title": "Tatry",
+        "text": "Najwyższe góry w Polsce, z alpejskimi krajobrazami i kultowymi szlakami.",
+        "img": "images/tatras.webp"
+      },
+      {
+        "title": "Pieniny i Przełom Dunajca",
+        "text": "Spektakularny przełom rzeki, słynny z raftingu i malowniczych widoków.",
+        "img": "images/pieniny.webp"
+      },
+      {
+        "title": "Beskidy",
+        "text": "Łagodne góry idealne na wędrówki, rowery i rodzinne wycieczki.",
+        "img": "images/beskids.webp"
+      }
+    ],
+    "related": ["villages", "zakopane"]
+  },
+
+  "food-and-beverages": {
+    "description": "Kuchnia Małopolski łączy smaki gór, tradycyjne przepisy i regionalne specjały.",
+    "blocks": [
+      {
+        "title": "Oscypek",
+        "text": "Wędzony ser z mleka owczego — symbol kultury góralskiej.",
+        "img": "images/oscypek.webp"
+      },
+      {
+        "title": "Pierogi",
+        "text": "Ikoniczne polskie pierogi, nadziewane serem, ziemniakami, mięsem lub sezonowymi składnikami.",
+        "img": "images/pierogi.webp"
+      },
+      {
+        "title": "Kwaśnica",
+        "text": "Pożywna góralska zupa z kiszonej kapusty i mięsa.",
+        "img": "images/kwasnica.webp"
+      }
+    ],
+    "related": ["products", "zakopane"]
+  },
+
+  "products": {
+    "description": "Lokalne rzemiosło, drewniane rzeźby, koronki, ceramika i regionalne specjały z górskich wiosek.",
+    "blocks": [
+      {
+        "title": "Rzemiosło Drewniane",
+        "text": "Ręcznie rzeźbione dekoracje, meble i tradycyjne ozdoby.",
+        "img": "images/woodcraft.webp"
+      },
+      {
+        "title": "Koronki i Tkaniny",
+        "text": "Delikatne koronki i ręcznie tkane materiały od lokalnych rzemieślników.",
+        "img": "images/lace.webp"
+      },
+      {
+        "title": "Ceramika",
+        "text": "Tradycyjna ceramika formowana i malowana przez regionalnych artystów.",
+        "img": "images/pottery.webp"
+      }
+    ],
+    "related": ["food-and-beverages", "villages"]
+  },
+
+  "art": {
+    "description": "Sztuka Małopolski obejmuje architekturę sakralną, tradycje ludowe i wieki rzemiosła.",
+    "blocks": [
+      {
+        "title": "Drewniane Kościoły",
+        "text": "Kościoły wpisane na listę UNESCO — unikatowe dziedzictwo architektoniczne.",
+        "img": "images/wooden_church.webp"
+      },
+      {
+        "title": "Stroje Ludowe",
+        "text": "Kolorowe stroje regionalne odzwierciedlają lokalną tożsamość i tradycję.",
+        "img": "images/folk_costume.webp"
+      },
+      {
+        "title": "Sztuka Sakralna",
+        "text": "Ołtarze, rzeźby i obrazy przechowywane w kościołach i muzeach.",
+        "img": "images/sacred_art.webp"
+      }
+    ],
+    "related": ["unesco-sites", "culture"]
+  },
+
+  "unesco-sites": {
+    "description": "Małopolska posiada kilka obiektów UNESCO, z wyjątkową wartością kulturową.",
+    "blocks": [
+      {
+        "title": "Stare Miasto w Krakowie",
+        "text": "Historyczne centrum pełne zabytków, kościołów i wieków dziedzictwa.",
+        "img": "images/krakow_oldtown.webp"
+      },
+      {
+        "title": "Kopalnia Soli w Wieliczce",
+        "text": "Podziemny świat komór, rzeźb i słonych jezior.",
+        "img": "images/wieliczka_unesco.webp"
+      },
+      {
+        "title": "Drewniane Kościoły",
+        "text": "Unikatowa kolekcja drewnianej architektury sakralnej.",
+        "img": "images/wooden_churches_unesco.webp"
+      }
+    ],
+    "related": ["krakow", "wieliczka", "art"]
+  },
+
+  "craft": {
+    "description": "Rzemiosło Małopolski odzwierciedla tradycje górskie, obróbkę drewna, tkaniny i techniki artystyczne.",
+    "blocks": [
+      {
+        "title": "Drewno",
+        "text": "Tradycyjne techniki rzeźbienia przekazywane przez pokolenia.",
+        "img": "images/craft_wood.webp"
+      },
+      {
+        "title": "Tkaniny",
+        "text": "Ręcznie tkane materiały i haftowane stroje.",
+        "img": "images/craft_textiles.webp"
+      },
+      {
+        "title": "Warsztaty Rzemieślnicze",
+        "text": "Lokalne warsztaty zachowują tradycyjne umiejętności i tworzą nowoczesne interpretacje.",
+        "img": "images/craft_workshops.webp"
+      }
+    ],
+    "related": ["products", "art"]
+  },
+
+  "businesses": {
+    "description": "Gospodarka Małopolski łączy turystykę, technologię, edukację i lokalne przedsiębiorstwa.",
+    "blocks": [
+      {
+        "title": "Turystyka",
+        "text": "Miasta, góry i miejsca kultury przyciągają miliony turystów.",
+        "img": "images/business_tourism.webp"
+      },
+      {
+        "title": "Innowacje",
+        "text": "Uczelnie i firmy technologiczne napędzają badania i rozwój.",
+        "img": "images/business_innovation.webp"
+      },
+      {
+        "title": "Lokalne Przedsiębiorstwa",
+        "text": "Małe i średnie firmy stanowią fundament regionalnej gospodarki.",
+        "img": "images/business_local.webp"
+      }
+    ],
+    "related": ["craft", "products"]
   }
+},
+"veneto-detail": {  
+  "treviso": {
+    "description": "Treviso to kameralne miasto kanałów, podcieni i spokojnych placów. Jego historyczne centrum łączy średniowieczne mury, renesansowe pałace i łagodny przepływ wód, które nadają mu wyjątkowy, niemal tajemniczy urok.",
+    "blocks": [
+      {
+        "title": "Miasto Wody i Podcieni",
+        "text": "Historyczne centrum Treviso przecinają kanały, a eleganckie podcienia tworzą przestrzeń codziennego życia — między kawiarniami, małymi sklepikami i zabytkowymi fasadami.",
+        "img": "images/treviso_canals.webp"
+      },
+      {
+        "title": "Place i Codzienne Życie",
+        "text": "Piazza dei Signori i okoliczne uliczki to tętniące serce miasta, gdzie mieszkańcy spotykają się na kawę, aperitivo i wieczorne spacery.",
+        "img": "images/treviso_piazza.webp"
+      },
+      {
+        "title": "Smaki Regionu",
+        "text": "Od wzgórz Prosecco po lokalne trattorie — Treviso jest bramą do autentycznej kuchni i win Wenecji Euganejskiej.",
+        "img": "images/treviso_food.webp"
+      }
+    ],
+    "related": ["padua", "vicenza", "villages"]
+  },
+
+  "padua": {
+    "description": "Padwa to jedno z najstarszych miast uniwersyteckich we Włoszech, gdzie od wieków splatają się nauka, wiara i sztuka. Jej ulice i place opowiadają historie studentów, pielgrzymów i kupców.",
+    "blocks": [
+      {
+        "title": "Dawna Tradycja Uniwersytecka",
+        "text": "Uniwersytet w Padwie, założony w 1222 roku, gościł wielkie umysły, takie jak Galileo Galilei, i do dziś pozostaje żywym centrum badań i kultury.",
+        "img": "images/padova_university.webp"
+      },
+      {
+        "title": "Sztuka Sakralna i Pielgrzymka",
+        "text": "Bazylika św. Antoniego oraz Kaplica Scrovegnich z freskami Giotta czynią Padwę ważnym miejscem sztuki i duchowości.",
+        "img": "images/padova_basilica.webp"
+      },
+      {
+        "title": "Place i Targi",
+        "text": "Piazza delle Erbe i Piazza della Frutta goszczą historyczne targi, gdzie kolory, zapachy i głosy tworzą ponadczasową atmosferę.",
+        "img": "images/padova_market.webp"
+      }
+    ],
+    "related": ["treviso", "vicenza", "unesco-sites"]
+  },
+
+  "vicenza": {
+    "description": "Vicenza to miasto Palladia, gdzie architektura staje się żywą sceną. Wille, pałace i ikoniczny Teatro Olimpico czynią je arcydziełem renesansowej harmonii.",
+    "blocks": [
+      {
+        "title": "Dziedzictwo Palladia",
+        "text": "Wille i pałace Andrei Palladia ukształtowały tożsamość Vicenzy i wpłynęły na architekturę w całej Europie i na świecie.",
+        "img": "images/vicenza_palladio.webp"
+      },
+      {
+        "title": "Teatro Olimpico",
+        "text": "Teatro Olimpico, ze swoją niezwykłą sceną perspektywiczną, jest jednym z najbardziej fascynujących teatrów, jakie kiedykolwiek zbudowano.",
+        "img": "images/vicenza_teatro.webp"
+      },
+      {
+        "title": "Eleganckie Życie Miejskie",
+        "text": "Spacer po Corso Palladio i historycznym centrum odsłania butiki, kawiarnie i wyrafinowaną atmosferę miasta.",
+        "img": "images/vicenza_city.webp"
+      }
+    ],
+    "related": ["treviso", "padua", "craft"]
+  },
+
+  "belluno": {
+    "description": "Belluno to brama do Dolomitów, gdzie góry, lasy i doliny tworzą krajobraz o wyjątkowym pięknie. To miasto zawieszone między naturą a historią.",
+    "blocks": [
+      {
+        "title": "Brama do Dolomitów",
+        "text": "Z Belluno Dolomity wznoszą się w całej swojej majestatyczności, oferując szlaki, punkty widokowe i niezapomniane panoramy.",
+        "img": "images/belluno_dolomites.webp"
+      },
+      {
+        "title": "Natura i Aktywność na Świeżym Powietrzu",
+        "text": "Wędrówki, narciarstwo, jazda na rowerze i górskie schroniska czynią ten region rajem dla miłośników outdooru.",
+        "img": "images/belluno_nature.webp"
+      },
+      {
+        "title": "Historyczne Centrum",
+        "text": "Historyczne centrum Belluno zachowuje eleganckie pałace, kościoły i place z widokami na okoliczne góry.",
+        "img": "images/belluno_city.webp"
+      }
+    ],
+    "related": ["landscapes", "villages", "unesco-sites"]
+  },
+
+  "rovigo": {
+    "description": "Rovigo leży między rzekami Pad i Adyga, w spokojnym krajobrazie Polesine. To kraina wody, horyzontów i powolnych rytmów.",
+    "blocks": [
+      {
+        "title": "Między Rzekami a Lądem",
+        "text": "Teren wokół Rovigo kształtują rzeki, kanały i ziemie odzyskane, tworząc unikalny krajobraz.",
+        "img": "images/rovigo_river.webp"
+      },
+      {
+        "title": "Średniowieczne Ślady",
+        "text": "Wieże, kościoły i zabytkowe budynki opowiadają historię miasta, które od dawna było skrzyżowaniem regionów.",
+        "img": "images/rovigo_history.webp"
+      },
+      {
+        "title": "Spokojna Atmosfera",
+        "text": "Rovigo oferuje spokojny, autentyczny rytm życia, z dala od najbardziej zatłoczonych tras turystycznych.",
+        "img": "images/rovigo_city.webp"
+      }
+    ],
+    "related": ["landscapes", "villages"]
+  },
+
+  "villages": {
+    "description": "Weneckie miasteczka to małe światy z kamienia, murów i placów. Każde z nich zachowuje historie, tradycje i widoki jak z obrazu.",
+    "blocks": [
+      {
+        "title": "Asolo",
+        "text": "Znane jako „miasto stu horyzontów”, Asolo zachwyca widokami, podcieniami i literacką historią.",
+        "img": "images/asolo.webp"
+      },
+      {
+        "title": "Marostica",
+        "text": "Słynna z żywej partii szachów, Marostica łączy średniowieczne mury, zamek i malowniczy plac.",
+        "img": "images/marostica.webp"
+      },
+      {
+        "title": "Bassano del Grappa",
+        "text": "Drewniany most nad rzeką Brenta, destylarnie grappy i górskie widoki czynią Bassano niezapomnianym.",
+        "img": "images/bassano.webp"
+      }
+    ],
+    "related": ["landscapes", "treviso", "vicenza"]
+  },
+
+  "landscapes": {
+    "description": "Od Dolomitów po Jezioro Garda i wybrzeże Adriatyku — Wenecja Euganejska oferuje mozaikę krajobrazów: góry, jeziora, wzgórza, równiny i morze.",
+    "blocks": [
+      {
+        "title": "Dolomity",
+        "text": "Miejsce wpisane na listę UNESCO — kraina skalnych wież, dolin i zmieniającego się światła.",
+        "img": "images/dolomites.webp"
+      },
+      {
+        "title": "Jezioro Garda",
+        "text": "Wschodni brzeg Jeziora Garda oferuje łagodny klimat, gaje oliwne i nadjeziorne miasteczka.",
+        "img": "images/garda.webp"
+      },
+      {
+        "title": "Wybrzeże Adriatyku",
+        "text": "Plaże, laguny i tradycje rybackie definiują nadmorską część regionu.",
+        "img": "images/adriatic.webp"
+      }
+    ],
+    "related": ["villages", "belluno", "unesco-sites"]
+  },
+
+  "food-and-beverages": {
+    "description": "Kuchnia Wenecji Euganejskiej to podróż przez smaki: od serów górskich po ryby z laguny, od tradycyjnych przepisów po kuchnię współczesną.",
+    "blocks": [
+      {
+        "title": "Radicchio Rosso di Treviso",
+        "text": "Wyjątkowe warzywo o lekko gorzko‑słodkim smaku, uprawiane z troską i cenione w zimowych daniach, sałatkach i risottach.",
+        "img": "images/radicchio.webp"
+      },
+      {
+        "title": "Soppressa Veneta",
+        "text": "Tradycyjna wiejska kiełbasa, bogata w smak, często podawana z chlebem, polentą i lokalnymi winami.",
+        "img": "images/soppressa.webp"
+      },
+      {
+        "title": "Asiago DOP",
+        "text": "Ser z płaskowyżu Asiago — od świeżego i delikatnego po dojrzewający i intensywny, idealny samodzielnie lub w potrawach.",
+        "img": "images/asiago.webp"
+      }
+    ],
+    "related": ["products", "villages", "cities"]
+  },
+
+  "products": {
+    "description": "Produkty Wenecji Euganejskiej odzwierciedlają jej różnorodność: od doskonałości rolniczej po rzemiosło i design.",
+    "blocks": [
+      {
+        "title": "Lokalne Specjały",
+        "text": "Sery, wędliny, ryż, polenta i wina stanowią fundament kultury kulinarnej regionu.",
+        "img": "images/veneto_products_food.webp"
+      },
+      {
+        "title": "Rzemiosło i Design",
+        "text": "Od szkła i ceramiki po tkaniny i meble — Wenecja Euganejska to kraina rzemiosła i innowacji.",
+        "img": "images/veneto_products_craft.webp"
+      },
+      {
+        "title": "Terytorium i Tożsamość",
+        "text": "Każdy produkt opowiada historię ziemi, klimatu i ludzkiej umiejętności, łącząc tradycję z nowoczesnością.",
+        "img": "images/veneto_products_territory.webp"
+      }
+    ],
+    "related": ["food-and-beverages", "craft", "businesses"]
+  },
+
+  "art": {
+    "description": "Sztuka regionu Veneto obejmuje wieki: od kościołów romańskich po renesansowe arcydzieła, od willi palladiańskich po współczesną kreatywność.",
+    "blocks": [
+      {
+        "title": "Sztuka Renesansowa i Sakralna",
+        "text": "Kościoły, kaplice i pałace przechowują freski, ołtarze i rzeźby, które ukształtowały europejską sztukę.",
+        "img": "images/veneto_art_sacred.webp"
+      },
+      {
+        "title": "Wille i Pałace",
+        "text": "Rezydencje szlacheckie na wsi i w miastach opowiadają historie o władzy, smaku i mecenacie.",
+        "img": "images/veneto_art_villas.webp"
+      },
+      {
+        "title": "Żywa Kultura",
+        "text": "Festiwale, wystawy i wydarzenia kulturalne podtrzymują i rozwijają artystyczną tradycję regionu.",
+        "img": "images/veneto_art_events.webp"
+      }
+    ],
+    "related": ["unesco-sites", "cities", "culture"]
+  },
+
+  "unesco-sites": {
+    "description": "Region Veneto posiada kilka obiektów wpisanych na listę UNESCO, gdzie natura, architektura i historia osiągają wyjątkową wartość.",
+    "blocks": [
+      {
+        "title": "Wenecja i jej Laguna",
+        "text": "Unikalne miasto na wodzie, z kanałami, pałacami i kruchym, lecz niezwykłym ekosystemem.",
+        "img": "images/venice.webp"
+      },
+      {
+        "title": "Cykl Fresków w Padwie",
+        "text": "Freski w Padwie, w tym dzieła Giotta, stanowią kamień milowy europejskiego malarstwa.",
+        "img": "images/padova_frescoes.webp"
+      },
+      {
+        "title": "Dolomity",
+        "text": "Uznane za ich wartość geologiczną i krajobrazową, Dolomity są naturalnym pomnikiem.",
+        "img": "images/dolomites_unesco.webp"
+      }
+    ],
+    "related": ["landscapes", "art", "belluno"]
+  },
+
+  "craft": {
+    "description": "Rzemiosło Veneto to połączenie tradycji i eksperymentu: szkło, ceramika, drewno, tkaniny i wiele więcej.",
+    "blocks": [
+      {
+        "title": "Szkło",
+        "text": "Weneckie szkło słynie na całym świecie z kolorów, form i technik doskonalonych przez wieki.",
+        "img": "images/veneto_glass.webp"
+      },
+      {
+        "title": "Drewno i Meble",
+        "text": "Od górskich warsztatów po firmy designerskie — obróbka drewna jest kluczową częścią tożsamości regionu.",
+        "img": "images/veneto_wood.webp"
+      },
+      {
+        "title": "Tkaniny i Moda",
+        "text": "Produkcja tkanin i projektowanie mody łączą lokalne rzemiosło z globalnymi rynkami.",
+        "img": "images/veneto_textiles.webp"
+      }
+    ],
+    "related": ["products", "businesses", "vicenza"]
+  },
+
+  "businesses": {
+    "description": "Gospodarka Veneto jest dynamiczna i zróżnicowana: przemysł, rolnictwo, turystyka, usługi i sektory kreatywne współistnieją i współpracują.",
+    "blocks": [
+      {
+        "title": "Dzielnice Przemysłowe",
+        "text": "Małe i średnie przedsiębiorstwa tworzą wyspecjalizowane klastry produkcyjne znane z eksportu i innowacji.",
+        "img": "images/veneto_industry.webp"
+      },
+      {
+        "title": "Rolnictwo i Wino",
+        "text": "Winnice, sady i pola dostarczają wina, owoce i produkty cenione na całym świecie.",
+        "img": "images/veneto_agriculture.webp"
+      },
+      {
+        "title": "Turystyka i Usługi",
+        "text": "Miasta sztuki, góry, jeziora i wybrzeże wspierają silny sektor turystyczny i usługowy.",
+        "img": "images/veneto_tourism.webp"
+      }
+    ],
+    "related": ["craft", "products", "cities"]
+  }
+}
 }

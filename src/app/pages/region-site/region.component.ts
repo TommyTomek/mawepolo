@@ -4,11 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { RegionService } from '../../services/region.service';
 import { LanguageService } from '../../core/i18n/language.service';
 import { Region } from '../../types/region';
+import { DiscoverCardComponent } from '../../components/discover-card/discover-card';
 
 @Component({
   selector: 'app-region',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DiscoverCardComponent],
   templateUrl: './region.component.html',
   styleUrls: ['./region.component.scss'],
 })

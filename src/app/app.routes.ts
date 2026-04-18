@@ -28,6 +28,12 @@ export const routes: Routes = [
         canActivate: [authGuard],
       },
       {
+        path: 'region/:region/:category/:slug',
+        loadComponent: () =>
+          import('./pages/region-detail/region-detail.component')
+            .then(m => m.RegionDetailComponent)
+      },
+      {
         path: 'login',
         loadComponent: () =>
           import('./pages/login/login.component').then(m => m.LoginComponent)

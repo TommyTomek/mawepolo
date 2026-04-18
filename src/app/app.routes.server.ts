@@ -4,11 +4,6 @@ export const serverRoutes: ServerRoute[] = [
   {
     path: 'region/:region',
     renderMode: RenderMode.Prerender,
-    /**
-     * Required for dynamic routes when using RenderMode.Prerender.
-     * This provides the specific parameter values to the build engine
-     * so it can generate the static HTML files at build time.
-     */
     getPrerenderParams: async () => {
       return [
         { region: 'veneto' },
@@ -17,10 +12,24 @@ export const serverRoutes: ServerRoute[] = [
     },
   },
   {
-    /**
-     * This catch-all route ensures that all other routes defined in 
-     * app.routes.ts (home, login, register, etc.) are also prerendered.
-     */
+    path: 'region/:region/:category/:slug',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: async () => {
+      return [
+        {
+          region: 'veneto',
+          category: 'churches',
+          slug: 'basilica-di-san-marco'
+        },
+        {
+          region: 'malopolska',
+          category: 'castles',
+          slug: 'wawel-royal-castle'
+        }
+      ];
+    }
+  },
+  {
     path: '**',
     renderMode: RenderMode.Prerender
   }

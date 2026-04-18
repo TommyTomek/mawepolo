@@ -1,0 +1,21 @@
+<div
+  class="discover-card"
+  [routerLink]="['/region', region, category, slug]"
+>
+
+  <!-- Background image -->
+  <div
+    class="card-image"
+    [style.background-image]="'url(' + image + ')'"
+  ></div>
+
+  <!-- Black gradient overlay -->
+  <div class="gradient-overlay"></div>
+
+  <!-- Title -->
+  <h2>{{ title }}</h2>
+
+  <!-- Description -->
+  <p>{{ description }}</p>
+
+</div>
