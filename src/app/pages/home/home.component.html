@@ -24,27 +24,30 @@
 
     <!-- DISCOVER -->
     <div class="discover-section">
+      <div class="discover-card veneto">
+      <app-discover-card
+        [title]="'home.discover.veneto.title' | translate"
+        [description]="'home.discover.veneto.text' | translate"
+        image="/images/home_discover_veneto.webp"
+        region="veneto"
+        [animateOnClick]="true"
+        (navigate)="animateAndGo($event)"
+      ></app-discover-card>
 
-      <div class="discover-card veneto" routerLink="/region/veneto">
-        <img src="/images/home_discover_veneto.webp" alt="Image Veneto" />
-        <div class="image-glass">
-          <h2 class="discover-veneto">
-            {{ 'home.discover.veneto.title' | translate }}
-          </h2>
-          <p>
-            {{ 'home.discover.veneto.text' | translate }}
-          </p>
-        </div>
+
+
+
       </div>
+      <div class="discover-card malopolska">
+      <app-discover-card
+          [title]="'home.discover.malopolska.title' | translate"
+          [description]="'home.discover.malopolska.text' | translate"
+          image="/images/home_discover_malopolska.webp"
+          region="malopolska"
+          [animateOnClick]="true"
+          (navigate)="animateAndGo($event)"
+        ></app-discover-card>
 
-      <div class="discover-card malopolska" routerLink="/region/malopolska">
-        <img src="/images/home_discover_malopolska.webp" alt="Image Małopolska" />
-        <h2 class="discover-malopolska">
-          {{ 'home.discover.malopolska.title' | translate }}
-        </h2>
-        <p>
-          {{ 'home.discover.malopolska.text' | translate }}
-        </p>
       </div>
 
     </div>

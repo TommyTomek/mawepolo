@@ -4,6 +4,8 @@ export interface Region {
   hero: {
     title: string;
     image: string;
+    stats: RegionStats;
+    description: string;
   };
 
   cities: RegionItem[];
@@ -11,6 +13,16 @@ export interface Region {
   gastronomy: RegionItem[];
   culture: RegionItem[];
   economy: RegionItem[];
+}
+
+export interface RegionStats {
+  capital: string;
+  population: string;
+  area: string;
+  density?: string;
+  gdp?: string;
+  provinces?: number;
+  counties?: number;
 }
 
 export interface RegionItem {

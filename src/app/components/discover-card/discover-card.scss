@@ -52,3 +52,38 @@ p {
   font-weight: 500;
   opacity: 0.9;
 }
+.discover-card {
+  cursor: pointer;
+}
+
+/* ===========================
+   PREMIUM MAŁOPOLSKA LOADING BAR
+   =========================== */
+
+.loading-bar {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  height: 0.5%;
+  width: 0%;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(90deg, var(--color-yellow-leone) 0%, var(--color-red) 100%);
+  animation: loadBar 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  z-index: 100;
+}
+
+@keyframes loadBar {
+  0% {
+    width: 0%;
+    opacity: 1;
+    transform: translateY(2px);
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

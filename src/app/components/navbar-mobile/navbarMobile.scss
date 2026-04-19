@@ -26,8 +26,23 @@
       width: auto;
       object-fit: contain;
       cursor: pointer;
+      transition: opacity .4s ease, transform .4s ease;
     }
   }
+
+  .left.hide {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.8);
+  pointer-events: none;
+
+  .logo {
+      height: 70%;
+      width: auto;
+      object-fit: contain;
+      cursor: pointer;
+      transition: opacity .4s ease, transform .4s ease;
+    }
+}
 
   .search-wrapper {
     width: 40%;
@@ -108,7 +123,7 @@
     transition: color var(--transition-fast);
 
     &.active {
-      color: var(--color-blue-light); /* global blue */
+      color: var(--color-yellow-leone); /* global blue */
     }
 
     mat-icon {
@@ -381,4 +396,20 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+.logo {
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center;
+  opacity: 1;
+}
+
+.logo.logo-animating {
+  transform: rotateY(180deg) scale(0.6);
+  opacity: 0;
+}
+.logo.logo-reverse {
+  transform: rotateY(0deg) scale(1);
+  opacity: 1;
 }

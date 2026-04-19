@@ -11,12 +11,13 @@
   --color-grey-300: #c2c2c2;
   --color-grey-600: #6b6b6b;
   --color-grey-900: #1a1a1a;
+  --color-red: #C8102E;
 
   /* TYPOGRAPHY */
   --font-size-xs: 0.75rem;   /* 12px */
   --font-size-sm: 0.875rem;  /* 14px */
   --font-size-md: 1rem;      /* 16px */
-  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-lg: 1.3rem;  /* 18px */
   --font-size-xl: 1.5rem;    /* 24px */
 
   --font-weight-regular: 400;
@@ -59,9 +60,14 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--color-bg);
   color: var(--color-grey-900);
+
 }
 
 .app-logo {
   height: 5px;   // or 24px, 28px — whatever fits your tile
   width: auto;
+}
+*{
+  scroll-behavior: smooth;
+      scrollbar-color: #ffc602 transparent;
 }

@@ -6,28 +6,35 @@ import {
   effect,
   signal
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { LayoutService } from '../../services/services';
 import { authProfile } from '../../store/auth.store';
 import { TranslateModule } from '@ngx-translate/core';
+import { DiscoverCardComponent } from '../../components/discover-card/discover-card';
+import { LogoAnimationService } from '../../services/logo-animation.service';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [RouterLink, TranslateModule] 
+  imports: [RouterLink, TranslateModule, DiscoverCardComponent] 
 })
 export class HomeComponent implements AfterViewInit {
 
   profile = authProfile;
+  isHome = true; // Home page is always "home"
+
 
   private animationsStarted = signal(false);
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private layout: LayoutService
+    private layout: LayoutService,
+    private router: Router,
+    private logoService: LogoAnimationService
   ) {
     effect(() => {
       if (!isPlatformBrowser(this.platformId)) return;
@@ -38,6 +45,26 @@ export class HomeComponent implements AfterViewInit {
       this.initAnimations();
     });
   }
+      
+  animateAndGo({ region, category, slug, next }: any) {
+  // Start logo animation immediately
+  this.logoService.trigger();
+
+  const route = ['/region', region];
+  if (category) route.push(category);
+  if (slug) route.push(slug);
+  if (next) route.push(next);
+
+  // Navigate immediately (no delay)
+  this.router.navigate(route);
+}
+
+ngOnInit() {
+  const img = new Image();
+  img.src = 'images/discover-region-hero.webp';
+  this.logoService.reverse();
+}
+
 
   ngAfterViewInit() {}
 

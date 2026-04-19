@@ -3,9 +3,64 @@
 <div class="discover-region-wrapper snap-section">
 
   <!-- HERO -->
-  <div class="hero-image" [style.background-image]="'url(' + r.hero.image + ')'">
-    <p class="h-hero">{{ r.hero.title }}</p>
+   <h1 class="h-title">{{ region.hero.title }}</h1>
+   <p class="region-hero__description"> {{ r.hero.description }}</p>
+@if (r.hero.stats) {
+  <div class="region-hero__stats">
+
+    @if (r.hero.stats.capital) {
+      <div class="region-hero__stat">
+        <span class="region-hero__stat-label">Capital</span>
+        <span class="region-hero__stat-value">{{ r.hero.stats.capital }}</span>
+      </div>
+    }
+
+    @if (r.hero.stats.population) {
+      <div class="region-hero__stat">
+        <span class="region-hero__stat-label">Population</span>
+        <span class="region-hero__stat-value">{{ r.hero.stats.population }}</span>
+      </div>
+    }
+
+    @if (r.hero.stats.area) {
+      <div class="region-hero__stat">
+        <span class="region-hero__stat-label">Area</span>
+        <span class="region-hero__stat-value">{{ r.hero.stats.area }}</span>
+      </div>
+    }
+
+    @if (r.hero.stats.density) {
+      <div class="region-hero__stat">
+        <span class="region-hero__stat-label">Density</span>
+        <span class="region-hero__stat-value">{{ r.hero.stats.density }}</span>
+      </div>
+    }
+
+    @if (r.hero.stats.provinces) {
+      <div class="region-hero__stat">
+        <span class="region-hero__stat-label">Provinces</span>
+        <span class="region-hero__stat-value">{{ r.hero.stats.provinces }}</span>
+      </div>
+    }
+
+    @if (r.hero.stats.counties) {
+      <div class="region-hero__stat">
+        <span class="region-hero__stat-label">Counties</span>
+        <span class="region-hero__stat-value">{{ r.hero.stats.counties }}</span>
+      </div>
+    }
+
+    @if (r.hero.stats.gdp) {
+      <div class="region-hero__stat">
+        <span class="region-hero__stat-label">GDP</span>
+        <span class="region-hero__stat-value">{{ r.hero.stats.gdp }}</span>
+      </div>
+    }
+
   </div>
+}
+
+
 
   <!-- MAIN CITIES -->
   <h1 class="h-title">Main Cities</h1>
@@ -22,6 +77,8 @@
           [region]="r.slug"
           category="city"
           [slug]="c.slug"
+          [animateOnClick]="true"
+          (navigate)="animateAndGo($event)"
         />
       }
     </div>
@@ -37,17 +94,16 @@
         @for (copy of [1,2,3]; track copy) {
           @for (c of r.cities; track c.title) {
 
-            <!-- IMPORTANT: wrapper kept for carousel JS -->
-            
-              <app-discover-card
-                [title]="c.title"
-                [description]="c.text"
-                [image]="c.img"
-                [region]="r.slug"
-                category="city"
-                [slug]="c.slug"
-              />
-            
+            <app-discover-card
+              [title]="c.title"
+              [description]="c.text"
+              [image]="c.img"
+              [region]="r.slug"
+              category="city"
+              [slug]="c.slug"
+              [animateOnClick]="true"
+              (navigate)="animateAndGo($event)"
+            />
 
           }
         }
@@ -69,6 +125,8 @@
         [region]="r.slug"
         category="territory"
         [slug]="t.slug"
+        [animateOnClick]="true"
+        (navigate)="animateAndGo($event)"
       />
     }
   </div>
@@ -85,6 +143,8 @@
         [region]="r.slug"
         category="gastronomy"
         [slug]="g.slug"
+        [animateOnClick]="true"
+        (navigate)="animateAndGo($event)"
       />
     }
   </div>
@@ -101,6 +161,9 @@
         [region]="r.slug"
         category="culture"
         [slug]="c.slug"
+        [next]="c.slug"
+        [animateOnClick]="true"
+        (navigate)="animateAndGo($event)"
       />
     }
   </div>
@@ -117,6 +180,9 @@
         [region]="r.slug"
         category="economy"
         [slug]="e.slug"
+        [next]="e.slug"
+        [animateOnClick]="true"
+        (navigate)="animateAndGo($event)"
       />
     }
   </div>

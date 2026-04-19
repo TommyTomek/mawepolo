@@ -1,11 +1,10 @@
 import { Component, AfterViewInit, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RegionService } from '../../services/region.service';
 import { LanguageService } from '../../core/i18n/language.service';
 import { Region } from '../../types/region';
 import { DiscoverCardComponent } from '../../components/discover-card/discover-card';
-
 @Component({
   selector: 'app-region',
   standalone: true,
@@ -22,7 +21,9 @@ export class RegionComponent implements AfterViewInit {
   region!: Region;
   regionName!: string;
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     this.regionName = this.route.snapshot.paramMap.get('region')!;
     this.region = this.route.snapshot.data['region'];
 
@@ -49,16 +50,17 @@ export class RegionComponent implements AfterViewInit {
   initCarousel() {
     const row = document.querySelector('.dv-scroll-row') as HTMLElement | null;
     const cards = Array.from(document.querySelectorAll('.dv-scroll-row .dv-card')) as HTMLElement[];
+    const carouselCards = cards.slice(2);
 
-    if (!row || cards.length === 0) return;
+    if (!row || carouselCards.length === 0) return;
 
     const original = this.region.cities.length;
-    const total = cards.length;
+    const total = carouselCards.length;
 
     let current = original + 1;
 
     const scrollToCard = (index: number, behavior: ScrollBehavior = 'smooth') => {
-      cards[index].scrollIntoView({
+      carouselCards[index].scrollIntoView({
         behavior,
         inline: 'center',
         block: 'nearest'
@@ -66,7 +68,7 @@ export class RegionComponent implements AfterViewInit {
     };
 
     const updateActiveCard = () => {
-      cards.forEach((card, index) => {
+      carouselCards.forEach((card, index) => {
         card.classList.toggle('active', index === current);
       });
     };
@@ -74,7 +76,7 @@ export class RegionComponent implements AfterViewInit {
     const updateCardTransforms = () => {
       const viewportCenter = window.innerWidth / 2;
 
-      cards.forEach((card, index) => {
+      carouselCards.forEach((card, index) => {
         const rect = card.getBoundingClientRect();
         const cardCenter = rect.left + rect.width / 2;
         const distance = Math.abs(viewportCenter - cardCenter);
@@ -169,7 +171,7 @@ export class RegionComponent implements AfterViewInit {
         let closestDistance = Infinity;
         const viewportCenter = window.innerWidth / 2;
 
-        cards.forEach((card, index) => {
+        carouselCards.forEach((card, index) => {
           const rect = card.getBoundingClientRect();
           const cardCenter = rect.left + rect.width / 2;
           const distance = Math.abs(cardCenter - viewportCenter);
@@ -211,5 +213,18 @@ export class RegionComponent implements AfterViewInit {
 
       }, 120);
     });
+
+
   }
+
+  animateAndGo({ region, category, slug, next }: any) {
+  const route = ['/region', region];
+
+  if (category) route.push(category);
+  if (slug) route.push(slug);
+  if (next) route.push(next);
+
+  this.router.navigate(route);
+  }
+
 }

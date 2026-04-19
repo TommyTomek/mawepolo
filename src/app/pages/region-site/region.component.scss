@@ -11,33 +11,8 @@
       color: var(--color-white);
       overflow-y: scroll;
       scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-      scrollbar-color: #ffc602 transparent;
-    }
-
-    /* ============================================================
-      HERO IMAGE
-      ============================================================ */
-    .hero-image {
-      flex: none;
-      width: 100%;
-      height: 15%;
-      position: relative;
-      background: url('/images/discover-veneto.webp') center/cover no-repeat;
-      background-blend-mode: overlay;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      text-shadow: 0 0 8px black;
-      color: black;
-    }
-
-    .h-hero {
-      display: flex;
-      justify-content: center;
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-bold);
-      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      padding-bottom: 12%;
+      
     }
 
     /* ============================================================
@@ -48,8 +23,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 4%;
-      font-size: 1.3rem;
+      padding: 4% 0 0 0;
+      font-size: var(--font-size-lg);
       font-weight: 600;
       color: black;
       gap: 0.8rem;
@@ -225,7 +200,7 @@
     p {
       font-size: var(--font-size-sm);
       font-weight: 500;
-      background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+
     }
 
     /* ============================================================
@@ -275,6 +250,71 @@
       padding: 0 2%;
       height: 90%;
     }
+.region-hero__stats {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding:0 2% 0 2%;
+  height: 30%;
+  /* ensures stats are always visible */
+  color: #fff;
+  position: relative;
+  z-index: 2;
+  flex:none;
+}
 
+.region-hero__stat {
+  min-width: 140px;
+  padding: 0.9rem 1.2rem 0.9rem 1.2rem;
+  border-radius: 14px;
+  flex:1;
 
+  /* glassy effect */
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 
+  /* smooth fade-in */
+  opacity: 0;
+  transform: translateY(6px);
+  animation: fadeUp 0.5s ease forwards;
+}
+
+.region-hero__stat:nth-child(1) { animation-delay: 0.05s; }
+.region-hero__stat:nth-child(2) { animation-delay: 0.10s; }
+.region-hero__stat:nth-child(3) { animation-delay: 0.15s; }
+.region-hero__stat:nth-child(4) { animation-delay: 0.20s; }
+.region-hero__stat:nth-child(5) { animation-delay: 0.25s; }
+
+.region-hero__stat-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+
+}
+
+.region-hero__stat-value {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* animation */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+p-title {
+  color: black;
+  background-color: aqua;
+}
+
+.region-hero__description {
+  color: black  ;
+  padding: 2% 5%;
+}

@@ -1,7 +1,9 @@
 <header class="mobile-top">
 
   <div class="left">
-    <img src="/images/logoImage.png" alt="logo" class="logo" routerLink="/home"/>
+    <img src="/images/logoImage.png" alt="logo" class="logo" 
+    [class.logo-animating]="logoAnimating"
+    [class.logo-reverse]="logoReversing">
   </div>
 
   <div class="search-wrapper">
@@ -58,9 +60,9 @@
 
 <!-- BOTTOM NAVIGATION -->
 <nav class="mobile-bottom-nav">
-  <a routerLink="/fai" routerLinkActive="active">
-    <mat-icon>group</mat-icon>
-    <span>Fai Network</span>
+  <a routerLink="/home" routerLinkActive="active">
+    <mat-icon>home</mat-icon>
+    <span>Home</span>
   </a>
 
   <a routerLink="/events" routerLinkActive="active">

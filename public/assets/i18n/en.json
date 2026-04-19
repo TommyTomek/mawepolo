@@ -31,7 +31,16 @@
     "slug": "malopolska",
     "hero": {
       "title": "Discover Małopolska",
-      "image": "images/discover-region-hero.webp"
+      "image": "images/discover-region-hero.webp",
+      "stats": {
+      "population": "3.43 million inhabitants",
+      "area": "15,183 km²",
+      "capital": "Kraków",
+      "counties": 22,
+      "density": "226 inhabitants/km²",
+      "gdp": "€45 billion"
+    },
+    "description": "Małopolska is one of Poland’s most dynamic regions, known for its rich cultural heritage, thriving tourism, and the historic city of Kraków."
     },
     "cities": [
       { "slug": "krakow", "title": "Kraków", "text": "The historic heart of Poland. Wawel Castle, the Main Square, Kazimierz, and centuries of royal heritage.", "img": "images/krakow.webp" },
@@ -64,9 +73,20 @@
     "slug": "veneto",
     "hero": {
       "title": "Discover Veneto",
-      "image": "images/discover-region-hero.webp"
+      "image": "images/discover-region-hero.webp",
+      "stats": {
+      "population": "4.85 million inhabitants",
+      "area": "18,345 km²",
+      "capital": "Venezia",
+      "provinces": 7,
+      "density": "265 inhabitants/km²",
+      "gdp": "€166 billion"
+    },
+    "description": "Veneto is one of Northern Italy’s most influential regions, renowned for Venice, strong manufacturing districts, world‑class wine production, and a unique blend of culture, innovation, and tourism."
     },
     "cities": [
+      {"slug": "venezia" , "title":"Venezia", "text":"A small gem crossed by canals and medieval arcades.", "img":"images/venezia.webp"},
+      {"slug": "verona" , "title":"Verona", "text":"A gateway to the mountains, wooden architecture, and rich regional traditions.", "img":"images/verona.webp"},
       { "slug": "treviso", "title": "Treviso", "text": "A small gem crossed by canals and medieval arcades.", "img": "images/treviso.webp" },
       { "slug": "padua", "title": "Padua", "text": "A historic university city with ancient traditions.", "img": "images/padova.webp" },
       { "slug": "vicenza", "title": "Vicenza", "text": "The city of Palladio, Renaissance elegance, UNESCO heritage.", "img": "images/vicenza.webp" },
@@ -409,6 +429,48 @@
   },
 
   "veneto-detail": {  
+    "venezia": {
+      "description": "Venezia is a city unlike any other — a labyrinth of canals, bridges, and centuries‑old palaces rising from the water. Its atmosphere blends art, history, and quiet corners where time seems to slow down.",
+      "blocks": [
+        {
+          "title": "City of Canals and Bridges",
+          "text": "Gondolas, narrow waterways, and iconic bridges like the Rialto and the Bridge of Sighs create a unique urban landscape shaped entirely by water.",
+          "img": "images/venezia_canals.webp"
+        },
+        {
+          "title": "Piazzas and Venetian Life",
+          "text": "St. Mark’s Square, with its basilica and cafés, is the heart of the city — a place where locals and visitors gather to enjoy the rhythm of Venetian life.",
+          "img": "images/venezia_piazza.webp"
+        },
+        {
+          "title": "Art, Light, and Heritage",
+          "text": "From the Doge’s Palace to hidden churches filled with masterpieces, Venezia is a living museum where art and architecture reflect centuries of maritime power.",
+          "img": "images/venezia_art.webp"
+        }
+      ],
+      "related": ["padua", "treviso", "unesco-sites"]
+    },
+    "verona": {
+      "description": "Verona is a city of romance, Roman heritage, and elegant streets. Its amphitheater, piazzas, and riverfront create a timeless atmosphere where history and daily life blend seamlessly.",
+      "blocks": [
+        {
+          "title": "Roman and Medieval Heritage",
+          "text": "The Arena di Verona, ancient walls, and medieval towers reveal the city’s long history as a crossroads of cultures and empires.",
+          "img": "images/verona_arena.webp"
+        },
+        {
+          "title": "Piazzas and City Rhythm",
+          "text": "Piazza delle Erbe and Piazza dei Signori are vibrant spaces filled with markets, cafés, and the unmistakable charm of Veronese life.",
+          "img": "images/verona_piazza.webp"
+        },
+        {
+          "title": "Riverside Views and Romance",
+          "text": "The Adige River, stone bridges, and historic neighborhoods create a romantic atmosphere that has inspired stories, legends, and generations of travelers.",
+          "img": "images/verona_river.webp"
+        }
+      ],
+      "related": ["vicenza", "padua", "villages"]
+    },
     "treviso": {
     "description": "Treviso is an intimate city of canals, arcades, and quiet piazzas. Its historic center blends medieval walls, Renaissance palaces, and the gentle flow of waterways that give it a unique, almost secret charm.",
     "blocks": [
