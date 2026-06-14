@@ -4,7 +4,7 @@
 
   <!-- HERO -->
    <h1 class="h-title">{{ region.hero.title }}</h1>
-   <p class="region-hero__description"> {{ r.hero.description }}</p>
+   <p class="p-title"> {{ r.hero.description }}</p>
 @if (r.hero.stats) {
   <div class="region-hero__stats">
 
@@ -92,7 +92,7 @@
 
         <!-- COPY 1–3 FOR INFINITE LOOP -->
         @for (copy of [1,2,3]; track copy) {
-          @for (c of r.cities; track c.title) {
+          @for (c of r.cities.slice(2); track c.title) {
 
             <app-discover-card
               [title]="c.title"

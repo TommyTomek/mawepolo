@@ -9,8 +9,7 @@
       flex-direction: column;
       align-items: center;
       color: var(--color-white);
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
+        overflow-y: scroll;
       padding-bottom: 12%;
       
     }
@@ -66,6 +65,8 @@
     /* ============================================================
       SCROLLING CAROUSEL
       ============================================================ */
+
+      
     .dv-scroll-wrapper {
       position: relative;
       width: 96%;
@@ -112,8 +113,7 @@
       height: 100%;
       min-height: 100%;
       flex-shrink: 0;
-      align-items: stretch;
-      scroll-snap-type: x mandatory;
+        align-items: stretch;
     }
 
     .dv-scroll-row::-webkit-scrollbar {
@@ -249,43 +249,29 @@
       gap: 2%;
       padding: 0 2%;
       height: 90%;
+      margin-bottom: 2%;
     }
-.region-hero__stats {
-  position: relative;
+  .region-hero__stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  padding:0 2% 0 2%;
-  height: 30%;
-  /* ensures stats are always visible */
+    gap: 0.5rem;
   color: #fff;
   position: relative;
   z-index: 2;
   flex:none;
+  margin: 2%;
 }
 
 .region-hero__stat {
-  min-width: 140px;
-  padding: 0.9rem 1.2rem 0.9rem 1.2rem;
   border-radius: 14px;
-  flex:1;
-
+  flex:1;     
   /* glassy effect */
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.18);
-
-  /* smooth fade-in */
-  opacity: 0;
-  transform: translateY(6px);
-  animation: fadeUp 0.5s ease forwards;
-}
-
-.region-hero__stat:nth-child(1) { animation-delay: 0.05s; }
-.region-hero__stat:nth-child(2) { animation-delay: 0.10s; }
-.region-hero__stat:nth-child(3) { animation-delay: 0.15s; }
-.region-hero__stat:nth-child(4) { animation-delay: 0.20s; }
-.region-hero__stat:nth-child(5) { animation-delay: 0.25s; }
+  padding: 5px 10px;
+  min-width: 20%;
+  }
 
 .region-hero__stat-label {
   display: block;
@@ -302,19 +288,22 @@
   line-height: 1.2;
 }
 
-/* animation */
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-p-title {
-  color: black;
-  background-color: aqua;
+.p-title {
+    color: black;
 }
 
 .region-hero__description {
   color: black  ;
   padding: 2% 5%;
+}
+
+
+.carousel-no-anim {
+  scroll-behavior: auto !important;
+  transition: none !important;
+  animation: none !important;
+}
+.carousel-no-anim * {
+  transition: none !important;
+  animation: none !important;
 }

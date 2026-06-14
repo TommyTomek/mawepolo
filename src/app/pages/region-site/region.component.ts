@@ -17,15 +17,19 @@ export class RegionComponent implements AfterViewInit {
   private route = inject(ActivatedRoute);
   private regionService = inject(RegionService);
   private lang = inject(LanguageService);
+  private carouselInitialized = false;
 
+  
   region!: Region;
   regionName!: string;
 
   constructor(
-    private router: Router
+    private router: Router,
+    
   ) {
     this.regionName = this.route.snapshot.paramMap.get('region')!;
     this.region = this.route.snapshot.data['region'];
+    
 
     effect(() => {
       const currentLang = this.lang.currentLang();
@@ -41,182 +45,200 @@ export class RegionComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.initCarousel();
+     const el = document.querySelector('.discover-region-wrapper');
+     if (el) el.scrollTop = 0;
   }
 
   /* ---------------------------------------------------
      CAROUSEL LOGIC — JS BLUR + SCALE
   ----------------------------------------------------*/
-  initCarousel() {
-    const row = document.querySelector('.dv-scroll-row') as HTMLElement | null;
-    const cards = Array.from(document.querySelectorAll('.dv-scroll-row .dv-card')) as HTMLElement[];
-    const carouselCards = cards.slice(2);
+initCarousel() {
+  let ticking = false;
+  let loopLock = false;
+  if (this.carouselInitialized) return;
+  this.carouselInitialized = true;
 
-    if (!row || carouselCards.length === 0) return;
+  const row = document.querySelector('.dv-scroll-row') as HTMLElement | null;
+  const cards = Array.from(document.querySelectorAll('.dv-scroll-row .dv-card')) as HTMLElement[];
 
-    const original = this.region.cities.length;
-    const total = carouselCards.length;
+  if (!row || cards.length === 0) return;
 
-    let current = original + 1;
+  // Disable animations on first load
+  row.classList.add('carousel-no-anim');
 
-    const scrollToCard = (index: number, behavior: ScrollBehavior = 'smooth') => {
-      carouselCards[index].scrollIntoView({
-        behavior,
-        inline: 'center',
-        block: 'nearest'
-      });
-    };
+  const total = cards.length;
 
-    const updateActiveCard = () => {
-      carouselCards.forEach((card, index) => {
-        card.classList.toggle('active', index === current);
-      });
-    };
 
-    const updateCardTransforms = () => {
-      const viewportCenter = window.innerWidth / 2;
+  let current = 5; // start from 5th card
+  let scrollTimeout: any;
 
-      carouselCards.forEach((card, index) => {
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
-        const distance = Math.abs(viewportCenter - cardCenter);
-        const maxDistance = window.innerWidth * 0.45;
-
-        const t = Math.min(distance / maxDistance, 1); // 0 center, 1 far
-        const scale = 1 - t * 0.25;                    // 1 → 0.75
-        const opacity = 1 - t * 0.4;                   // 1 → 0.6
-        const blur = t * 4;                            // 0 → 4px
-
-        card.style.transform = `scale(${scale})`;
-        card.style.opacity = `${opacity}`;
-
-        const img = card.querySelector('.card-image') as HTMLElement | null;
-        if (img) img.style.filter = `blur(${blur}px)`;
-      });
-    };
-
-    // Initial center
-    scrollToCard(current, 'auto');
-    setTimeout(() => {
-      updateActiveCard();
-      updateCardTransforms();
-    }, 50);
-
-    /* ---------------------------------------------------
-       ARROWS
-    ----------------------------------------------------*/
-    const leftArrow = document.querySelector('.carousel-arrow.left') as HTMLElement | null;
-    const rightArrow = document.querySelector('.carousel-arrow.right') as HTMLElement | null;
-
-    if (leftArrow) {
-      leftArrow.onclick = () => {
-        current = Math.max(0, current - 1);
-        scrollToCard(current);
-        setTimeout(() => {
-          updateActiveCard();
-          updateCardTransforms();
-        }, 80);
-      };
-    }
-
-    if (rightArrow) {
-      rightArrow.onclick = () => {
-        current = Math.min(total - 1, current + 1);
-        scrollToCard(current);
-        setTimeout(() => {
-          updateActiveCard();
-          updateCardTransforms();
-        }, 80);
-      };
-    }
-
-    /* ---------------------------------------------------
-       TOUCH SWIPE
-    ----------------------------------------------------*/
-    let startX = 0;
-
-    row.ontouchstart = (e: TouchEvent) => {
-      startX = e.touches[0].clientX;
-    };
-
-    row.ontouchend = (e: TouchEvent) => {
-      const endX = e.changedTouches[0].clientX;
-      const diff = startX - endX;
-
-      if (Math.abs(diff) > 50) {
-        current = diff > 0
-          ? Math.min(total - 1, current + 1)
-          : Math.max(0, current - 1);
-
-        scrollToCard(current);
-        setTimeout(() => {
-          updateActiveCard();
-          updateCardTransforms();
-        }, 80);
-      }
-    };
-
-    /* ---------------------------------------------------
-       INFINITE LOOP + CENTER DETECTION
-  ----------------------------------------------------*/
-    let scrollTimeout: any;
-
-    row.addEventListener('scroll', () => {
-      // live transform while scrolling
-      updateCardTransforms();
-
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        let closestIndex = 0;
-        let closestDistance = Infinity;
-        const viewportCenter = window.innerWidth / 2;
-
-        carouselCards.forEach((card, index) => {
-          const rect = card.getBoundingClientRect();
-          const cardCenter = rect.left + rect.width / 2;
-          const distance = Math.abs(cardCenter - viewportCenter);
-
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestIndex = index;
-          }
-        });
-
-        current = closestIndex;
-
-        // Infinite loop boundaries
-        if (current >= total - original - 1) {
-          current = original + (current % original);
-          scrollToCard(current, 'auto');
-          setTimeout(() => {
-            updateActiveCard();
-            updateCardTransforms();
-          }, 50);
-          return;
-        }
-
-        if (current <= original) {
-          current = original + (current % original);
-          scrollToCard(current, 'auto');
-          setTimeout(() => {
-            updateActiveCard();
-            updateCardTransforms();
-          }, 50);
-          return;
-        }
-
-        scrollToCard(current);
-        setTimeout(() => {
-          updateActiveCard();
-          updateCardTransforms();
-        }, 50);
-
-      }, 120);
+  const scrollToCard = (index: number, behavior: ScrollBehavior = 'smooth') => {
+    current = Math.max(0, Math.min(total - 1, index));
+    cards[current].scrollIntoView({
+      behavior,
+      inline: 'center',
+      block: 'nearest'
     });
+  };
+  const updateActiveCard = () => {
+    cards.forEach((card, index) => {
+      card.classList.toggle('active', index === current);
+    });
+  };
+  const updateCardTransforms = () => {
+    const viewportCenter = window.innerWidth / 2;
+
+    cards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.left + rect.width / 2;
+      const distance = Math.abs(viewportCenter - cardCenter);
+      const maxDistance = window.innerWidth * 0.45;
+
+      const t = Math.min(distance / maxDistance, 1);
+      const scale = 1 - t * 0.25;
+      const opacity = 1 - t * 0.4;
+      const blur = t * 4;
+
+      card.style.transform = `scale(${scale})`;
+      card.style.opacity = `${opacity}`;
+
+      const img = card.querySelector('.card-image') as HTMLElement | null;
+      if (img) img.style.filter = `blur(${blur}px)`;
+    });
+  };
+
+  // --- INITIAL POSITION (NO ANIMATION) ---
+
+  scrollToCard(current, 'auto');
+  updateActiveCard();
+  updateCardTransforms();
 
 
+
+  
+
+  
+
+  // ARROWS
+  const leftArrow = document.querySelector('.carousel-arrow.left') as HTMLElement | null;
+  const rightArrow = document.querySelector('.carousel-arrow.right') as HTMLElement | null;
+
+  if (leftArrow) {
+    leftArrow.onclick = () => {
+      scrollToCard(current - 1);
+    };
   }
 
+  if (rightArrow) {
+    rightArrow.onclick = () => {
+      scrollToCard(current + 1);
+    };
+  }
+
+  // TOUCH SWIPE
+  let startX = 0;
+
+  row.ontouchstart = (e: TouchEvent) => {
+    startX = e.touches[0].clientX;
+  };
+
+  row.ontouchend = (e: TouchEvent) => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
+
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        scrollToCard(current + 1);
+      } else {
+        scrollToCard(current - 1);
+      }
+    }
+  };
+  let firstScroll = true;
+  // SCROLL HANDLER — detect center and update state
+  row.addEventListener('scroll', () => {
+    if (loopLock) return;
+    console.log(current);
+
+
+
+
+
+    if (firstScroll) {
+    firstScroll = false;
+    row.classList.remove('carousel-no-anim');
+  }
+    // Smooth per-frame transforms
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateCardTransforms();
+        ticking = false;
+      });
+      ticking = true;
+    }
+
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+      const viewportCenter = window.innerWidth / 2;
+
+      cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const distance = Math.abs(cardCenter - viewportCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      current = closestIndex;
+
+      if (current > 9) {
+    loopLock = true;
+    row.classList.add('carousel-no-anim');
+
+    current = current - 5;
+    scrollToCard(current, 'auto');
+    updateActiveCard();
+    updateCardTransforms();
+
+    requestAnimationFrame(() => {
+      row.classList.remove('carousel-no-anim');
+      loopLock = false;
+    });
+
+    return;
+  }
+      if (current < 5) {
+    loopLock = true;
+    row.classList.add('carousel-no-anim');
+
+    current = current + 5;
+    scrollToCard(current, 'auto');
+    updateActiveCard();
+    updateCardTransforms();
+
+    requestAnimationFrame(() => {
+      row.classList.remove('carousel-no-anim');
+      loopLock = false;
+    });
+
+    return;
+  }
+
+    }, 80);
+    updateActiveCard();
+  });
+}
+
+
+
+
+
+  
   animateAndGo({ region, category, slug, next }: any) {
   const route = ['/region', region];
 
