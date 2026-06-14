@@ -1,4 +1,4 @@
-import { Component, inject, effect } from '@angular/core';
+import { Component, inject, effect, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RegionService } from '../../services/region.service';
@@ -18,14 +18,14 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './region-detail.component.html',
   styleUrls: ['./region-detail.component.scss']
 })
-export class RegionDetailComponent {
+export class RegionDetailComponent implements AfterViewInit {
 
   private route = inject(ActivatedRoute);
   private regionService = inject(RegionService);
   private lang = inject(LanguageService);
 
-  region: any = null;       // from getRegion()
-  detail: any = null;       // from getRegionDetail()
+  region: any = null;
+  detail: any = null;
   category!: string;
   regionSlug!: string;
   itemSlug!: string;
@@ -35,28 +35,23 @@ export class RegionDetailComponent {
     this.category = this.route.snapshot.paramMap.get('category')!;
     this.itemSlug = this.route.snapshot.paramMap.get('slug')!;
 
-    // React to language changes automatically
     effect(() => {
       const currentLang = this.lang.currentLang();
       this.reload(currentLang);
     });
   }
 
-  /* ---------------------------------------------------
-     LOAD REGION + DETAIL
-  ----------------------------------------------------*/
   reload(lang: string) {
-    // Load region list (cities, gastronomy, etc.)
     this.regionService.getRegion(this.regionSlug).subscribe(region => {
       this.region = region;
     });
 
-    // Load detail content (blocks, description, related)
     this.regionService.getRegionDetail(this.regionSlug, this.itemSlug)
       .subscribe(detail => {
         this.detail = detail;
       });
   }
+
   getHeroItem() {
     if (!this.region || !this.region[this.category]) return null;
     return this.region[this.category].find((x: any) => x.slug === this.itemSlug);
@@ -67,5 +62,34 @@ export class RegionDetailComponent {
     return this.region[this.category].find((x: any) => x.slug === slug);
   }
 
+  ngAfterViewInit() {
+    this.lazyLoadImages();
+  }
 
+  lazyLoadImages() {
+    const images = Array.from(
+      document.querySelectorAll('.hero, .block-image')
+    ) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const bg = el.getAttribute('data-bg');
+
+            if (bg) {
+              el.style.backgroundImage = `url(${bg})`;
+              el.classList.remove('loading');
+            }
+
+            observer.unobserve(el);
+          }
+        });
+      },
+      { rootMargin: '300px' }
+    );
+
+    images.forEach(img => observer.observe(img));
+  }
 }

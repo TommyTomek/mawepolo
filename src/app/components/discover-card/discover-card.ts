@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,13 +9,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./discover-card.scss'],
   host: { class: 'dv-card' }
 })
-export class DiscoverCardComponent {
+export class DiscoverCardComponent implements AfterViewInit {
 
   @Input() title!: string;
   @Input() description!: string;
   @Input() image!: string;
   @Input() next?: string;
-
 
   @Input() region!: string;
   @Input() category?: string;
@@ -26,13 +25,37 @@ export class DiscoverCardComponent {
   @Output() navigate = new EventEmitter<{ 
     region: string; 
     category?: string; 
-    slug?: string ;
+    slug?: string;
     next?: string;
-    
   }>();
 
   animating = false;
+  loaded = false;
 
+  constructor(private el: ElementRef) {}
+
+  // -----------------------------------------------------
+  // LAZY LOAD IMAGE WHEN CARD ENTERS VIEWPORT
+  // -----------------------------------------------------
+  ngAfterViewInit() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.loaded = true;
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '200px' }
+    );
+
+    observer.observe(this.el.nativeElement);
+  }
+
+  // -----------------------------------------------------
+  // CLICK HANDLER
+  // -----------------------------------------------------
   onClick() {
     if (!this.animateOnClick) {
       this.emitNavigation();

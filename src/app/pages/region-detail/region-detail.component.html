@@ -2,31 +2,37 @@
 
 <div class="detail-wrapper">
 
-  <!-- HERO -->
+  <!-- ===========================
+       TOP SECTION (Hero + Title + Description)
+       =========================== -->
   @let heroItem = getHeroItem();
 
-  <div class="hero" [style.background-image]="'url(' + heroItem?.img + ')'">
-    <div class="hero-gradient"></div>
+  <div class="top-section">
 
-    <div class="hero-content">
+    <div class="top-image loading" [attr.data-bg]="heroItem?.img">
+      <div class="top-overlay"></div>
+
       <button class="back-btn" [routerLink]="['/region', regionSlug]">‹</button>
-      <h1>{{ heroItem?.title }}</h1>
-      <p class="region-label">{{ region.hero.title }}</p>
+
+      <div class="top-content">
+        <h1 class="top-title">{{ heroItem?.title }}</h1>
+        <p class="top-region">{{ region.hero.title }}</p>
+        <p class="top-description">{{ detail.description }}</p>
+      </div>
     </div>
+
   </div>
 
-  <!-- DESCRIPTION -->
-  <section class="description">
-    <p>{{ detail.description }}</p>
-  </section>
 
-  <!-- ALTERNATING BLOCKS -->
+  <!-- ===========================
+       ALTERNATING BLOCKS
+       =========================== -->
   <section class="blocks">
     @for (block of detail.blocks; track block.title; let i = $index) {
       <div class="block" [class.reverse]="i % 2 === 1">
 
-        <div class="block-image"
-             [style.background-image]="'url(' + block.img + ')'">
+        <div class="block-image loading"
+             [attr.data-bg]="block.img">
         </div>
 
         <div class="block-content">
@@ -38,7 +44,10 @@
     }
   </section>
 
-  <!-- RELATED -->
+
+  <!-- ===========================
+       RELATED ITEMS
+       =========================== -->
   <h2 class="related-title">
     {{ 'regionDetail.moreFrom' | translate:{ region: region.hero.title } }}
   </h2>
@@ -55,7 +64,6 @@
           [region]="regionSlug"
           [category]="category"
           [slug]="item.slug"
-          
         />
       }
     }

@@ -1,12 +1,17 @@
 <div class="discover-card" (click)="onClick()" [class.is-animating]="animating">
 
-  <div class="card-image" [style.background-image]="'url(' + image + ')'"></div>
+  <div class="card-image"
+       [class.loading]="!loaded"
+       [style.background-image]="loaded ? 'url(' + image + ')' : 'none'">
+  </div>
+
   <div class="gradient-overlay"></div>
 
   <h2>{{ title }}</h2>
   <p>{{ description }}</p>
 
-  <!-- Loading bar -->
-  <div class="loading-bar" *ngIf="animating"></div>
+  @if (animating) {
+    <div class="loading-bar"></div>
+  }
 
 </div>

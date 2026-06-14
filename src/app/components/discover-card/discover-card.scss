@@ -1,4 +1,5 @@
 .discover-card {
+  position: static;
   height: 100%;
   width: 100%;
   display: flex;
@@ -16,6 +17,7 @@
   background-position: center;
   z-index: 0;
   height: 100%;
+
 }
 
 /* Black gradient overlay */
