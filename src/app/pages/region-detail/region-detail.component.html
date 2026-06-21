@@ -3,70 +3,69 @@
 <div class="detail-wrapper">
 
   <!-- ===========================
-       TOP SECTION (Hero + Title + Description)
+       HERO SECTION
        =========================== -->
   @let heroItem = getHeroItem();
 
-  <div class="top-section">
+  <div class="hero-section loading" [attr.data-bg]="heroItem?.img">
+    <div class="hero-overlay"></div>
 
-    <div class="top-image loading" [attr.data-bg]="heroItem?.img">
-      <div class="top-overlay"></div>
+    <button class="back-btn" [routerLink]="['/region', regionSlug]">‹</button>
 
-      <button class="back-btn" [routerLink]="['/region', regionSlug]">‹</button>
-
-      <div class="top-content">
-        <h1 class="top-title">{{ heroItem?.title }}</h1>
-        <p class="top-region">{{ region.hero.title }}</p>
-        <p class="top-description">{{ detail.description }}</p>
-      </div>
+    <div class="hero-content">
+      <h1 class="hero-title">{{ heroItem?.title }}</h1>
+      <p class="hero-region">{{ region.hero.title }}</p>
+      <p class="hero-description">{{ detail.description }}</p>
     </div>
-
   </div>
 
 
   <!-- ===========================
-       ALTERNATING BLOCKS
+       WHITE CONTENT CONTAINER
        =========================== -->
-  <section class="blocks">
-    @for (block of detail.blocks; track block.title; let i = $index) {
-      <div class="block" [class.reverse]="i % 2 === 1">
+  <div class="content-container">
 
-        <div class="block-image loading"
-             [attr.data-bg]="block.img">
+    <!-- ALTERNATING BLOCKS -->
+    <section class="blocks">
+      @for (block of detail.blocks; track block.title; let i = $index) {
+        <div class="block" [class.reverse]="i % 2 === 1">
+
+          <div class="block-image loading"
+               [attr.data-bg]="block.img">
+          </div>
+
+          <div class="block-content">
+            <h2>{{ block.title }}</h2>
+            <p>{{ block.text }}</p>
+          </div>
+
         </div>
-
-        <div class="block-content">
-          <h2>{{ block.title }}</h2>
-          <p>{{ block.text }}</p>
-        </div>
-
-      </div>
-    }
-  </section>
-
-
-  <!-- ===========================
-       RELATED ITEMS
-       =========================== -->
-  <h2 class="related-title">
-    {{ 'regionDetail.moreFrom' | translate:{ region: region.hero.title } }}
-  </h2>
-
-  <div class="related-scroll">
-    @for (slug of detail.related; track slug) {
-      @let item = getItemBySlug(slug);
-
-      @if (item) {
-        <app-discover-card
-          [title]="item.title"
-          [description]="item.text"
-          [image]="item.img"
-          [region]="regionSlug"
-          [category]="category"
-          [slug]="item.slug"
-        />
       }
-    }
+    </section>
+
+
+    <!-- RELATED -->
+    <h2 class="related-title">
+      {{ 'regionDetail.moreFrom' | translate:{ region: region.hero.title } }}
+    </h2>
+
+    <div class="related-scroll">
+      @for (slug of detail.related; track slug) {
+        @let item = getItemBySlug(slug);
+
+        @if (item) {
+          <!-- <app-discover-card
+            [title]="item.title"
+            [description]="item.text"
+            [image]="item.img"
+            [region]="regionSlug"
+            [category]="category"
+            [slug]="item.slug"
+          /> -->
+        }
+      }
+    </div>
+
   </div>
 
 </div>
