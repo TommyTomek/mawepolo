@@ -23,30 +23,38 @@ export class RegionComponent implements AfterViewInit {
   region!: Region;
   regionName!: string;
 
-  constructor(
-    private router: Router,
-    
-  ) {
-    this.regionName = this.route.snapshot.paramMap.get('region')!;
-    this.region = this.route.snapshot.data['region'];
-    
+constructor(
+  private router: Router,
+) {
+  effect(() => {
+    const currentLang = this.lang.currentLang();
+    this.reloadRegion(currentLang);
+  });
 
-    effect(() => {
-      const currentLang = this.lang.currentLang();
-      this.reloadRegion(currentLang);
-    });
-  }
+  this.route.paramMap.subscribe(params => {
+    this.regionName = params.get('region')!;
+    this.region = this.route.snapshot.data['region'];
+
+    this.reloadRegion(this.lang.currentLang());
+
+    const el = document.querySelector('.discover-region-wrapper');
+    if (el) el.scrollTop = 0;
+  });
+}
 
   reloadRegion(lang: string) {
-    this.regionService.getRegion(this.regionName).subscribe(data => {
-      this.region = data;
-      setTimeout(() => this.initCarousel(), 50);
-    });
-  }
+  this.regionService.getRegion(this.regionName).subscribe(data => {
+    this.region = data;
+    setTimeout(() => {
+      this.initCarousel();
+      const el = document.querySelector('.discover-region-wrapper');
+      if (el) el.scrollTop = 0;
+    }, 50);
+  });
+}
 
   ngAfterViewInit(): void {
-     const el = document.querySelector('.discover-region-wrapper');
-     if (el) el.scrollTop = 0;
+  
   }
 
   /* ---------------------------------------------------
@@ -79,13 +87,20 @@ initCarousel() {
 
   // Scroll to a specific card index
   const scrollToCard = (index: number, behavior: ScrollBehavior = 'smooth') => {
-    current = Math.max(0, Math.min(total - 1, index));
-    cards[current].scrollIntoView({
-      behavior,
-      inline: 'center',
-      block: 'nearest'
-    });
-  };
+  current = Math.max(0, Math.min(total - 1, index));
+  const card = cards[current];
+
+  const rowRect = row.getBoundingClientRect();
+  const cardRect = card.getBoundingClientRect();
+
+  // distanza tra il centro della card e il centro della row,
+  // calcolata in coordinate relative allo scrollLeft attuale
+  const offset =
+    cardRect.left - rowRect.left -
+    (row.clientWidth - card.clientWidth) / 2;
+
+  row.scrollBy({ left: offset, behavior });
+};
 
   // Highlight the active card
   const updateActiveCard = () => {

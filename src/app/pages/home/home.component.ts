@@ -30,21 +30,25 @@ export class HomeComponent implements AfterViewInit {
 
   private animationsStarted = signal(false);
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private layout: LayoutService,
-    private router: Router,
-    private logoService: LogoAnimationService
-  ) {
-    effect(() => {
-      if (!isPlatformBrowser(this.platformId)) return;
-      if (!this.layout.ready()) return;
-      if (this.animationsStarted()) return;
+constructor(
+  @Inject(PLATFORM_ID) private platformId: Object,
+  private layout: LayoutService,
+  private router: Router,
+  private logoService: LogoAnimationService
+) {
+  effect(() => {
+    if (!isPlatformBrowser(this.platformId)) return;
+    if (!this.layout.ready()) return;
 
-      this.animationsStarted.set(true);
-      this.initAnimations();
-    });
-  }
+    // reset dello scroll del contenitore reale della Home
+    const wrapper = document.querySelector('.home-page');
+    if (wrapper) wrapper.scrollTop = 0;
+
+    if (this.animationsStarted()) return;
+    this.animationsStarted.set(true);
+    this.initAnimations();
+  });
+}
       
   animateAndGo({ region, category, slug, next }: any) {
   // Start logo animation immediately
@@ -69,28 +73,25 @@ ngOnInit() {
   ngAfterViewInit() {}
 
   private initAnimations() {
-    window.scrollTo(0, 0);
+  setTimeout(() => {
+    requestAnimationFrame(() => {
+      const sections = document.querySelectorAll('.snap-section');
+      if (sections.length > 0) {
+        sections[0].classList.add('is-visible');
+      }
 
-    setTimeout(() => {
-      requestAnimationFrame(() => {
-        const sections = document.querySelectorAll('.snap-section');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          } else {
+            entry.target.classList.remove('is-visible');
+          }
+        });
+      }, { threshold: 0.4 });
 
-        if (sections.length > 0) {
-          sections[0].classList.add('is-visible');
-        }
-
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-            } else {
-              entry.target.classList.remove('is-visible');
-            }
-          });
-        }, { threshold: 0.4 });
-
-        sections.forEach(sec => observer.observe(sec));
-      });
-    }, 0);
-  }
+      sections.forEach(sec => observer.observe(sec));
+    });
+  }, 0);
+}
 }
