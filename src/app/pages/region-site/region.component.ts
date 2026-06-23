@@ -45,11 +45,17 @@ constructor(
   reloadRegion(lang: string) {
   this.regionService.getRegion(this.regionName).subscribe(data => {
     this.region = data;
-    setTimeout(() => {
-      this.initCarousel();
-      const el = document.querySelector('.discover-region-wrapper');
-      if (el) el.scrollTop = 0;
-    }, 50);
+
+    // Reset initialization when the view is refreshed with new content.
+    this.carouselInitialized = false;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this.initCarousel();
+        const el = document.querySelector('.discover-region-wrapper');
+        if (el) el.scrollTop = 0;
+      });
+    });
   });
 }
 
@@ -60,7 +66,7 @@ constructor(
   /* ---------------------------------------------------
      CAROUSEL LOGIC — JS BLUR + SCALE
   ----------------------------------------------------*/
-initCarousel() {
+async initCarousel() {
   // --- STATE FLAGS ----------------------------------------------------------
   let ticking = false;          // rAF throttle for transforms
   let loopLock = false;         // prevents recursive scroll events during teleport
@@ -76,31 +82,30 @@ initCarousel() {
 
   if (!row || cards.length === 0) return;
 
+  // Wait for the browser to finish layout and painting.
+  await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
+  await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
+
   // Disable animations on first load (teleport-safe)
   row.classList.add('carousel-no-anim');
 
   const total = cards.length;
-  let current = 5; // Start centered on the 5th card (your design choice)
+  const loopSize = Math.floor(total / 3);
+  const loopStart = loopSize;
+  const loopEnd = loopSize * 2;
+  let current = Math.max(loopStart, 0);
   let scrollTimeout: any;
 
   // --- HELPERS --------------------------------------------------------------
 
   // Scroll to a specific card index
   const scrollToCard = (index: number, behavior: ScrollBehavior = 'smooth') => {
-  current = Math.max(0, Math.min(total - 1, index));
-  const card = cards[current];
+    current = Math.max(0, Math.min(total - 1, index));
+    const card = cards[current];
+    const left = card.offsetLeft - (row.clientWidth - card.clientWidth) / 2;
 
-  const rowRect = row.getBoundingClientRect();
-  const cardRect = card.getBoundingClientRect();
-
-  // distanza tra il centro della card e il centro della row,
-  // calcolata in coordinate relative allo scrollLeft attuale
-  const offset =
-    cardRect.left - rowRect.left -
-    (row.clientWidth - card.clientWidth) / 2;
-
-  row.scrollBy({ left: offset, behavior });
-};
+    row.scrollTo({ left, behavior });
+  };
 
   // Highlight the active card
   const updateActiveCard = () => {
@@ -111,13 +116,14 @@ initCarousel() {
 
   // Apply scale/opacity/blur transforms based on distance from center
   const updateCardTransforms = () => {
-    const viewportCenter = window.innerWidth / 2;
+    const rowRect = row.getBoundingClientRect();
+    const viewportCenter = rowRect.left + rowRect.width / 2;
 
     cards.forEach((card) => {
       const rect = card.getBoundingClientRect();
       const cardCenter = rect.left + rect.width / 2;
       const distance = Math.abs(viewportCenter - cardCenter);
-      const maxDistance = window.innerWidth * 0.45;
+      const maxDistance = rowRect.width * 0.45;
 
       const t = Math.min(distance / maxDistance, 1);
       const scale = 1 - t * 0.25;
@@ -188,7 +194,8 @@ initCarousel() {
       if (row.scrollLeft !== lastScrollLeft) return;
 
       // Find closest card to center
-      const viewportCenter = window.innerWidth / 2;
+      const rowRect = row.getBoundingClientRect();
+      const viewportCenter = rowRect.left + rowRect.width / 2;
       let closestIndex = 0;
       let closestDistance = Infinity;
 
@@ -204,13 +211,15 @@ initCarousel() {
       });
 
       current = closestIndex;
+      const loopMin = loopStart;
+      const loopMax = loopEnd - 1;
 
       // --- LOOP TELEPORT LOGIC ----------------------------------------------
-      if (current > 9) {
+      if (current > loopMax) {
         loopLock = true;
         row.classList.add('carousel-no-anim');
 
-        current -= 5;
+        current -= loopSize;
         scrollToCard(current, 'auto');
         updateActiveCard();
         updateCardTransforms();
@@ -223,11 +232,11 @@ initCarousel() {
         return;
       }
 
-      if (current < 5) {
+      if (current < loopMin) {
         loopLock = true;
         row.classList.add('carousel-no-anim');
 
-        current += 5;
+        current += loopSize;
         scrollToCard(current, 'auto');
         updateActiveCard();
         updateCardTransforms();
