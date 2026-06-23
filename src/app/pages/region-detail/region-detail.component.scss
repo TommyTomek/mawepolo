@@ -24,6 +24,11 @@
   padding-bottom: var(--spacing-md);
 }
 
+.related-item{
+  height:100px;
+  width:100px;
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -169,11 +174,25 @@
 }
 
 .related-scroll {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: var(--spacing-md);
-  overflow-x: auto;
   padding-bottom: var(--spacing-md);
 }
+
+/* Alias for consistency */
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+
 
 .hero-section,
 .block-image {

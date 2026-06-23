@@ -1,9 +1,10 @@
 import { Component, inject, effect, AfterViewInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { RegionService } from '../../services/region.service';
 import { LanguageService } from '../../core/i18n/language.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { DiscoverCardComponent } from '../../components/discover-card/discover-card';
 
 @Component({
   selector: 'app-region-detail',
@@ -11,13 +12,15 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     RouterLink,
-    TranslateModule
+    TranslateModule,
+    DiscoverCardComponent
   ],
   templateUrl: './region-detail.component.html',
   styleUrls: ['./region-detail.component.scss']
 })
 export class RegionDetailComponent implements AfterViewInit {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private regionService = inject(RegionService);
   private lang = inject(LanguageService);
   private platformId = inject(PLATFORM_ID);
@@ -69,6 +72,31 @@ export class RegionDetailComponent implements AfterViewInit {
   getItemBySlug(slug: string) {
     if (!this.region || !this.region[this.category]) return null;
     return this.region[this.category].find((x: any) => x.slug === slug);
+  }
+
+  getRelatedItems() {
+    if (!this.region || !this.detail || !this.detail.related) return [];
+
+    const categories = ['cities', 'territory', 'gastronomy', 'culture', 'economy'];
+    const related: any[] = [];
+
+    // For each related slug, find which category it belongs to
+    this.detail.related.forEach((slug: string) => {
+      for (const cat of categories) {
+        const items = this.region[cat] || [];
+        const item = items.find((x: any) => x.slug === slug);
+        if (item) {
+          related.push({ ...item, category: cat });
+          break;
+        }
+      }
+    });
+
+    return related;
+  }
+
+  navigateToRelated(event: any) {
+    this.router.navigate(['/region', this.regionSlug, event.category, event.slug]);
   }
 
   ngAfterViewInit() {

@@ -34,17 +34,28 @@
     </section>
 
     <!-- RELATED -->
-    <h2 class="related-title">
-      {{ 'regionDetail.moreFrom' | translate:{ region: region.hero.title } }}
-    </h2>
-    <div class="related-scroll">
-      @for (slug of detail.related; track slug) {
-        @let item = getItemBySlug(slug);
-        @if (item) {
-          <!-- Discover cards disabled for now -->
-        }
+    @let relatedItems = getRelatedItems();
+    @if (relatedItems.length > 0) {
+      <h2 class="related-title">
+        {{ 'regionDetail.moreFrom' | translate:{ region: region.hero.title } }}
+      </h2>
+      <div class="related-grid">
+      @for (item of relatedItems; track item.slug) {
+        <div class="related-item">
+          <app-discover-card
+            [title]="item.title"
+            [description]="item.text"
+            [image]="item.img"
+            [region]="regionSlug"
+            [category]="item.category"
+            [slug]="item.slug"
+            [animateOnClick]="true"
+            (navigate)="navigateToRelated($event)"
+          />
+        </div>
       }
     </div>
+    }
 
   </div>
 </div>
