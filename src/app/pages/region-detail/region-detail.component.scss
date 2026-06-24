@@ -24,45 +24,42 @@
   padding-bottom: var(--spacing-md);
 }
 
-.related-item{
-  height:100px;
-  width:100px;
-}
-
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 20%, rgba(0,0,0,0.55));
+  background: linear-gradient(to bottom, transparent 20%, rgba(0, 0, 0, 0.55));
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   z-index: 1;
 }
 
-.back-btn {
+.back-btn-arrow {
   position: absolute;
   top: var(--spacing-lg);
   left: var(--spacing-lg);
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(6px);
-  border: none;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-size: 26px;
+  font-weight: 300;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
-  color: white;
   cursor: pointer;
   z-index: 3;
-  transition: background 0.2s ease;
+  transition: background 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.55);
+    border-color: rgba(255, 255, 255, 0.55);
+  }
 }
 
-.back-btn:hover {
-  background: rgba(0,0,0,0.55);
-}
 
 .hero-content {
   position: relative;
@@ -104,8 +101,7 @@
 }
 
 /* ===========================
-   BLOCKS — immagine alternata sx/dx,
-   testo che scorre attorno, linea divisoria
+   BLOCKS
    =========================== */
 .blocks {
   display: flex;
@@ -115,19 +111,16 @@
 .block {
   display: block;
   padding: var(--spacing-lg) 0;
-}
 
-/* linea sottile tra un blocco e l'altro,
-   non sull'ultimo */
-.block:not(:last-child) {
-  border-bottom: 1px solid var(--color-border, #e5e5e5);
-}
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--color-border, #e5e5e5);
+  }
 
-/* clearfix: l'immagine è floated */
-.block::after {
-  content: "";
-  display: table;
-  clear: both;
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }
 
 .block-image {
@@ -138,33 +131,33 @@
   background-position: center;
 }
 
-/* blocchi dispari (1°, 3°, 5°...) → immagine a sinistra */
 .block:nth-child(odd) .block-image {
   float: left;
   margin-right: var(--spacing-lg);
   margin-bottom: var(--spacing-sm);
 }
 
-/* blocchi pari (2°, 4°, 6°...) → immagine a destra */
 .block:nth-child(even) .block-image {
   float: right;
   margin-left: var(--spacing-lg);
   margin-bottom: var(--spacing-sm);
 }
 
-.block-content h2 {
-  margin-bottom: var(--spacing-sm);
-}
+.block-content {
+  h2 {
+    margin-bottom: var(--spacing-sm);
+  }
 
-.block-content p {
-  text-align: justify;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  word-break: break-word; /* fallback se manca una sillaba lunga */
+  p {
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: break-word;
+  }
 }
 
 /* ===========================
-   RELATED
+   RELATED — horizontal scroll
    =========================== */
 .related-title {
   margin-top: var(--spacing-xl);
@@ -174,26 +167,44 @@
 }
 
 .related-scroll {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  display: flex;
+  flex-direction: row;
   gap: var(--spacing-md);
-  padding-bottom: var(--spacing-md);
-}
-
-/* Alias for consistency */
-.related-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: var(--spacing-md);
+  overflow-x: auto;
   padding-bottom: var(--spacing-md);
   margin-top: var(--spacing-md);
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
+.related-card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+}
 
+/* ===========================
+   BOTTOM BACK LINK
+   =========================== */
+.bottom-back-link {
+  display: block;
+  margin-top: var(--spacing-xl);
+  text-align: center;
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+  text-decoration: none;
 
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* ===========================
+   LAZY LOAD ANIMATIONS
+   =========================== */
 .hero-section,
 .block-image {
   opacity: 0;
@@ -209,7 +220,6 @@
   transform: translateX(20px);
 }
 
-/* these now match (or exceed) the specificity above */
 .hero-section.loaded {
   opacity: 1;
   transform: translateX(0);
@@ -219,4 +229,49 @@
 .block:nth-child(even) .block-image.loaded {
   opacity: 1;
   transform: translateX(0);
+}
+.back-btn-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: var(--spacing-xl) auto 0;
+  padding: 12px 28px;
+
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: var(--color-text);
+  width: fit-content;
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.12),
+    inset 0 0 12px rgba(255, 255, 255, 0.25);
+
+  cursor: pointer;
+  transition:
+    background .25s ease,
+    box-shadow .25s ease,
+    transform .25s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow:
+      0 6px 18px rgba(0, 0, 0, 0.18),
+      inset 0 0 16px rgba(255, 255, 255, 0.35);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow:
+      0 3px 10px rgba(0, 0, 0, 0.15),
+      inset 0 0 10px rgba(255, 255, 255, 0.20);
+  }
 }

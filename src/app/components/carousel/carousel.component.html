@@ -1,0 +1,35 @@
+<div class="related-carousel-wrapper">
+
+  <!-- Title -->
+  <h3 class="carousel-title">{{ title }}</h3>
+
+  <!-- Arrows -->
+  <button class="carousel-arrow left">‹</button>
+  <button class="carousel-arrow right">›</button>
+
+  <!-- Scroll Row -->
+  <div #relatedRow class="related-scroll-row">
+
+    @for (item of loopedItems; track item.slug + (item._clone ? '-clone' : '')) {
+
+      <div class="related-card" [attr.data-bg]="item.img">
+
+        <!-- DiscoverCard with internal lazy-loaded image -->
+        <app-discover-card
+          class="discover-wrapper"
+          
+          [title]="item.title"
+          [description]="item.text"
+          [image]="item.img"
+          [region]="regionSlug"
+          [category]="item.category"
+          [slug]="item.slug"
+          [animateOnClick]="true">
+        </app-discover-card>
+
+      </div>
+
+    }
+
+  </div>
+</div>

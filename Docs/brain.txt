@@ -1,0 +1,175 @@
+# MAWEPOLO — Project Brain
+> Load this file at the start of every session. Update the STATUS and BACKLOG sections before saving.
+
+---
+
+## 1. PROJECT OVERVIEW
+- **Name:** MAWEPOLO
+- **Type:** Multilingual regional discovery web platform
+- **Languages:** English (en), Polish (pl), Italian (it)
+- **Goals:** SSR-safe Angular app, SEO-friendly, production-grade TypeScript, easy content/localization updates
+
+---
+
+## 2. TECH STACK
+| Layer | Choice |
+|---|---|
+| Framework | Angular 17.x (standalone components) |
+| SSR | Angular Universal |
+| Language | TypeScript strict mode, ES2022+ |
+| Styling | SCSS + BEM |
+| Translations | ngx-translate + custom SSR-safe loader |
+| Reactivity | RxJS + Angular signals |
+| Node | 18+ LTS |
+| Package manager | npm |
+| Linting | ESLint + TypeScript rules + no-console |
+| E2E | Playwright (recommended) |
+| Unit tests | Jest (recommended, not confirmed) |
+| CI | npm ci → lint → typecheck → test → build → build:ssr |
+
+---
+
+## 3. REPOSITORY LAYOUT
+```
+src/
+  app/
+    components/       # one standalone component per folder
+    pages/            # lazy-loaded page components
+    core/
+      i18n/           # translation-loader.ts, language.service.ts
+      services/
+      guards/
+      interceptors/
+      resolvers/
+    layout/           # header, footer, navbar, mobile-navbar
+    services/
+public/
+  assets/
+    i18n/             # en.json, pl.json, it.json
+    images/
+    icons/
+    fonts/
+docs/                 # architecture docs
+```
+
+---
+
+## 4. HARD RULES (enforce every session)
+- **SSR:** Never use `window/document/localStorage/navigator` without `isPlatformBrowser()` guard
+- **Components:** Standalone only · `OnPush` CD · no inline templates/styles · no business logic
+- **i18n:** All text via translation keys (dot notation) · no hardcoded strings anywhere
+- **Routing:** `provideRouter` in `app.config.ts` · `loadComponent` lazy loading · no language URL prefixes
+- **TypeScript:** Never use `any` · prefer interfaces · `readonly` where appropriate
+- **RxJS:** `switchMap` over nesting · `takeUntilDestroyed()` for cleanup · `async` pipe in templates
+- **Forbidden:** `console.log` · magic strings · direct DOM access · deprecated Angular APIs · third-party UI libs (unless approved)
+- **Allowed libs:** Angular built-ins, RxJS, Angular Universal, ngx-translate only
+
+---
+
+## 5. KEY FILE PATHS
+| File | Purpose |
+|---|---|
+| `src/app/core/i18n/translation-loader.ts` | SSR-safe HTTP translation loader |
+| `src/app/core/i18n/language.service.ts` | Language state, `setLanguage()`, localStorage (browser only) |
+| `src/app/app.config.ts` | `provideRouter`, providers |
+| `public/assets/i18n/{en,pl,it}.json` | Translation files (dot-notation keys) |
+
+**Translation key patterns:**
+- `regions.<id>.description`
+- `cities.<id>.description`
+- `home.title`, `navbar.login`, etc.
+
+---
+
+## 6. ROUTE TREE
+```
+/                         → HomeComponent
+/region-site/:id          → RegionSiteComponent
+/region-detail/:id        → RegionDetailComponent
+/login                    → LoginComponent
+/register                 → RegisterComponent
+/forgot-password          → ForgotPasswordComponent
+```
+
+---
+
+## 7. CONTENT RULES
+- Region descriptions: 3–5 sentences, atmospheric, no clichés, no invented facts
+- City descriptions: 3–6 sentences, present tense, narrative (not bullet facts)
+- All images: `.webp` · hero images `1920×1080+` · city icons `512×512`
+
+---
+
+## 8. VALIDATION COMMANDS
+```bash
+npm ci
+npm run lint
+npm run typecheck        # or: tsc -p tsconfig.json
+npm run test
+npm run build
+npm run build:ssr
+npm run serve:ssr
+```
+
+---
+
+## 9. GIT RULES
+- **Never commit to `main`**
+- Active branch: `mawepolo/ai-refactor` (create if missing)
+- Commit trailer: `Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>`
+
+---
+
+## 10. AI RESPONSE FORMAT (enforce every reply)
+1. **Summary** — 1–3 sentences of what was done
+2. **File tree** — list of created/modified paths
+3. **Code** — full content for new files · unified diff for edits
+4. **Validation** — commands to run
+5. **Next steps** — suggested follow-ups
+
+---
+
+## 11. CURRENT STATUS
+
+- **Last worked on:** Agent scaffold, `agent-tasks.md`, `project-brain.txt`; branch `mawepolo/ai-refactor` created
+- **Current branch:** `mawepolo/ai-refactor`
+- **What's built:**
+  - Routing: home, `region-site/:id`, `region-detail/:id` — lazy-loaded ✅
+  - i18n: SSR-safe translation loader scaffolded; `en/pl/it.json` seeded with core keys ✅
+  - Pages: Home + region-detail exist ✅
+  - Components: region-card scaffolded (needs refinement) 🔧
+- **What's in progress:** Language service completion + persistence checks
+- **Known blockers:**
+  - Translations incomplete for all regions/cities
+  - CI lint rule for `console.log` not yet enforced
+
+---
+
+## 12. BACKLOG
+
+### 🔴 High Priority
+- [ ] Complete language service + localStorage persistence (SSR-safe)
+- [ ] Finish translations for all regions and cities (en/pl/it)
+- [ ] Add CI pipeline: lint → typecheck → test → build → build:ssr
+- [ ] Enforce `no-console` ESLint rule in CI
+
+### 🟡 Medium Priority
+- [ ] Refine `region-card` component (premium UI polish)
+- [ ] Implement `region-related-links` component
+- [ ] Accessibility & Lighthouse audit + fixes
+
+### 🟢 Low Priority
+- [ ] Add Playwright E2E tests
+- [ ] Add Jest unit tests for language service and translation loader
+
+### 💡 Future Ideas
+- Additional language support beyond en/pl/it
+- Prerender static pages for top regions
+
+---
+
+## 13. SESSION LOG
+
+| Date | Branch | What was done |
+|---|---|---|
+| 2026-06-24 | `mawepolo/ai-refactor` | Added agent scaffold, `agent-tasks.md`, `project-brain.txt`. Created branch. Next: language service + translation completion. |

@@ -7,7 +7,11 @@
   @let heroItem = getHeroItem();
   <div class="hero-section loading" [attr.data-bg]="heroItem?.img">
     <div class="hero-overlay"></div>
-    <button class="back-btn" [routerLink]="['/region', regionSlug]">‹</button>
+
+    <!-- NEW: pill back button -->
+    <button class="back-btn-arrow" [routerLink]="['/region', regionSlug]">‹</button>
+
+
     <div class="hero-content">
       <h1 class="hero-title">{{ heroItem?.title }}</h1>
       <p class="hero-region">{{ region.hero.title }}</p>
@@ -20,7 +24,7 @@
        =========================== -->
   <div class="content-container">
 
-    <!-- BLOCKS: immagine a sinistra, testo che ci scorre attorno -->
+    <!-- BLOCKS -->
     <section class="blocks">
       @for (block of detail.blocks; track block.title) {
         <div class="block">
@@ -33,30 +37,23 @@
       }
     </section>
 
-    <!-- RELATED -->
-    @let relatedItems = getRelatedItems();
-    @if (relatedItems.length > 0) {
-      <h2 class="related-title">
-        {{ 'regionDetail.moreFrom' | translate:{ region: region.hero.title } }}
-      </h2>
-      <div class="related-grid">
-      @for (item of relatedItems; track item.slug) {
-        <div class="related-item">
-          <app-discover-card
-            [title]="item.title"
-            [description]="item.text"
-            [image]="item.img"
-            [region]="regionSlug"
-            [category]="item.category"
-            [slug]="item.slug"
-            [animateOnClick]="true"
-            (navigate)="navigateToRelated($event)"
-          />
-        </div>
-      }
-    </div>
-    }
 
+    <app-related-carousel
+      [title]="'regionDetail.moreFrom' | translate:{ region: region.hero.title }"
+      [items]="getCarouselItems()"
+      [regionSlug]="regionSlug"
+      (navigate)="navigateToRelated($event)"
+    />
+    <div class="back-pill-wrapper">
+  <button
+    class="back-btn-bottom"
+    [routerLink]="['/region', regionSlug]"
+  >
+    ‹ Back to {{ region?.hero?.title }}
+  </button>
+</div>
   </div>
+  
+
 </div>
 }
