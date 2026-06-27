@@ -1,0 +1,26 @@
+# Activity — 2026-06-25  
+## Related Carousel + DiscoverCard Image Fix + Region Detail Pillow
+
+### ✔ Completed
+- Implemented full RelatedCarouselComponent (TS/HTML/SCSS)
+- Added infinite-loop dataset generation (`loopedItems`)
+- Synced carousel logic with Region carousel (scroll, snap, blur, scale)
+- Fixed lazy-loading by moving `.card-image` inside DiscoverCard
+- Corrected DiscoverCard image sizing (aspect-ratio fix)
+- Removed zooming caused by `height: 100%`
+- Added premium pillow button back to Region Detail
+- Cleaned SCSS for arrows, fade edges, transforms
+- Ensured SSR-safe initialization (double RAF)
+- Added teleport animation disabling (`carousel-no-anim`)
+
+### 📁 Files touched
+- `src/app/components/related-carousel/*`
+- `src/app/components/discover-card/*`
+- `src/app/pages/region-detail/*`
+- `src/styles/*` (minor adjustments)
+
+### 🧠 Notes
+- DiscoverCard now fully controls image rendering.
+- Related carousel now visually matches Region carousel.
+- All transforms apply only to `.related-card`, not the image container.
+- Lazy loader now targets `[data-bg].card-image` consistently across app.

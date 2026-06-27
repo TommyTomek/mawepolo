@@ -1,10 +1,25 @@
 <header class="mobile-top">
 
   <div class="left">
-    <img src="/images/logoImage.png" alt="logo" class="logo" 
-    [class.logo-animating]="logoAnimating"
-    [class.logo-reverse]="logoReversing">
-  </div>
+
+  @if (!showBackButton) {
+    <img 
+      src="/images/logoImage.png" 
+      alt="logo" 
+      class="logo"
+      [class.logo-animating]="logoAnimating"
+      [class.logo-reverse]="logoReversing"
+    />
+  } @else {
+    <button class="back-btn" (click)="navigateBack()">
+      <mat-icon class="back-icon">arrow_back_ios_new</mat-icon>
+
+    </button>
+  }
+
+</div>
+
+
 
   <div class="search-wrapper">
     <mat-icon class="lens-icon">search</mat-icon>
@@ -24,6 +39,7 @@
     language
   </mat-icon>
 </div>
+
 
 @if (isLanguageMenuOpen) {
   <div class="lang-menu" (click)="$event.stopPropagation()">

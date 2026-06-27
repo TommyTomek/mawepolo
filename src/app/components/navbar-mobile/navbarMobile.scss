@@ -338,6 +338,7 @@
   transition: transform 0.35s ease, filter 0.35s ease, opacity 0.25s ease;
   background: linear-gradient(135deg, #c90757, #1e3852);
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
   display: inline-flex;
   line-height: 1;
@@ -412,4 +413,68 @@
 .logo.logo-reverse {
   transform: rotateY(0deg) scale(1);
   opacity: 1;
+}
+
+.mobile-top {
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+  overflow: visible;
+}
+
+.mobile-top-base {
+  position: relative;
+  z-index: 1;
+}
+/* ---------------------------------------
+   BACK BUTTON — FIXED + VISIBLE
+---------------------------------------- */
+
+.back-btn {
+  height: 70%;
+  aspect-ratio: 1 / 1;
+  min-width: 40px;
+  min-height: 40px;
+
+  border: none;
+  background: var(--color-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  padding: 0;
+
+  /* Premium soft shadow */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+
+  /* Start state */
+  opacity: 0;
+  transform: translateX(-10px) scale(0.92);
+
+  /* Smooth, elegant animation */
+  animation: backInMinimal 0.38s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+
+  mat-icon {
+    font-size: 22px;
+    color: var(--color-grey-900);
+  }
+}
+
+@keyframes backInMinimal {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px) scale(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+.back-icon {
+  font-variation-settings: 'wght' 200;
+  font-size: 22px;
+  color: var(--color-grey-900);
 }

@@ -14,7 +14,6 @@ import {
 import { CommonModule } from '@angular/common';
 import { DiscoverCardComponent } from '../discover-card/discover-card';
 import { RelatedItem } from '../../types/region-detail.model';
-import { RouterLink } from '@angular/router';
 
 type LoopItem = RelatedItem & { _clone?: boolean };
 
@@ -41,7 +40,6 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
 
   constructor() {}
 
-  // build 3× dataset for infinite loop
   ngOnChanges(changes: SimpleChanges): void {
     if (this.items && this.items.length) {
       this.loopedItems = [
@@ -49,7 +47,6 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
         ...this.items,
         ...this.items.map(i => ({ ...i, _clone: true }))
       ];
-      // allow re-init when items change
       this.carouselInitialized = false;
     }
   }
@@ -68,13 +65,15 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
   }
 
   /* ---------------------------------------------------
-     CAROUSEL LOGIC — cloned from Region carousel
+     CAROUSEL LOGIC — WITH AUTO‑SCROLL
   ----------------------------------------------------*/
   async initCarousel() {
     let ticking = false;
     let loopLock = false;
     let firstScroll = true;
     let lastScrollLeft = 0;
+    let autoScrolling = false;
+
 
     if (this.carouselInitialized) return;
     this.carouselInitialized = true;
@@ -89,25 +88,56 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
 
     row.classList.add('carousel-no-anim');
 
-    const total = cards.length;          // 3 × N
-    const loopSize = Math.floor(total / 3); // N
-    const loopStart = loopSize;         // middle block start
-    const loopEnd = loopSize * 2;       // middle block end
+    const total = cards.length;          
+    const loopSize = Math.floor(total / 3);
+    const loopStart = loopSize;
+    const loopEnd = loopSize * 2;
+
     let current = Math.max(loopStart, 0);
+
+const goToNextCard = () => {
+    let next = current + 1;
+    if (next >= loopEnd) next = loopStart;
+
+    autoScrolling = true;                    // ← flag BEFORE scroll
+    scrollToCard(next);
+    current = next;
+    updateActiveCard();
+    setTimeout(() => { autoScrolling = false; }, 450); // ← matches scroll duration
+  };
+let autoScrollTimer: any;
+
+  const startAutoScroll = () => {
+    clearInterval(autoScrollTimer);          // ← prevent stacking intervals
+    autoScrollTimer = setInterval(goToNextCard, 5000);
+  };
+  const resetAutoScroll = () => {
+    clearInterval(autoScrollTimer);
+    setTimeout(startAutoScroll, 3000);
+  };
+startAutoScroll();
+
+row.addEventListener('touchstart', resetAutoScroll);
+(row.parentElement ?? row).addEventListener('mousedown', resetAutoScroll);
+row.addEventListener('wheel', resetAutoScroll);
+
+
     let scrollTimeout: any;
 
     const scrollToCard = (index: number, behavior: ScrollBehavior = 'smooth') => {
-      current = Math.max(0, Math.min(total - 1, index));
-      const card = cards[current];
-      const left = card.offsetLeft - (row.clientWidth - card.clientWidth) / 2;
-      row.scrollTo({ left, behavior });
-    };
+  current = Math.max(0, Math.min(total - 1, index));
+  const card = cards[current];
+  const left = card.offsetLeft - (row.clientWidth - card.clientWidth) / 2;
+  row.scrollTo({ left, behavior });
+};
 
-    const updateActiveCard = () => {
-      cards.forEach((card, index) => {
-        card.classList.toggle('active', index === current);
-      });
-    };
+const updateActiveCard = () => {
+  cards.forEach((card, index) => {
+    card.classList.toggle('active', index === current);
+  });
+};
+
+
 
     const updateCardTransforms = () => {
       const rowRect = row.getBoundingClientRect();
@@ -117,12 +147,12 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
         const rect = card.getBoundingClientRect();
         const cardCenter = rect.left + rect.width / 2;
         const distance = Math.abs(viewportCenter - cardCenter);
-        const maxDistance = rowRect.width * 0.45;
+        const maxDistance = rowRect.width * 0.85;
 
         const t = Math.min(distance / maxDistance, 1);
-        const scale = 1 - t * 0.25;
-        const opacity = 1 - t * 0.4;
-        const blur = t * 4;
+        const scale = 1 - t * 0.12;
+        const opacity = 1 - t * 0.35;
+        const blur = t * 3;
 
         card.style.transform = `scale(${scale})`;
         card.style.opacity = `${opacity}`;
@@ -137,12 +167,33 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
     updateActiveCard();
     updateCardTransforms();
 
-    const leftArrow = row.parentElement?.querySelector('.carousel-arrow.left') as HTMLElement | null;
-    const rightArrow = row.parentElement?.querySelector('.carousel-arrow.right') as HTMLElement | null;
+    /* ---------------------------------------------------
+       ARROWS
+    ----------------------------------------------------*/
+    let leftArrow = row.parentElement?.querySelector('.carousel-arrow.left') as HTMLElement | null;
+    let rightArrow = row.parentElement?.querySelector('.carousel-arrow.right') as HTMLElement | null;
 
-    if (leftArrow) leftArrow.onclick = () => scrollToCard(current - 1);
-    if (rightArrow) rightArrow.onclick = () => scrollToCard(current + 1);
+  if (leftArrow) {
+  leftArrow.onclick = () => {
+    resetAutoScroll();          // ← add this
+    autoScrolling = true;       // ← add this
+    scrollToCard(current - 1);
+    setTimeout(() => { autoScrolling = false; }, 450);
+  };
+}
 
+if (rightArrow) {
+  rightArrow.onclick = () => {
+    resetAutoScroll();          // ← add this
+    autoScrolling = true;
+    scrollToCard(current + 1);
+    setTimeout(() => { autoScrolling = false; }, 450);
+  };
+}
+
+    /* ---------------------------------------------------
+       TOUCH SWIPE
+    ----------------------------------------------------*/
     let startX = 0;
 
     row.ontouchstart = (e: TouchEvent) => {
@@ -158,9 +209,12 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
       }
     };
 
+    /* ---------------------------------------------------
+       SCROLL HANDLING + INFINITE LOOP
+    ----------------------------------------------------*/
     row.addEventListener('scroll', () => {
       if (loopLock) return;
-
+      if (autoScrolling) return;
       lastScrollLeft = row.scrollLeft;
 
       if (firstScroll) {
@@ -242,10 +296,12 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
     });
   }
 
+  /* ---------------------------------------------------
+     LAZY LOAD IMAGES
+  ----------------------------------------------------*/
   private lazyLoadImages(): void {
     const images = Array.from(
       document.querySelectorAll('[data-bg].card-image')
-
     );
 
     const observer = new IntersectionObserver(

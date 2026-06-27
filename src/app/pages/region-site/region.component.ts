@@ -5,6 +5,7 @@ import { RegionService } from '../../services/region.service';
 import { LanguageService } from '../../core/i18n/language.service';
 import { Region } from '../../types/region';
 import { DiscoverCardComponent } from '../../components/discover-card/discover-card';
+import { LogoAnimationService } from '../../services/logo-animation.service';
 @Component({
   selector: 'app-region',
   standalone: true,
@@ -18,6 +19,7 @@ export class RegionComponent implements AfterViewInit {
   private regionService = inject(RegionService);
   private lang = inject(LanguageService);
   private carouselInitialized = false;
+  private logoService = inject(LogoAnimationService);
 
   
   region!: Region;
@@ -44,6 +46,19 @@ constructor(
 
   reloadRegion(lang: string) {
   this.regionService.getRegion(this.regionName).subscribe(data => {
+    if (!this.logoService.consumeFromDetail()) {
+  // Only animate when NOT coming from detail
+  this.logoService.trigger();
+}
+
+
+      setTimeout(() => {
+        this.logoService.showBackButton();
+        this.logoService.setBackTarget(['/home']);
+      }, 600);
+    
+    
+
     this.region = data;
 
     // Reset initialization when the view is refreshed with new content.

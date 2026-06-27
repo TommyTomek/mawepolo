@@ -1,0 +1,26 @@
+# Next Task — 2026-06-25  
+## Unify DiscoverCard + Carousel Image System
+
+### 🎯 Goal
+Create a single, shared lazy-loading + image-rendering system used by:
+- Region carousel
+- Related carousel
+- DiscoverCard
+- Any future card-based components
+
+### 🧩 Requirements
+- Move lazy-loading logic into a shared service (`ImageLoaderService`)
+- DiscoverCard should expose a single `<div class="card-image">` API
+- Carousels should not manage image loading directly
+- Add fade-in animation on image load
+- Add responsive aspect-ratio map:
+  - mobile: 4/3
+  - tablet: 3/2
+  - desktop: 16/9
+
+### 📌 Acceptance Criteria
+- All cards load images identically
+- No duplicated lazy-loading logic
+- No zooming or stretching on any device
+- Carousels remain SSR-safe
+- DiscoverCard remains the single source of truth for image display
