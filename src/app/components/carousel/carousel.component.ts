@@ -17,6 +17,8 @@ import { RelatedItem } from '../../types/region-detail.model';
 
 type LoopItem = RelatedItem & { _clone?: boolean };
 
+const MAX_BLUR_PX = 4;
+
 @Component({
   selector: 'app-related-carousel',
   standalone: true,
@@ -115,17 +117,21 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
       });
     };
 
+    // FIX: `blur` was previously undeclared, which threw a ReferenceError
+    // and silently aborted the rest of initCarousel() (autoscroll, arrows,
+    // touch handlers, and the scroll/loop listener never got attached).
     const updateCardTransforms = () => {
       const rowRect = row.getBoundingClientRect();
       const viewportCenter = rowRect.left + rowRect.width / 2;
       if (suppressShadow) return;   // ← block scaling during teleport
+
       cards.forEach(card => {
         const rect = card.getBoundingClientRect();
         const cardCenter = rect.left + rect.width / 2;
         const distance = Math.abs(viewportCenter - cardCenter);
         const maxDistance = rowRect.width * 0.85;
 
-        
+        const blur = Math.min(distance / maxDistance, 1) * MAX_BLUR_PX;
 
         const discover = card.querySelector('app-discover-card') as any;
         const img = discover?.imageElement as HTMLElement | undefined;
@@ -138,20 +144,72 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
     scrollToCard(current, 'auto');
     updateCardTransforms();
     updateActiveCard();
-    
+
+    /* ---------------------------------------------------
+       Shared helper: seamlessly teleport back into the
+       middle "real" copy of the loop once we've scrolled
+       into a cloned section, without any visible jump.
+    ----------------------------------------------------*/
+    const resolveLoopPosition = () => {
+      if (current > loopEnd - 1) {
+        loopLock = true;
+        suppressShadow = true;
+        row.classList.add('carousel-no-anim');
+
+        current -= loopSize;
+        scrollToCard(current, 'auto');
+        updateActiveCard();
+        updateCardTransforms();
+
+        requestAnimationFrame(() => {
+          row.classList.remove('carousel-no-anim');
+          suppressShadow = false;
+          loopLock = false;
+        });
+        return true;
+      }
+
+      if (current < loopStart) {
+        loopLock = true;
+        suppressShadow = true;
+        row.classList.add('carousel-no-anim');
+
+        current += loopSize;
+        scrollToCard(current, 'auto');
+        updateActiveCard();
+        updateCardTransforms();
+
+        requestAnimationFrame(() => {
+          row.classList.remove('carousel-no-anim');
+          suppressShadow = false;
+          loopLock = false;
+        });
+        return true;
+      }
+
+      return false;
+    };
 
     /* ---------------------------------------------------
        AUTO-SCROLL
     ----------------------------------------------------*/
     const goToNextCard = () => {
-      let next = current + 1;
-      if (next >= loopEnd) next = loopStart;
+      // FIX: previously this pre-clamped `next` back to loopStart and
+      // smooth-scrolled there directly, causing a visible backwards
+      // scroll every cycle instead of a seamless loop. Now it scrolls
+      // forward naturally into the cloned section and then teleports
+      // back invisibly afterwards, same as the manual-scroll path.
+      const next = current + 1;
 
       autoScrolling = true;
       scrollToCard(next);
       current = next;
       updateActiveCard();
-      setTimeout(() => { autoScrolling = false; }, 450);
+
+      setTimeout(() => {
+        autoScrolling = false;
+        resolveLoopPosition();
+      }, 450);
     };
 
     let autoScrollTimer: any;
@@ -178,42 +236,45 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
     const leftArrow = row.parentElement?.querySelector('.carousel-arrow.left') as HTMLElement | null;
     const rightArrow = row.parentElement?.querySelector('.carousel-arrow.right') as HTMLElement | null;
 
-if (leftArrow) {
-  leftArrow.onclick = () => {
-    resetAutoScroll();
-    autoScrolling = true;
+    if (leftArrow) {
+      leftArrow.onclick = () => {
+        resetAutoScroll();
+        autoScrolling = true;
 
-    const next = current - 1;
-    row.classList.remove('carousel-no-anim');   // ← FIX
-    // ⭐ Make the card active BEFORE scrolling
-    current = next;
-    updateActiveCard();
-    updateCardTransforms();
+        const next = current - 1;
+        row.classList.remove('carousel-no-anim');
+        current = next;
+        updateActiveCard();
+        updateCardTransforms();
 
-    scrollToCard(next);
+        scrollToCard(next);
 
-    setTimeout(() => { autoScrolling = false; }, 450);
-  };
-}
+        setTimeout(() => {
+          autoScrolling = false;
+          resolveLoopPosition();
+        }, 450);
+      };
+    }
 
-if (rightArrow) {
-  rightArrow.onclick = () => {
-    resetAutoScroll();
-    autoScrolling = true;
+    if (rightArrow) {
+      rightArrow.onclick = () => {
+        resetAutoScroll();
+        autoScrolling = true;
 
-    const next = current + 1;
-    row.classList.remove('carousel-no-anim');   // ← FIX
-    // ⭐ Make the card active BEFORE scrolling
-    current = next;
-    updateActiveCard();
-    updateCardTransforms();
+        const next = current + 1;
+        row.classList.remove('carousel-no-anim');
+        current = next;
+        updateActiveCard();
+        updateCardTransforms();
 
-    scrollToCard(next);
+        scrollToCard(next);
 
-    setTimeout(() => { autoScrolling = false; }, 450);
-  };
-}
-
+        setTimeout(() => {
+          autoScrolling = false;
+          resolveLoopPosition();
+        }, 450);
+      };
+    }
 
     /* ---------------------------------------------------
        TOUCH SWIPE
@@ -240,6 +301,9 @@ if (rightArrow) {
 
     row.addEventListener('scroll', () => {
       if (loopLock) return;
+      // NOTE: autoscroll-driven moves resolve their own loop position via
+      // resolveLoopPosition() in goToNextCard's setTimeout, so we still
+      // skip the debounce-based logic below while autoScrolling is true.
       if (autoScrolling) return;
       lastScrollLeft = row.scrollLeft;
 
@@ -277,45 +341,13 @@ if (rightArrow) {
         });
 
         current = closestIndex;
-        const loopMin = loopStart;
-        const loopMax = loopEnd - 1;
-        let suppressShadow = false;
 
-        if (current > loopMax) {
-          loopLock = true;
-          row.classList.add('carousel-no-anim');
-
-          current -= loopSize;
-          suppressShadow = true;
-          scrollToCard(current, 'auto');
-          updateActiveCard();
-          updateCardTransforms();
-
-          requestAnimationFrame(() => {
-            row.classList.remove('carousel-no-anim');
-            loopLock = false;
-          });
-
-          return;
-        }
-
-        if (current < loopMin) {
-          loopLock = true;
-          row.classList.add('carousel-no-anim');
-
-          current += loopSize;
-          suppressShadow = true;
-          scrollToCard(current, 'auto');
-          updateActiveCard();
-          updateCardTransforms();
-
-          requestAnimationFrame(() => {
-            row.classList.remove('carousel-no-anim');
-            loopLock = false;
-          });
-
-          return;
-        }
+        // FIX: this `let suppressShadow = false;` used to be redeclared
+        // here, shadowing the outer variable that updateCardTransforms()
+        // actually reads — so the "suppress blur during teleport" logic
+        // never fired. Removed; resolveLoopPosition() now manages the
+        // outer suppressShadow flag directly.
+        if (resolveLoopPosition()) return;
 
         scrollToCard(current, 'smooth');
         updateActiveCard();
