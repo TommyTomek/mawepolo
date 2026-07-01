@@ -1,4 +1,14 @@
-import { Component, Input, Output, EventEmitter, ElementRef, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ElementRef,
+  AfterViewInit,
+  ViewChild,
+  ChangeDetectorRef,
+  OnChanges
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,7 +19,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./discover-card.scss'],
   host: { class: 'dv-card' }
 })
-export class DiscoverCardComponent implements AfterViewInit {
+export class DiscoverCardComponent implements AfterViewInit, OnChanges {
 
   @Input() title!: string;
   @Input() description!: string;
@@ -22,40 +32,38 @@ export class DiscoverCardComponent implements AfterViewInit {
 
   @Input() animateOnClick: boolean = false;
 
-  @Output() navigate = new EventEmitter<{ 
-    region: string; 
-    category?: string; 
-    slug?: string;
-    next?: string;
-  }>();
+  @Output() navigate = new EventEmitter();
 
-  animating = false;
+  @ViewChild('imageEl', { static: false })
+  imageEl!: ElementRef<HTMLElement>;
+
   loaded = false;
+  animating = false;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef, private cdr: ChangeDetectorRef) {}
 
-  // -----------------------------------------------------
-  // LAZY LOAD IMAGE WHEN CARD ENTERS VIEWPORT
-  // -----------------------------------------------------
-  ngAfterViewInit() {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            this.loaded = true;
-            observer.disconnect();
-          }
-        });
-      },
-      { rootMargin: '200px' }
-    );
-
-    observer.observe(this.el.nativeElement);
+  ngOnChanges() {
+    this.cdr.markForCheck();   // ← REQUIRED FOR ONPUSH
   }
 
-  // -----------------------------------------------------
-  // CLICK HANDLER
-  // -----------------------------------------------------
+  ngAfterViewInit() {
+    const img = this.imageEl.nativeElement;
+
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        this.loaded = true;
+        this.cdr.markForCheck();   // ← REQUIRED FOR ONPUSH
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(img);
+  }
+
+  get imageElement(): HTMLElement {
+    return this.imageEl.nativeElement;
+  }
+
   onClick() {
     if (!this.animateOnClick) {
       this.emitNavigation();

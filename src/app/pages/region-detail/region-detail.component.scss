@@ -7,6 +7,7 @@
   padding-bottom: 12%;
   scroll-snap-stop: always;
   scroll-padding-top: 0;
+  margin-bottom: 7vh;
 }
 
 /* ===========================
@@ -98,6 +99,7 @@
   padding: var(--spacing-xl);
   position: relative;
   z-index: 3;
+  height: 100%;
 }
 
 /* ===========================
@@ -274,4 +276,10 @@
       0 3px 10px rgba(0, 0, 0, 0.15),
       inset 0 0 10px rgba(255, 255, 255, 0.20);
   }
+}
+
+.carusel-container{
+  position: relative;
+  height: 30dvh;
+  width: 100%;
 }

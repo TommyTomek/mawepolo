@@ -1,15 +1,23 @@
 <div class="discover-card" (click)="onClick()" [class.is-animating]="animating">
 
-  <div class="card-image"
-       [class.loading]="!loaded"
-       [style.background-image]="loaded ? 'url(' + image + ')' : 'none'">
-  </div>
+  <!-- IMAGE -->
+  <div #imageEl
+     class="card-image"
+     [class.loading]="!loaded"
+     [style.background-image]="loaded ? 'url(' + image + ')' : 'none'">
+</div>
 
+  <!-- GLASS EDGES -->
   <div class="gradient-overlay"></div>
 
+  <!-- DARK TEXT GRADIENT -->
+  <div class="text-gradient"></div>
+
+  <!-- TEXT (BOTTOM ALIGNED) -->
   <h2>{{ title }}</h2>
   <p>{{ description }}</p>
 
+  <!-- LOADING BAR -->
   @if (animating) {
     <div class="loading-bar"></div>
   }

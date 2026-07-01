@@ -6,19 +6,6 @@
 }
 
 /* ---------------------------------------------------
-   TITLE
-----------------------------------------------------*/
-.carousel-title {
-  position: relative;
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-  margin-bottom: 1rem;
-  padding-left: 0.5rem;
-  flex-shrink: 0;
-  z-index: 10;
-}
-
-/* ---------------------------------------------------
    FADE EDGES
 ----------------------------------------------------*/
 .related-carousel-wrapper::before,
@@ -26,38 +13,30 @@
   content: "";
   position: absolute;
   top: 0;
-  width: 60px;
+  width:10%;
   height: 100%;
   z-index: 5;
   pointer-events: none;
 }
 
-.related-carousel-wrapper::before {
-  left: 0;
-  background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-}
 
-.related-carousel-wrapper::after {
-  right: 0;
-  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-}
 
 /* ---------------------------------------------------
    ARROWS
 ----------------------------------------------------*/
 .carousel-arrow {
   position: absolute;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%);
   z-index: 6;
 
-  width: 42px;
-  height: 42px;
+  width: 13%;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.22);
 
   background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
 
   display: flex;
   align-items: center;
@@ -82,12 +61,12 @@
 ----------------------------------------------------*/
 .related-scroll-row {
   display: flex;
-  gap: 1rem;
+  height: 100%;
   overflow-x: scroll;
   scroll-behavior: smooth;
 
   /* Extra bottom padding so the cast shadow is never clipped */
-  padding: 1rem 0 2.5rem;
+  padding: 8% 0 18%;
 
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -97,22 +76,15 @@
   display: none;
 }
 
-/* Disable animations during loop teleport */
-.carousel-no-anim {
+/* Disable animations ONLY — keep blur/scale effects */
+.carousel-no-anim,
+.carousel-no-anim * {
+  transition: none !important;
+  animation: none !important;
   scroll-behavior: auto !important;
-  transition: none !important;
-}
 
-.related-scroll-row.carousel-no-anim {
-  scroll-behavior: auto !important;
-}
-
-.related-scroll-row.carousel-no-anim .related-card {
-  transition: none !important;
-}
-
-.related-scroll-row.carousel-no-anim .card-image {
-  transition: none !important;
+  /* Prevent GPU smoothing/interpolation */
+  will-change: none !important;
 }
 
 /* ---------------------------------------------------
@@ -125,38 +97,16 @@
   width: 70%;
   position: relative;
 
-  /* NO overflow: hidden here — shadow must escape */
-  overflow: visible;
 
-  border-radius: 18px;
-
-  /* Glass surface */
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-
-  /* Card's own subtle inner glow — depth is handled by ::after */
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    0 2px 6px rgba(0, 0, 0, 0.06);
-
-  will-change: transform, opacity, filter;
-
-  transition:
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.35s ease,
-    box-shadow 0.35s ease,
-    background 0.35s ease,
-    border-color 0.35s ease;
 }
 
 /* Clip content (image, gradient, text) inside the rounded card */
 .related-card app-discover-card {
-  display: block;
+  
   width: 100%;
   border-radius: 18px;
   overflow: hidden;
+  height: 100%;
 }
 
 /* ---------------------------------------------------
@@ -219,9 +169,32 @@
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.70),
     0 2px 8px rgba(0, 0, 0, 0.08);
+  scale: 1;
+  transform: translateY(0);
+  opacity: 1;
+  filter: blur(0);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease,
+    filter 0.35s ease,
+    scale 0.35s ease, 
 }
 
 /* Image blur target (driven by JS) */
 .related-card .card-image {
   transition: filter 0.35s ease;
+}
+
+.related-card:not(.active) {
+  scale: 0.84;
+  transform: translateY(6%);
+  opacity: 0.55;
+  filter: blur(2px);
+  z-index: 2;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease,
+    filter 0.35s ease,
+    scale 0.35s ease,
+    z-index 0.35s ease; 
 }

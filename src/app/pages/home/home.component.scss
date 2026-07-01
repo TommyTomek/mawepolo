@@ -5,7 +5,6 @@
   position: relative;
   width: 100%;
   height: 86%;
-  //background-image: url('/images/Home_background.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -15,6 +14,12 @@
   scroll-behavior: smooth;
 
 }
+
+.snap-section.section-hero-discover {
+  /* styles */
+  height: 100%;
+}
+
 
 
 /* ===========================
@@ -48,6 +53,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  height:30%;
 }
 
 .hero-logo {
@@ -67,140 +73,19 @@
    DISCOVER SECTION
    =========================== */
 .discover-section {
-  flex: 1;
-  width: 90%;
+  position: relative;
+  height: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 70%;
+  gap: 10%;
 }
 
-.discover-card {
-  position: relative;
-  
-  flex-direction: column;
-  justify-content: flex-end;
-  height: 45%;
+.home-discover-card {
+  flex-shrink: 0  ;
   width: 100%;
-  border-radius: var(--border-radius-lg);
-  overflow: hidden;
-  background: #ffffff10;
-  backdrop-filter: blur(12px);
-  box-shadow:
-    0 4px 12px rgba(0,0,0,0.35),
-    inset 0 0 20px rgba(255,255,255,0.05);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  height: 40%;
 }
 
-/* Hover micro‑lift */
-.discover-card:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 8px 24px rgba(0,0,0,0.45),
-    inset 0 0 25px rgba(255,255,255,0.08);
-}
-
-/* IMAGE */
-.discover-card img {
-  width: 100%;
-  height: 65%;
-  object-fit: cover;
-  position: relative;
-  z-index: 1;
-}
-
-/* Cinematic vignette */
-.discover-card img::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%);
-}
-
-/* Diagonal light streak */
-.discover-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.25) 0%,
-    rgba(255,255,255,0.05) 40%,
-    rgba(0,0,0,0.15) 100%
-  );
-  mix-blend-mode: overlay;
-}
-
-/* TEXT PANEL */
-.discover-card .content {
-  position: relative;
-  z-index: 4;
-  padding: 1rem 1.25rem;
-  background: rgba(255,255,255,0.25);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255,255,255,0.4);
-  box-shadow: inset 0 0 20px rgba(255,255,255,0.15);
-}
-
-.discover-card h2 {
-  margin: 0;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #fff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-}
-
-.discover-card p {
-  margin-top: 0.4rem;
-  font-size: 0.95rem;
-  color: #f0f0f0;
-  line-height: 1.4;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
-  padding-bottom: var(--spacing-md);
-}
-
-
-
-.discover-card h2 {
-  margin: 0 var(--spacing-md);
-  font-size: var(--font-size-md);
-  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
-  padding: var(--spacing-md) 0 0 0;
-}
-
-// .discover-veneto {
-//   background: linear-gradient(90deg, #4A4DE7 0%, #4A4DE7 10%, #991159 40%, #991159 100%);
-//   -webkit-background-clip: text;
-//   background-clip: text;
-//   -webkit-text-fill-color: transparent;
-// }
-
-.discover-card.veneto h2 {
-  color: white;
-}
-
-// .discover-malopolska {
-//   background: linear-gradient(90deg, #ffbc0d 0%, #ffbc0d 30%, #991159 40%, #991159 100%);
-//   -webkit-background-clip: text;
-//   background-clip: text;
-//   -webkit-text-fill-color: transparent;
-// }
-
-.discover-card.malopolska h2 {
-  color: white;
-}
-
-.discover-card p {
-  margin: 0 var(--spacing-md);
-  font-size: var(--font-size-sm);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
 .why-content h2 {
   display: inline-block;
   background: linear-gradient(90deg, #c90757 0%, #1e3852 100%);
@@ -209,7 +94,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-.discover-card button {
+.home-discover-card button {
   border-radius: 999px;
   border: none;
   font-size: var(--font-size-sm);
@@ -230,18 +115,18 @@
   transition: all 0.2s ease;
 }
 
-.discover-card button:active {
+.home-discover-card button:active {
   transform: scale(0.96);
   box-shadow:
     0 2px 6px rgba(0, 0, 0, 0.3),
     inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.discover-card.veneto button {
+.home-discover-cardveneto button {
   background: linear-gradient(135deg, #4aa8ff, #1e6fd8);
 }
 
-.discover-card.malopolska button {
+.home-discover-card.malopolska button {
   background: linear-gradient(135deg, #ffd85a, #ffb800);
 }
 

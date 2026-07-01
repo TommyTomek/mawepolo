@@ -21,11 +21,12 @@ import { RelatedCarouselComponent } from '../../components/carousel/carousel.com
 import { Region } from '../../types/region';
 import { RegionDetail, RegionItem, RelatedItem } from '../../types/region-detail.model';
 import { LogoAnimationService } from '../../services/logo-animation.service';
+
 @Component({
   selector: 'app-region-detail',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, RouterLink, TranslateModule, RelatedCarouselComponent],
+  imports: [CommonModule, TranslateModule, RelatedCarouselComponent],
   templateUrl: './region-detail.component.html',
   styleUrls: ['./region-detail.component.scss'],
 })
@@ -161,10 +162,13 @@ export class RegionDetailComponent implements AfterViewInit {
       .map((item: any) => ({ ...item, category: this.category }));
   }
 
-  navigateToRelated(event: { region: string; category?: string; slug?: string; next?: string }): void {
-    if (!event.category || !event.slug) return;
-    this.router.navigate(['/region', this.regionSlug, event.category, event.slug]);
-  }
+  navigateToRelated(event: { region: string; category: string; slug: string }): void {
+  this.router.navigate(['/region', this.regionSlug, event.category, event.slug]);
+}
+
+
+
+
   
 
   // ─── DOM helpers ────────────────────────────────────────────────

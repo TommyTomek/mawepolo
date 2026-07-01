@@ -1,50 +1,172 @@
+/* ===========================
+   GLASS CARD — CLEAR CENTER + INTERACTION
+   =========================== */
 .discover-card {
   position: relative;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  overflow: hidden;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  overflow: hidden;
+
+  border-radius: var(--border-radius-lg);
+  background: transparent;
+
+  /* Soft glass depth at edges */
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.18),
+    inset 0 0 40px rgba(255, 255, 255, 0.25);
+
+  /* Interaction transitions */
+  transition:
+    transform .45s cubic-bezier(.22, .61, .36, 1),
+    box-shadow .45s ease,
 }
 
+/* ===========================
+   HOVER — PARALLAX GLASS MOVEMENT
+   =========================== */
+.discover-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.28),
+    inset 0 0 55px rgba(255, 255, 255, 0.32);
+}
 
+/* ===========================
+   CLICK — GLASS PRESSURE RIPPLE
+   =========================== */
+.discover-card:active {
+  transform: scale(0.985);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.22),
+    inset 0 0 65px rgba(255, 255, 255, 0.38);
+}
+
+/* Ripple effect */
+.discover-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.35) 0%,
+    rgba(255,255,255,0.0) 70%
+  );
+
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.discover-card:active::after {
+  opacity: 0.55;
+  transform: scale(1.25);
+}
+
+/* ===========================
+   IMAGE (clear)
+   =========================== */
 .card-image {
   position: absolute;
-  inset: 0; 
-  background-size: cover;      /* or 'contain' if you want to fit inside */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: 0;
-  height: 100%;
-  flex-shrink: 0;
 
+  z-index: 0;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
-
-/* Black gradient overlay */
+/* ===========================
+   FROSTED EDGES
+   =========================== */
 .gradient-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
 
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.0) 45%,
+      rgba(255, 255, 255, 0.12) 65%,
+      rgba(255, 255, 255, 0.22) 80%,
+      rgba(255, 255, 255, 0.32) 100%
+    );
+}
+
+/* ===========================
+   DARK BOTTOM GRADIENT
+   =========================== */
+.gradient-overlay {
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0.45) 40%,
+    rgba(0, 0, 0, 0.44) 0%,
+    rgba(0, 0, 0, 0.35) 35%,
+    rgba(0, 0, 0, 0.18) 65%,
     rgba(0, 0, 0, 0.0) 100%
   );
 }
 
-/* Text overlays */
-h2,
-p {
-  position: relative;
+/* ===========================
+   MICRO-SCRATCHES REFLECTION (premium)
+   =========================== */
+.discover-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   z-index: 2;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(135deg,
+      rgba(255,255,255,0.25) 0%,
+      rgba(255,255,255,0.05) 40%,
+      rgba(255,255,255,0.0) 100%
+    ),
+    url("data:image/svg+xml;utf8,\
+      <svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'>\
+        <defs>\
+          <pattern id='scratches' width='6' height='6' patternUnits='userSpaceOnUse'>\
+            <path d='M0 6 L6 0' stroke='rgba(255,255,255,0.06)' stroke-width='0.4'/>\
+          </pattern>\
+        </defs>\
+        <rect width='300' height='300' fill='url(#scratches)'/>\
+      </svg>"
+    );
+
+  background-size: cover;
+  mix-blend-mode: screen;
+  opacity: 0.35;
+  transition: opacity .45s ease;
+}
+
+.discover-card:hover::before {
+  opacity: 0.55;
+}
+
+/* ===========================
+   TEXT
+   =========================== */
+h2, p {
+  position: relative;
+  z-index: 3;
   margin: 0;
   padding: var(--spacing-sm);
-  color: var(--color-white);
+  color: rgba(255, 255, 255, 0.95);
+  width: 100%;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.25);
 }
 
 h2 {
@@ -57,38 +179,36 @@ p {
   font-weight: 500;
   opacity: 0.9;
 }
-.discover-card {
-  cursor: pointer;
-}
 
-/* ===========================
-   PREMIUM MAŁOPOLSKA LOADING BAR
-   =========================== */
-
-.loading-bar {
+.card-image {
   position: absolute;
-  bottom: 0px;
-  left: 0;
-  height: 0.5%;
-  width: 0%;
-  border-radius: 0 0 6px 6px;
-  background: linear-gradient(90deg, var(--color-yellow-leone) 0%, var(--color-red) 100%);
-  animation: loadBar 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  z-index: 100;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  z-index: 0;
+
+  transform: scale(1);
+  transition:
+    transform .65s cubic-bezier(.22, .61, .36, 1);
+  will-change: transform, opacity, filter;
 }
 
-@keyframes loadBar {
-  0% {
-    width: 0%;
-    opacity: 1;
-    transform: translateY(2px);
-  }
-  40% {
-    opacity: 1;
-  }
-  100% {
-    width: 100%;
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Hover zoom */
+.discover-card:hover .card-image {
+  transform: scale(1.08);
+  filter: brightness(1.08) saturate(1.12);
+  opacity: 0.9;
+
+}
+
+/* Click zoom (pressure effect) */
+.discover-card:active .card-image {
+  transform: scale(1.18);
+  opacity: 0.8;
+
 }

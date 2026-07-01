@@ -38,15 +38,15 @@
 
       <!-- Title -->
     <h3 class="carousel-title">discover more from {{ region.slug }}</h3>
-  
+    <div class="carusel-container">
     <app-related-carousel
       [title]="'regionDetail.moreFrom' | translate:{ region: region.hero.title }"
       [items]="getCarouselItems()"
       [regionSlug]="regionSlug"
       (navigate)="navigateToRelated($event)"
     />
+    </div>
   </div>
-  
 
 </div>
 }

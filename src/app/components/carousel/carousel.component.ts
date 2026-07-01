@@ -31,7 +31,11 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
   @Input() items: RelatedItem[] = [];
   @Input() regionSlug!: string;
 
-  @Output() navigate = new EventEmitter<any>();
+  @Output() navigate = new EventEmitter<{
+    region: string;
+    category: string;
+    slug: string;
+  }>();
 
   @ViewChild('relatedRow') relatedRow!: ElementRef<HTMLElement>;
 
@@ -51,15 +55,18 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  onNavigate(event: any) {
-    this.navigate.emit(event);
+  onNavigate(item: RelatedItem) {
+    this.navigate.emit({
+      region: item.title,
+      category: item.category,
+      slug: item.slug
+    });
   }
 
   ngAfterViewInit(): void {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         this.initCarousel();
-        this.lazyLoadImages();
       });
     });
   }
@@ -73,7 +80,7 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
     let firstScroll = true;
     let lastScrollLeft = 0;
     let autoScrolling = false;
-
+    let suppressShadow = false;
 
     if (this.carouselInitialized) return;
     this.carouselInitialized = true;
@@ -88,108 +95,125 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges {
 
     row.classList.add('carousel-no-anim');
 
-    const total = cards.length;          
+    const total = cards.length;
     const loopSize = Math.floor(total / 3);
     const loopStart = loopSize;
     const loopEnd = loopSize * 2;
 
     let current = Math.max(loopStart, 0);
 
-const goToNextCard = () => {
-    let next = current + 1;
-    if (next >= loopEnd) next = loopStart;
-
-    autoScrolling = true;                    // ← flag BEFORE scroll
-    scrollToCard(next);
-    current = next;
-    updateActiveCard();
-    setTimeout(() => { autoScrolling = false; }, 450); // ← matches scroll duration
-  };
-let autoScrollTimer: any;
-
-  const startAutoScroll = () => {
-    clearInterval(autoScrollTimer);          // ← prevent stacking intervals
-    autoScrollTimer = setInterval(goToNextCard, 5000);
-  };
-  const resetAutoScroll = () => {
-    clearInterval(autoScrollTimer);
-    setTimeout(startAutoScroll, 3000);
-  };
-startAutoScroll();
-
-row.addEventListener('touchstart', resetAutoScroll);
-(row.parentElement ?? row).addEventListener('mousedown', resetAutoScroll);
-row.addEventListener('wheel', resetAutoScroll);
-
-
-    let scrollTimeout: any;
-
     const scrollToCard = (index: number, behavior: ScrollBehavior = 'smooth') => {
-  current = Math.max(0, Math.min(total - 1, index));
-  const card = cards[current];
-  const left = card.offsetLeft - (row.clientWidth - card.clientWidth) / 2;
-  row.scrollTo({ left, behavior });
-};
+      current = Math.max(0, Math.min(total - 1, index));
+      const card = cards[current];
+      const left = card.offsetLeft - (row.clientWidth - card.clientWidth) / 2;
+      row.scrollTo({ left, behavior });
+    };
 
-const updateActiveCard = () => {
-  cards.forEach((card, index) => {
-    card.classList.toggle('active', index === current);
-  });
-};
-
-
+    const updateActiveCard = () => {
+      cards.forEach((card, index) => {
+        card.classList.toggle('active', index === current);
+      });
+    };
 
     const updateCardTransforms = () => {
       const rowRect = row.getBoundingClientRect();
       const viewportCenter = rowRect.left + rowRect.width / 2;
-
+      if (suppressShadow) return;   // ← block scaling during teleport
       cards.forEach(card => {
         const rect = card.getBoundingClientRect();
         const cardCenter = rect.left + rect.width / 2;
         const distance = Math.abs(viewportCenter - cardCenter);
         const maxDistance = rowRect.width * 0.85;
 
-        const t = Math.min(distance / maxDistance, 1);
-        const scale = 1 - t * 0.12;
-        const opacity = 1 - t * 0.35;
-        const blur = t * 3;
+        
 
-        card.style.transform = `scale(${scale})`;
-        card.style.opacity = `${opacity}`;
+        const discover = card.querySelector('app-discover-card') as any;
+        const img = discover?.imageElement as HTMLElement | undefined;
 
-        const img = card.querySelector('.card-image') as HTMLElement | null;
         if (img) img.style.filter = `blur(${blur}px)`;
       });
     };
 
     // initial center
     scrollToCard(current, 'auto');
-    updateActiveCard();
     updateCardTransforms();
+    updateActiveCard();
+    
+
+    /* ---------------------------------------------------
+       AUTO-SCROLL
+    ----------------------------------------------------*/
+    const goToNextCard = () => {
+      let next = current + 1;
+      if (next >= loopEnd) next = loopStart;
+
+      autoScrolling = true;
+      scrollToCard(next);
+      current = next;
+      updateActiveCard();
+      setTimeout(() => { autoScrolling = false; }, 450);
+    };
+
+    let autoScrollTimer: any;
+
+    const startAutoScroll = () => {
+      clearInterval(autoScrollTimer);
+      autoScrollTimer = setInterval(goToNextCard, 5000);
+    };
+
+    const resetAutoScroll = () => {
+      clearInterval(autoScrollTimer);
+      setTimeout(startAutoScroll, 3000);
+    };
+
+    startAutoScroll();
+
+    row.addEventListener('touchstart', resetAutoScroll);
+    (row.parentElement ?? row).addEventListener('mousedown', resetAutoScroll);
+    row.addEventListener('wheel', resetAutoScroll);
 
     /* ---------------------------------------------------
        ARROWS
     ----------------------------------------------------*/
-    let leftArrow = row.parentElement?.querySelector('.carousel-arrow.left') as HTMLElement | null;
-    let rightArrow = row.parentElement?.querySelector('.carousel-arrow.right') as HTMLElement | null;
+    const leftArrow = row.parentElement?.querySelector('.carousel-arrow.left') as HTMLElement | null;
+    const rightArrow = row.parentElement?.querySelector('.carousel-arrow.right') as HTMLElement | null;
 
-  if (leftArrow) {
+if (leftArrow) {
   leftArrow.onclick = () => {
-    resetAutoScroll();          // ← add this
-    autoScrolling = true;       // ← add this
-    scrollToCard(current - 1);
+    resetAutoScroll();
+    autoScrolling = true;
+
+    const next = current - 1;
+    row.classList.remove('carousel-no-anim');   // ← FIX
+    // ⭐ Make the card active BEFORE scrolling
+    current = next;
+    updateActiveCard();
+    updateCardTransforms();
+
+    scrollToCard(next);
+
     setTimeout(() => { autoScrolling = false; }, 450);
   };
 }
 
 if (rightArrow) {
   rightArrow.onclick = () => {
-    resetAutoScroll();          // ← add this
+    resetAutoScroll();
     autoScrolling = true;
-    scrollToCard(current + 1);
+
+    const next = current + 1;
+    row.classList.remove('carousel-no-anim');   // ← FIX
+    // ⭐ Make the card active BEFORE scrolling
+    current = next;
+    updateActiveCard();
+    updateCardTransforms();
+
+    scrollToCard(next);
+
     setTimeout(() => { autoScrolling = false; }, 450);
   };
 }
+
 
     /* ---------------------------------------------------
        TOUCH SWIPE
@@ -212,6 +236,8 @@ if (rightArrow) {
     /* ---------------------------------------------------
        SCROLL HANDLING + INFINITE LOOP
     ----------------------------------------------------*/
+    let scrollTimeout: any;
+
     row.addEventListener('scroll', () => {
       if (loopLock) return;
       if (autoScrolling) return;
@@ -253,12 +279,14 @@ if (rightArrow) {
         current = closestIndex;
         const loopMin = loopStart;
         const loopMax = loopEnd - 1;
+        let suppressShadow = false;
 
         if (current > loopMax) {
           loopLock = true;
           row.classList.add('carousel-no-anim');
 
           current -= loopSize;
+          suppressShadow = true;
           scrollToCard(current, 'auto');
           updateActiveCard();
           updateCardTransforms();
@@ -276,6 +304,7 @@ if (rightArrow) {
           row.classList.add('carousel-no-anim');
 
           current += loopSize;
+          suppressShadow = true;
           scrollToCard(current, 'auto');
           updateActiveCard();
           updateCardTransforms();
@@ -294,32 +323,5 @@ if (rightArrow) {
 
       updateActiveCard();
     });
-  }
-
-  /* ---------------------------------------------------
-     LAZY LOAD IMAGES
-  ----------------------------------------------------*/
-  private lazyLoadImages(): void {
-    const images = Array.from(
-      document.querySelectorAll('[data-bg].card-image')
-    );
-
-    const observer = new IntersectionObserver(
-      entries => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const el = entry.target as HTMLElement;
-          const bg = el.getAttribute('data-bg');
-          if (bg) {
-            el.style.backgroundImage = `url(${bg})`;
-            el.classList.replace('loading', 'loaded');
-          }
-          observer.unobserve(el);
-        }
-      },
-      { rootMargin: '300px' }
-    );
-
-    for (const img of images) observer.observe(img);
   }
 }

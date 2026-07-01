@@ -24,22 +24,19 @@
 
     <!-- DISCOVER -->
     <div class="discover-section">
-      <div class="discover-card veneto">
-      <app-discover-card
-        [title]="'home.discover.veneto.title' | translate"
-        [description]="'home.discover.veneto.text' | translate"
-        image="/images/home_discover_veneto.webp"
-        region="veneto"
-        [animateOnClick]="true"
-        (navigate)="animateAndGo($event)"
-      ></app-discover-card>
-
-
-
-
+      <div class="home-discover-card veneto">
+        <app-discover-card
+          [title]="'home.discover.veneto.title' | translate"
+          [description]="'home.discover.veneto.text' | translate"
+          image="/images/home_discover_veneto.webp"
+          region="veneto"
+          [animateOnClick]="true"
+          (navigate)="animateAndGo($event)"
+        ></app-discover-card>
       </div>
-      <div class="discover-card malopolska">
-      <app-discover-card
+
+      <div class="home-discover-card malopolska">
+        <app-discover-card
           [title]="'home.discover.malopolska.title' | translate"
           [description]="'home.discover.malopolska.text' | translate"
           image="/images/home_discover_malopolska.webp"
@@ -47,8 +44,8 @@
           [animateOnClick]="true"
           (navigate)="animateAndGo($event)"
         ></app-discover-card>
-
       </div>
+
 
     </div>
 

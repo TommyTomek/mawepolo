@@ -9,7 +9,7 @@
 
     @for (item of loopedItems; track item.slug + (item._clone ? '-clone' : '')) {
 
-      <div class="related-card" [attr.data-bg]="item.img">
+      <div class="related-card">
 
         <app-discover-card
           class="discover-wrapper"
