@@ -3,11 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
-  ElementRef,
-  AfterViewInit,
-  ViewChild,
-  ChangeDetectorRef,
-  OnChanges
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -17,9 +13,10 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './discover-card.html',
   styleUrls: ['./discover-card.scss'],
-  host: { class: 'dv-card' }
+  host: { class: 'dv-card' },
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DiscoverCardComponent implements AfterViewInit, OnChanges {
+export class DiscoverCardComponent {
 
   @Input() title!: string;
   @Input() description!: string;
@@ -30,54 +27,46 @@ export class DiscoverCardComponent implements AfterViewInit, OnChanges {
   @Input() category?: string;
   @Input() slug?: string;
 
-  @Input() animateOnClick: boolean = false;
+  @Input() animateOnClick = false;
 
-  @Output() navigate = new EventEmitter();
-
-  @ViewChild('imageEl', { static: false })
-  imageEl!: ElementRef<HTMLElement>;
+  @Output() navigate = new EventEmitter<{
+    region: string;
+    category?: string;
+    slug?: string;
+    next?: string;
+  }>();
 
   loaded = false;
   animating = false;
 
-  constructor(private el: ElementRef, private cdr: ChangeDetectorRef) {}
-
-  ngOnChanges() {
-    this.cdr.markForCheck();   // ← REQUIRED FOR ONPUSH
+  // FIX: previously an IntersectionObserver (rooted at the page viewport,
+  // not the carousel's scroll container) decided when to reveal the image —
+  // any card starting off to the side of the horizontally-scrolling row was
+  // correctly reported as "not intersecting" and never loaded until it was
+  // scrolled into view. A plain <img loading="lazy"> lets the browser handle
+  // lazy-loading itself, and browsers already start fetching an image
+  // shortly before it enters view, so neighboring cards are ready by the
+  // time you swipe/autoscroll to them instead of popping in blank.
+  //
+  // The (load) binding below runs inside Angular's zone, so OnPush change
+  // detection fires on its own — no ChangeDetectorRef/markForCheck needed
+  // (the previous ngOnChanges -> markForCheck() call was also redundant:
+  // @Input changes already trigger OnPush change detection automatically).
+  onImageLoad(): void {
+    this.loaded = true;
   }
 
-  ngAfterViewInit() {
-    const img = this.imageEl.nativeElement;
-
-    const observer = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
-        this.loaded = true;
-        this.cdr.markForCheck();   // ← REQUIRED FOR ONPUSH
-        observer.disconnect();
-      }
-    });
-
-    observer.observe(img);
-  }
-
-  get imageElement(): HTMLElement {
-    return this.imageEl.nativeElement;
-  }
-
-  onClick() {
+  onClick(): void {
     if (!this.animateOnClick) {
       this.emitNavigation();
       return;
     }
 
     this.animating = true;
-
-    setTimeout(() => {
-      this.emitNavigation();
-    }, 350);
+    setTimeout(() => this.emitNavigation(), 350);
   }
 
-  private emitNavigation() {
+  private emitNavigation(): void {
     this.navigate.emit({
       region: this.region,
       category: this.category,

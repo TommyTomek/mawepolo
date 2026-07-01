@@ -1,16 +1,29 @@
 <div class="discover-card" (click)="onClick()" [class.is-animating]="animating">
 
-  <!-- IMAGE -->
-  <div #imageEl
-     class="card-image"
-     [class.loading]="!loaded"
-     [style.background-image]="loaded ? 'url(' + image + ')' : 'none'">
-</div>
+  <!--
+    FIX: was a div with [style.background-image] gated behind a manual
+    IntersectionObserver `loaded` flag (see discover-card.ts). A real <img>
+    with native lazy-loading is simpler, has proper alt text for
+    accessibility, and the browser preloads it slightly before it scrolls
+    into view instead of only after.
+    [attr.src] (not [src]) is used so that when `image` is empty/undefined
+    no src attribute is written at all — binding an empty string to the
+    `src` *property* can make some browsers request the current page URL.
+  -->
+  <img
+    class="card-image"
+    [class.loaded]="loaded"
+    [attr.src]="image || null"
+    [alt]="title || ''"
+    loading="lazy"
+    decoding="async"
+    (load)="onImageLoad()"
+  />
 
-  <!-- GLASS EDGES -->
+  <!-- FROSTED EDGES -->
   <div class="gradient-overlay"></div>
 
-  <!-- DARK TEXT GRADIENT -->
+  <!-- DARK GRADIENT FOR TEXT LEGIBILITY -->
   <div class="text-gradient"></div>
 
   <!-- TEXT (BOTTOM ALIGNED) -->
