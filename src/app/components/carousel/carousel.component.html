@@ -1,13 +1,21 @@
 <div class="related-carousel-wrapper">
 
   <!-- Arrows -->
-  <button class="carousel-arrow left">‹</button>
-  <button class="carousel-arrow right">›</button>
+  <button class="carousel-arrow left" type="button" aria-label="Previous">‹</button>
+  <button class="carousel-arrow right" type="button" aria-label="Next">›</button>
 
   <!-- Scroll Row -->
   <div class="related-scroll-row" #relatedRow>
 
-    @for (item of loopedItems; track item.slug + (item._clone ? '-clone' : '')) {
+    <!--
+      FIX: track by the precomputed `_key` (unique across BOTH clone groups
+      and the real middle copy) instead of `item.slug + (item._clone ? '-clone' : '')`.
+      The old expression produced the same key for a card in the leading
+      clone group and the trailing clone group, which is an invalid
+      duplicate for @for's `track` and let Angular reuse/misplace DOM
+      nodes between them.
+    -->
+    @for (item of loopedItems; track item._key) {
 
       <div class="related-card">
 

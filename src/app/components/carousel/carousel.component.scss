@@ -13,16 +13,19 @@
   content: "";
   position: absolute;
   top: 0;
-  width:10%;
+  width: 10%;
   height: 100%;
   z-index: 5;
   pointer-events: none;
 }
 
-
-
 /* ---------------------------------------------------
    ARROWS
+   FIX: negative offsets (`left: -10px` / `right: -10px`) can get clipped
+   by a parent with `overflow: hidden` and can sit partly off-screen on
+   narrow phones, making them hard/impossible to tap. Pulled inside the
+   wrapper instead. Also hidden below a small-screen breakpoint, since
+   swipe is the primary (and now more reliable) interaction there.
 ----------------------------------------------------*/
 .carousel-arrow {
   position: absolute;
@@ -52,18 +55,28 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
-  &.left  { left: -10px; }
-  &.right { right: -10px; }
+  &.left { left: 6px; }
+  &.right { right: 6px; }
+}
+
+@media (max-width: 640px) {
+  .carousel-arrow {
+    display: none;
+  }
 }
 
 /* ---------------------------------------------------
    SCROLL ROW
+   FIX: added scroll-snap so the browser itself keeps cards centered
+   during touch scrolling, instead of relying purely on JS offset math
+   fighting native momentum scrolling on mobile.
 ----------------------------------------------------*/
 .related-scroll-row {
   display: flex;
   height: 100%;
   overflow-x: scroll;
   scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
 
   /* Extra bottom padding so the cast shadow is never clipped */
   padding: 8% 0 18%;
@@ -96,13 +109,12 @@
   flex: 0 0 auto;
   width: 70%;
   position: relative;
-
-
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 
 /* Clip content (image, gradient, text) inside the rounded card */
 .related-card app-discover-card {
-  
   width: 100%;
   border-radius: 18px;
   overflow: hidden;
@@ -177,12 +189,7 @@
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.35s ease,
     filter 0.35s ease,
-    scale 0.35s ease, 
-}
-
-/* Image blur target (driven by JS) */
-.related-card .card-image {
-  transition: filter 0.35s ease;
+    scale 0.35s ease;
 }
 
 .related-card:not(.active) {
@@ -196,5 +203,5 @@
     opacity 0.35s ease,
     filter 0.35s ease,
     scale 0.35s ease,
-    z-index 0.35s ease; 
+    z-index 0.35s ease;
 }
