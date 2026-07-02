@@ -51,10 +51,6 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges, OnDes
   private viewReady = false;
   private teardown: (() => void) | null = null;
 
-    // rAF IDs to cancel on destroy
-  private rafA: number | null = null;
-  private rafB: number | null = null;
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['items']) {
       if (this.items && this.items.length) {
@@ -97,11 +93,6 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges, OnDes
     // could leak timers/listeners bound to detached DOM.
     this.teardown?.();
     this.teardown = null;
-    if (this.rafA !== null) cancelAnimationFrame(this.rafA);
-    if (this.rafB !== null) cancelAnimationFrame(this.rafB);
-
-    this.rafA = null;
-    this.rafB = null;
   }
 
   onNavigate(item: RelatedItem) {
@@ -121,11 +112,8 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges, OnDes
 
     // Two rAFs: one to let Angular finish painting the @for update, one to
     // let the browser settle layout before we read offsetLeft/getBoundingClientRect.
-  // SSR guard
-    if (typeof window === 'undefined') return;
-
-    this.rafA = requestAnimationFrame(() => {
-      this.rafB = requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
         this.teardown = this.initCarousel() ?? null;
       });
     });
@@ -156,7 +144,6 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges, OnDes
     row.classList.add('carousel-no-anim');
 
     const scrollToCard = (index: number, behavior: ScrollBehavior = 'smooth') => {
-      if (destroyed) return;
       current = Math.max(0, Math.min(total - 1, index));
       const card = cards[current];
       const left = card.offsetLeft - (row.clientWidth - card.clientWidth) / 2;
@@ -164,7 +151,6 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges, OnDes
     };
 
     const updateActiveCard = () => {
-      if (destroyed) return;
       cards.forEach((card, index) => {
         card.classList.toggle('active', index === current);
       });
@@ -176,26 +162,16 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges, OnDes
        single source of truth for the loop math.
     ----------------------------------------------------*/
     const resolveLoopPosition = (): boolean => {
-      if (destroyed) return false;
       if (current > loopEnd - 1) {
         loopLock = true;
-        // 1. Freeze transforms BEFORE changing current
-        row.classList.add('carousel-freeze');
         row.classList.add('carousel-no-anim');
         current -= loopSize;
         scrollToCard(current, 'auto');
         updateActiveCard();
-        // 4. Next frame: unfreeze transforms
-        // 4. Next frame: unfreeze transforms
-    requestAnimationFrame(() => {
-      row.classList.remove('carousel-freeze');
-
-        // 5. Next frame: restore transitions
         requestAnimationFrame(() => {
           row.classList.remove('carousel-no-anim');
           loopLock = false;
         });
-      });
         return true;
       }
 
@@ -226,8 +202,6 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges, OnDes
     ----------------------------------------------------*/
     const goToNextCard = () => {
       autoScrolling = true;
-      if (destroyed) return;
-
       const next = current + 1;
       scrollToCard(next);
       current = next;
@@ -269,8 +243,6 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges, OnDes
     const rightArrow = row.parentElement?.querySelector<HTMLElement>('.carousel-arrow.right') ?? null;
 
     const step = (direction: 1 | -1) => {
-      if (destroyed) return;
-
       pauseAutoScroll();
       autoScrolling = true;
       const next = current + direction;
@@ -318,8 +290,6 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges, OnDes
     };
 
     const onSettled = () => {
-      if (destroyed) return;
-
       if (autoScrolling || loopLock) return;
       current = findClosestIndex();
       updateActiveCard();
@@ -328,8 +298,6 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges, OnDes
 
     let settleTimer: number | undefined;
     const onScroll = () => {
-      if (destroyed) return;
-
       if (loopLock || autoScrolling) return;
       window.clearTimeout(settleTimer);
       settleTimer = window.setTimeout(onSettled, SETTLE_DEBOUNCE_MS);
@@ -357,8 +325,6 @@ export class RelatedCarouselComponent implements AfterViewInit, OnChanges, OnDes
     ----------------------------------------------------*/
     let resizeTimer: number | undefined;
     const onResize = () => {
-      if (destroyed) return;
-
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
         row.classList.add('carousel-no-anim');

@@ -1,35 +1,32 @@
 /* ===========================
-   GLASS CARD — CLEAR CENTER + INTERACTION
+   GLASS CARD — VISUAL IDENTITY
    =========================== */
 .discover-card {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  cursor: pointer;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 
   border-radius: var(--border-radius-lg);
-  background: rgba(0, 0, 0, 0.06); /* visible placeholder while the image loads */
+  overflow: hidden;
+  background: transparent;
 
-  /* Soft glass depth at edges */
+  /* Soft glass depth */
   box-shadow:
     0 6px 24px rgba(0, 0, 0, 0.18),
     inset 0 0 40px rgba(255, 255, 255, 0.25);
 
-  /* FIX: trailing comma after the last transition value was invalid SCSS —
-     Dart Sass (Angular's default) throws a compile error on this, which
-     could break this stylesheet's build entirely rather than just warn. */
+  /* Interaction transitions */
   transition:
-    transform .45s cubic-bezier(.22, .61, .36, 1),
-    box-shadow .45s ease;
+    transform .35s cubic-bezier(.22, 1, .36, 1),
+    box-shadow .35s ease;
 }
 
 /* ===========================
-   HOVER — PARALLAX GLASS MOVEMENT
+   HOVER — FULL EFFECT (static card)
    =========================== */
 .discover-card:hover {
   transform: translateY(-6px) scale(1.015);
@@ -39,7 +36,7 @@
 }
 
 /* ===========================
-   CLICK — GLASS PRESSURE RIPPLE
+   CLICK — PRESSURE RIPPLE
    =========================== */
 .discover-card:active {
   transform: scale(0.985);
@@ -48,7 +45,7 @@
     inset 0 0 65px rgba(255, 255, 255, 0.38);
 }
 
-/* Ripple effect */
+/* Ripple */
 .discover-card::after {
   content: "";
   position: absolute;
@@ -58,13 +55,13 @@
 
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.35) 0%,
-    rgba(255, 255, 255, 0.0) 70%
+    rgba(255,255,255,0.35) 0%,
+    rgba(255,255,255,0.0) 70%
   );
 
   opacity: 0;
   transform: scale(0.4);
-  transition: opacity .45s ease, transform .45s ease;
+  transition: opacity .35s ease, transform .35s ease;
 }
 
 .discover-card:active::after {
@@ -74,87 +71,37 @@
 
 /* ===========================
    IMAGE
-   FIX: previously declared twice with conflicting transition/will-change
-   values (the second block silently won). Consolidated into one rule.
-   Starts transparent and fades in on load instead of popping in, and
-   keeps the placeholder background above visible until then.
    =========================== */
 .card-image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
   z-index: 0;
-  opacity: 0;
+
   transform: scale(1);
-
   transition:
-    opacity .4s ease,
-    transform .65s cubic-bezier(.22, .61, .36, 1),
-    filter .45s ease;
-  will-change: transform, opacity;
+    transform .35s cubic-bezier(.22, 1, .36, 1),
+    filter .35s ease,
+    opacity .35s ease;
+
+  will-change: transform, opacity, filter;
 }
 
-.card-image.loaded {
-  opacity: 1;
-}
-
-/* Hover / click zoom */
+/* Hover zoom (static card) */
 .discover-card:hover .card-image {
   transform: scale(1.08);
   filter: brightness(1.08) saturate(1.12);
-}
-
-.discover-card:active .card-image {
-  transform: scale(1.18);
+  opacity: 0.9;
 }
 
 /* ===========================
-   FROSTED EDGES
-   =========================== */
-.gradient-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.0) 45%,
-    rgba(255, 255, 255, 0.12) 65%,
-    rgba(255, 255, 255, 0.22) 80%,
-    rgba(255, 255, 255, 0.32) 100%
-  );
-}
-
-/* ===========================
-   DARK BOTTOM GRADIENT (TEXT LEGIBILITY)
-   FIX: this used to be a second `.gradient-overlay` rule that fully
-   overwrote the frosted-edges rule above (same selector, later in the
-   file wins), so the frosted effect never actually rendered. Split into
-   its own class matching the `.text-gradient` element already in the
-   template, which previously had no styling at all.
-   =========================== */
-.text-gradient {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.44) 0%,
-    rgba(0, 0, 0, 0.35) 35%,
-    rgba(0, 0, 0, 0.18) 65%,
-    rgba(0, 0, 0, 0.0) 100%
-  );
-}
-
-/* ===========================
-   MICRO-SCRATCHES REFLECTION (premium)
+   SCRATCHES
    =========================== */
 .discover-card::before {
   content: "";
@@ -165,9 +112,9 @@
 
   background-image:
     linear-gradient(135deg,
-      rgba(255, 255, 255, 0.25) 0%,
-      rgba(255, 255, 255, 0.05) 40%,
-      rgba(255, 255, 255, 0.0) 100%
+      rgba(255,255,255,0.25) 0%,
+      rgba(255,255,255,0.05) 40%,
+      rgba(255,255,255,0.0) 100%
     ),
     url("data:image/svg+xml;utf8,\
       <svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'>\
@@ -183,7 +130,7 @@
   background-size: cover;
   mix-blend-mode: screen;
   opacity: 0.35;
-  transition: opacity .45s ease;
+  transition: opacity .35s ease;
 }
 
 .discover-card:hover::before {
@@ -200,7 +147,7 @@ h2, p {
   padding: var(--spacing-sm);
   color: rgba(255, 255, 255, 0.95);
   width: 100%;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.25);
 }
 
 h2 {
@@ -212,24 +159,4 @@ p {
   font-size: var(--font-size-sm);
   font-weight: 500;
   opacity: 0.9;
-}
-
-/* ===========================
-   CLICK-NAVIGATE LOADING BAR
-   =========================== */
-.loading-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  width: 100%;
-  z-index: 5;
-  background: rgba(255, 255, 255, 0.85);
-  transform-origin: left;
-  animation: loading-bar-fill 0.35s ease forwards;
-}
-
-@keyframes loading-bar-fill {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
 }
